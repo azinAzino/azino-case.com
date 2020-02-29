@@ -164,7 +164,7 @@ class AdminController extends Controller
 
 	public function payments()
 	{
-		$a = \DB::table('operations')->where('type', 0)->where('is_fake', "<>", 1)->orderBy('id', 'desc')->where('status', 1)->take(20)->get();
+		$a = \DB::table('operations')->where('type', 0)->where('is_fake', "<>", 1)->orderBy('id', 'desc')->where('status', 1)->get();
 		$c = [];
 		foreach ($a as $b) {
 			if ($u = User::find($b->user)) {;

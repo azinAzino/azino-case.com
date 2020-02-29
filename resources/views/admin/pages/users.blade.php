@@ -36,14 +36,17 @@
 	<div class="col-md-12">
 		<div class="portlet light bordered">
 			<div class="portlet-body">
-				<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+				<p id="date_filter">
+					<span id="date-label-from" class="date-label">{{ __('From') }}: </span><input class="date_range_filter date" type="text" id="datepicker_from" />
+					<span id="date-label-to" class="date-label">{{ __('To') }}:<input class="date_range_filter date" type="text" id="datepicker_to" />
+				</p>
+				<table id="usersTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>{{ trans('Avatar') }}</th>
 							<th>{{ trans('Name Lastname') }}</th>
-							<th>{{ trans('Link') }}</th>
 							<th>{{ trans('Balance') }}</th>
+							<th>{{ trans('Created') }}</th>
 							<th>{{ trans('Manage') }}</th>
 						</tr>
 					</thead>
@@ -51,10 +54,9 @@
 						@foreach($users as $user)
 						<tr>
 							<td style="vertical-align: middle;">{{$user->id}}</td>
-							<td align="center"><img width="50px" src="{{$user->avatar}}"/></td>
 							<td style="vertical-align: middle;">{{$user->username}}</td>
-							<td style="vertical-align: middle;"><a href="https://vk.com/id{{$user->login2}}" target="_blank">https://vk.com/id{{$user->login2}}</a></td>
 							<td style="vertical-align: middle;">{{$user->money}}</td>
+							<td style="vertical-align: middle;">{{$user->created_at}}</td>
 							<td align="center" style="vertical-align: middle;">
 								<button type="button" class="btn blue btn-sm" data-toggle="modal" data-target="#usr_edit" href="/admin/user/{{ $user->id }}/edit">{{ trans('Edit') }}</button>
 								<button type="button" class="btn green btn-sm" data-toggle="modal" data-target="#usr_replenish" href="/admin/user/{{ $user->id }}/replenish">{{ trans('Replenish') }}</button>
