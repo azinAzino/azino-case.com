@@ -356,7 +356,7 @@ class AdminController extends Controller
 				'name' => ['required', 'string', 'max:255', 'regex:/^[a-z0-9]+$/i'],
 			]);
 
-			$r->session()->reflash();
+			$r->session()->flash('alert-danger', false);
 
 			$user = User::where('username', $r->name)->first();
 
