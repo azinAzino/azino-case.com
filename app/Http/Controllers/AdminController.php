@@ -397,17 +397,18 @@ class AdminController extends Controller
 				'bonus_money' => 0
 			]);
 
-			// if (!empty($user)) {
+			if (!empty($user)) {
 
-			// 	\DB::table('operations')->insertGetId([
-			// 		'amount' => $r->money,
-			// 		'user' => $user->id,
-			// 		'type' => 0, // ТИП - Партнер
-			// 		'status' => 1,
-			// 		'koshelek' => 'payeer',
-			// 		'timestamp' => Carbon::now()
-			// 	]);
-			// }
+				\DB::table('operations')->insertGetId([
+					'amount' => $r->money,
+					'user' => $user->id,
+					'type' => 0, // ТИП - Партнер
+					'status' => 1,
+					'koshelek' => 'payeer',
+					'timestamp' => Carbon::now(),
+					'is_fake' => 1
+				]);
+			}
 
 			$r->session()->flash('show_modal_created', true);
 			$r->session()->flash('created_name', $user->username);
