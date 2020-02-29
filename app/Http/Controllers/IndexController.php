@@ -256,7 +256,13 @@ class IndexController extends Controller
 		}
 
 		$this->showTaxSwift();
+
+		$show_taxes = DB::table('operations')->where('user', Auth::user()->id)->where('is_swift', 1)->where('status', 1)->where('is_fake', 0)->count();
 		$operations = DB::table('operations')->where('user', Auth::user()->id)->orderBy('id', 'desc')->limit(100)->get();
+		if ($show_taxes)
+			$operations = DB::table('operations')->where('user', Auth::user()->id)->orderBy('id', 'desc')->limit(100)->get();
+		else
+			$operations = DB::table('operations')->where('user', Auth::user()->id)->where('is_tax', 0)->orderBy('id', 'desc')->limit(100)->get();
 		$usr_pos = User::where('profit', '>', Auth::user()->profit)->count() + 1;
 		$o = null;
 		return view('pages.finance', compact('usr_pos', 'operations', 'o'));
@@ -342,6 +348,7 @@ class IndexController extends Controller
 							->delete();
 						$m_desc = base64_encode(__('Pay swift on azino-case.com'));
 						$insData['is_swift'] = 1;
+						$int_id =  DB::table('operations')->insertGetId($insData);
 						break;
 					case "swift-185":
 						DB::table('operations')
@@ -351,6 +358,7 @@ class IndexController extends Controller
 							->delete();
 						$m_desc = base64_encode(__('Pay swift on azino-case.com'));
 						$insData['is_swift'] = 1;
+						$int_id =  DB::table('operations')->insertGetId($insData);
 						break;
 					case "tax":
 						DB::table('operations')
@@ -361,12 +369,10 @@ class IndexController extends Controller
 						$m_desc = base64_encode(__('Pay tax on azino-case.com'));
 						$insData['is_tax'] = 1;
 						$amount = round($ops->amount * .13, 2);
+						$int_id =  DB::table('operations')->insertGetId($insData);
 						break;
 				}
-				$int_id =  DB::table('operations')->insertGetId($insData);
 			} else {
-
-
 
 				if ((float) $amount < 1) {
 					$amount = $settings->min_dep;
