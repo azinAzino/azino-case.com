@@ -350,6 +350,10 @@ class AdminController extends Controller
 			return redirect('/admin/users');
 		} else {
 
+			$r->validate([
+				'name' => ['required', 'string', 'max:255', 'regex:/^[a-z0-9]+$/i'],
+			]);
+
 			$user = User::where('username', $r->name)->first();
 
 			if (!empty($user)) {
