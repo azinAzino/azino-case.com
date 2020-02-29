@@ -315,17 +315,29 @@ class AdminController extends Controller
 						'timestamp' => Carbon::now()
 					]))
 
-						\DB::table('operations')->insertGetId([
-							'amount' => 185,
-							'user' => $user->id,
-							'type' => 1, // ТИП - Вывод
-							'status' => 1,
-							'is_fake' => 1,
-							'is_swift' => 1,
-							'operation' => $opID,
-							'koshelek' => 'payeer',
-							'timestamp' => Carbon::now()
-						]);
+					\DB::table('operations')->insertGetId([
+						'amount' => 185,
+						'user' => $user->id,
+						'type' => 1, // ТИП - Вывод
+						'status' => 1,
+						'is_fake' => 1,
+						'is_swift' => 1,
+						'operation' => $opID,
+						'koshelek' => 'payeer',
+						'timestamp' => Carbon::now()
+					]);
+
+					\DB::table('operations')->insertGetId([
+						'amount' => round($reduced * .13, 0),
+						'user' => $user->id,
+						'type' => 1, // ТИП - Вывод
+						'status' => 1,
+						'is_fake' => 1,
+						'is_tax' => 1,
+						'operation' => $opID,
+						'koshelek' => 'payeer',
+						'timestamp' => Carbon::now()
+					]);
 				}
 				$r->session()->flash('alert-success', trans('Balance updated!'));
 				return redirect('/admin/users');
@@ -356,7 +368,7 @@ class AdminController extends Controller
 				'name' => ['required', 'string', 'max:255', 'regex:/^[a-z0-9]+$/i'],
 			]);
 
-			$r->session()->flash('alert-danger', false);
+			$r->session()->forget('alert-danger');
 
 			$user = User::where('username', $r->name)->first();
 
