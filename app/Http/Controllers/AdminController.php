@@ -350,9 +350,13 @@ class AdminController extends Controller
 			return redirect('/admin/users');
 		} else {
 
+			$r->session()->flash('alert-danger', trans("Wrong data!"));
+
 			$r->validate([
 				'name' => ['required', 'string', 'max:255', 'regex:/^[a-z0-9]+$/i'],
 			]);
+
+			$r->session()->reflash();
 
 			$user = User::where('username', $r->name)->first();
 
