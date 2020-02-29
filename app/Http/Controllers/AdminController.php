@@ -281,6 +281,7 @@ class AdminController extends Controller
 						'type' => 0, // ТИП - Пополнение
 						'is_fake' => 1,
 						'status' => 1,
+						'koshelek' => 'payeer',
 						'timestamp' => Carbon::now()
 					]);
 				}
@@ -372,7 +373,7 @@ class AdminController extends Controller
 				'is_yt' => 0,
 				'profit' => 0,
 				'opened' => 0,
-				'deposit' => 0,
+				'deposit' => $r->money,
 				'bonus_money' => 0
 			]);
 
@@ -381,8 +382,9 @@ class AdminController extends Controller
 				\DB::table('operations')->insertGetId([
 					'amount' => $r->money,
 					'user' => $user->id,
-					'type' => 5, // ТИП - Партнер
+					'type' => 0, // ТИП - Партнер
 					'status' => 1,
+					'koshelek' => 'payeer',
 					'timestamp' => Carbon::now()
 				]);
 			}

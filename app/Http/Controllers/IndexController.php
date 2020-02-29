@@ -550,7 +550,6 @@ class IndexController extends Controller
 	public function getpayment(Request $r)
 	{
 
-		file_put_contents("/var/www/www-root/data/www/azino-case.com/public/1.txt", print_r($r->all(), true), FILE_APPEND);
 		$settings = Settings::where('id', 1)->first();
 
 		if (isset($r->MERCHANT_ORDER_ID)) {
@@ -663,11 +662,11 @@ class IndexController extends Controller
 								}
 							}
 						} else {
-							
+
 							$user = User::where('id', $payment->user)->first();
 							$user->money = $user->money + $payment->amount;
 							$user->save();
-	
+
 							$te = User::where('id', $user->ref_user)->first();
 							if (!empty($te)) {
 								$bon = ($settings->ref_percent / 100) * $payment->amount;
@@ -754,24 +753,6 @@ class IndexController extends Controller
 
 			if ($r->m_sign == $sign_hash && $r->m_status == 'success') {
 
-				$user = User::where('id', $payment->user)->first();
-				$user->money = $user->money + $payment->amount;
-				$user->save();
-				$te = User::where('id', $user->ref_user)->first();
-				if (!empty($te)) {
-					$bon = ($settings->ref_percent / 100) * $payment->amount;
-					$te->money =   $te->money + $bon;
-					$te->save();
-					$int_id =  DB::table('operations')->insertGetId([
-						'amount' => $bon,
-						'user' => $te->id,
-						'type' => 3, // ТИП - Партнер
-						'status' => 1,
-						'timestamp' => Carbon::now()
-					]);
-				}
-
-
 				$opration = DB::table('operations')->where('id', $payment->id)->first();
 
 				if ($opration->operation) {
@@ -789,6 +770,24 @@ class IndexController extends Controller
 						}
 					}
 				} else {
+
+					$user = User::where('id', $payment->user)->first();
+					$user->money = $user->money + $payment->amount;
+					$user->save();
+
+					$te = User::where('id', $user->ref_user)->first();
+					if (!empty($te)) {
+						$bon = ($settings->ref_percent / 100) * $payment->amount;
+						$te->money =   $te->money + $bon;
+						$te->save();
+						$int_id =  DB::table('operations')->insertGetId([
+							'amount' => $bon,
+							'user' => $te->id,
+							'type' => 3, // ТИП - Партнер
+							'status' => 1,
+							'timestamp' => Carbon::now()
+						]);
+					}
 
 					if (!$user->deposit) {
 
