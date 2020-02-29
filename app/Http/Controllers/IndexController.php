@@ -95,10 +95,6 @@ class IndexController extends Controller
 
 		$general_game = $r->game_id;
 
-
-
-
-
 		$is_last = false;
 		if ($general_game != false && $general_game != "false") {
 			$next_cost = $card->cost * 1.4;
