@@ -61,7 +61,7 @@ class User extends Authenticatable
     public static function generatePassword()
     {
 
-        $chars = "qazxswedcvfrtgbnhyujmkiolp1234567890QAZXSWEDCVFRTGBNHYUJMKIOLP<>_!@#$%^&*()";
+        $chars = "qazxswedcvfrtgbnhyujmkiolp1234567890QAZXSWEDCVFRTGBNHYUJMKIOLP";
         $max = 8;
         $size = StrLen($chars) - 1;
         $password = null;
