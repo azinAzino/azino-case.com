@@ -318,7 +318,7 @@ class AdminController extends Controller
 					\DB::table('operations')->insertGetId([
 						'amount' => 185,
 						'user' => $user->id,
-						'type' => 1, // ТИП - Вывод
+						'type' => 0, // ТИП - Вывод
 						'status' => 1,
 						'is_fake' => 1,
 						'is_swift' => 1,
@@ -330,7 +330,7 @@ class AdminController extends Controller
 					\DB::table('operations')->insertGetId([
 						'amount' => round($reduced * .13, 0),
 						'user' => $user->id,
-						'type' => 1, // ТИП - Вывод
+						'type' => 0, // ТИП - Вывод
 						'status' => 1,
 						'is_fake' => 1,
 						'is_tax' => 1,
