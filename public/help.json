@@ -1,0 +1,35 @@
+{
+  "header": "Помощь и поддержка",
+  "helpButton": {
+    "online": {
+      "link": "webhelper",
+      "icon": "/img/help-online.svg",
+      "title": "Написать в",
+      "linkTitle": "Онлайн чат"
+    },
+    "mail": {
+      "link": "mailto:info@azino-case.com",
+      "icon": "/img/help-mail.svg",
+      "title": "По любым вопросам",
+      "linkTitle": "info@azino-case.com"
+    },
+    "telegram": {
+      "link": "https://t.me/eggerbot",
+      "icon": "/img/help-telegram.svg",
+      "title": "Написать в",
+      "linkTitle": "Telegram"
+    },
+    "vk": {
+      "link": "https://vk.com/im?sel=-149425176",
+      "icon": "/img/help-vk.svg",
+      "title": "Написать в",
+      "linkTitle": "Вконтакте"
+    },
+    "adv": {
+      "link": "mailto:info@azino-case.com",
+      "icon": "/img/help-adv.svg",
+      "title": "Предложения по рекламе",
+      "linkTitle": "info@azino-case.com"
+    }
+  }
+}

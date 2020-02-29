@@ -1,0 +1,151 @@
+Array
+(
+)
+Array
+(
+    [MERCHANT_ORDER_ID] => 207
+    [P_PHONE] => 
+    [P_EMAIL] => 090909jl@gmail.com
+    [CUR_ID] => 178
+    [AMOUNT] => 1.08
+    [MERCHANT_ID] => 181471
+    [SIGN] => 3ab499119c2987a0cec6baf01c67ae48
+    [intid] => 85600535
+)
+Array
+(
+    [MERCHANT_ORDER_ID] => 208
+    [P_PHONE] => 
+    [P_EMAIL] => 090909jl@gmail.com
+    [CUR_ID] => 178
+    [AMOUNT] => 1.08
+    [MERCHANT_ID] => 181471
+    [SIGN] => c1dc5dd310558e02574625738cce6f7c
+    [intid] => 85601830
+)
+Array
+(
+    [MERCHANT_ORDER_ID] => 210
+    [P_PHONE] => 
+    [P_EMAIL] => 2222@gmail.com
+    [CUR_ID] => 115
+    [AMOUNT] => 1.08
+    [MERCHANT_ID] => 181471
+    [SIGN] => 7b412831f3572dd34f7c7deaf7f06b20
+    [intid] => 85687738
+)
+Array
+(
+    [MERCHANT_ORDER_ID] => 210
+    [intid] => 85687738
+)
+Array
+(
+    [MERCHANT_ORDER_ID] => 213
+    [P_PHONE] => 
+    [P_EMAIL] => 2222@gmail.com
+    [CUR_ID] => 178
+    [AMOUNT] => 432
+    [MERCHANT_ID] => 181471
+    [SIGN] => a57df7df2e18571f11f4723b413ea741
+    [intid] => 85695704
+)
+Array
+(
+    [MERCHANT_ORDER_ID] => 215
+    [P_PHONE] => 
+    [P_EMAIL] => 2222@gmail.com
+    [CUR_ID] => 178
+    [AMOUNT] => 216
+    [MERCHANT_ID] => 181471
+    [SIGN] => 099e79782d8b3ff4fc8dd6038e7592b3
+    [intid] => 85695817
+)
+Array
+(
+    [MERCHANT_ORDER_ID] => 216
+    [P_PHONE] => 
+    [P_EMAIL] => 2222@gmail.com
+    [CUR_ID] => 178
+    [AMOUNT] => 97.2
+    [MERCHANT_ID] => 181471
+    [SIGN] => c8fff87df973ae3c01d49664505944d9
+    [intid] => 85695980
+)
+Array
+(
+    [MERCHANT_ORDER_ID] => 219
+    [P_PHONE] => 
+    [P_EMAIL] => 2222@gmail.com
+    [CUR_ID] => 178
+    [AMOUNT] => 210.6
+    [MERCHANT_ID] => 181471
+    [SIGN] => fccc43c5f78376ae9c92b56bffde4614
+    [intid] => 85696142
+)
+Array
+(
+    [MERCHANT_ORDER_ID] => 259
+    [P_PHONE] => 
+    [P_EMAIL] => Trend74@mail.ru
+    [CUR_ID] => 160
+    [AMOUNT] => 199.8
+    [MERCHANT_ID] => 181471
+    [SIGN] => 9462109af36202c17f6300bbc9b7d516
+    [intid] => 87311226
+)
+Array
+(
+    [MERCHANT_ORDER_ID] => 318
+    [P_PHONE] => 
+    [P_EMAIL] => kuzhugetsayana@mail.ru
+    [CUR_ID] => 160
+    [AMOUNT] => 97.2
+    [MERCHANT_ID] => 181471
+    [SIGN] => 5c739b2b9b3b5b8744e25061ae6027ab
+    [intid] => 87421453
+)
+Array
+(
+    [MERCHANT_ORDER_ID] => 369
+    [P_PHONE] => 
+    [P_EMAIL] => kuzhugetsayana@mail.ru
+    [CUR_ID] => 160
+    [AMOUNT] => 97.2
+    [MERCHANT_ID] => 181471
+    [SIGN] => 9b3a70de59409a35b92a2fd891d4de3c
+    [intid] => 87541900
+)
+Array
+(
+    [MERCHANT_ORDER_ID] => 378
+    [P_PHONE] => 
+    [P_EMAIL] => kuzhugetsayana@mail.ru
+    [CUR_ID] => 160
+    [AMOUNT] => 194.4
+    [MERCHANT_ID] => 181471
+    [SIGN] => 7efa7389c1b16048f4c441ecc0579197
+    [intid] => 87546771
+)
+Array
+(
+    [MERCHANT_ORDER_ID] => 381
+    [P_PHONE] => 
+    [P_EMAIL] => kuzhugetsayana@mail.ru
+    [CUR_ID] => 160
+    [AMOUNT] => 114.48
+    [MERCHANT_ID] => 181471
+    [SIGN] => 093ad0d2fa0970f4891c396a59f54993
+    [intid] => 87547097
+)
+Array
+(
+    [MERCHANT_ORDER_ID] => 478
+    [P_PHONE] => 
+    [P_EMAIL] => follantina@mail.ru
+    [CUR_ID] => 160
+    [AMOUNT] => 97.2
+    [MERCHANT_ID] => 181471
+    [SIGN] => 792a5853a0207f78f7ffd02a5b790a9b
+    [intid] => 87992085
+)

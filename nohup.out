@@ -1,0 +1,113 @@
+[33m[nodemon] 2.0.2[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching dir(s): *.*[39m
+[33m[nodemon] watching extensions: js,mjs,json[39m
+[32m[nodemon] starting `node bot/site.js`[39m
+events.js:200
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (net.js:1306:16)
+    at listenInCluster (net.js:1354:12)
+    at Server.listen (net.js:1442:7)
+    at Server.listen.Server.attach (/var/www/www-root/data/www/azino-case.com/node_modules/socket.io/lib/index.js:273:9)
+    at new Server (/var/www/www-root/data/www/azino-case.com/node_modules/socket.io/lib/index.js:59:17)
+    at Function.Server [as listen] (/var/www/www-root/data/www/azino-case.com/node_modules/socket.io/lib/index.js:44:41)
+    at Object.<anonymous> (/var/www/www-root/data/www/azino-case.com/bot/site.js:2:31)
+    at Module._compile (internal/modules/cjs/loader.js:955:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:991:10)
+    at Module.load (internal/modules/cjs/loader.js:811:32)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (net.js:1333:8)
+    at processTicksAndRejections (internal/process/task_queues.js:81:21) {
+  code: 'EADDRINUSE',
+  errno: 'EADDRINUSE',
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[33m[nodemon] 2.0.2[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching dir(s): *.*[39m
+[33m[nodemon] watching extensions: js,mjs,json[39m
+[32m[nodemon] starting `node bot/site.js`[39m
+events.js:200
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (net.js:1306:16)
+    at listenInCluster (net.js:1354:12)
+    at Server.listen (net.js:1442:7)
+    at Server.listen.Server.attach (/var/www/www-root/data/www/azino-case.com/node_modules/socket.io/lib/index.js:273:9)
+    at new Server (/var/www/www-root/data/www/azino-case.com/node_modules/socket.io/lib/index.js:59:17)
+    at Function.Server [as listen] (/var/www/www-root/data/www/azino-case.com/node_modules/socket.io/lib/index.js:44:41)
+    at Object.<anonymous> (/var/www/www-root/data/www/azino-case.com/bot/site.js:2:31)
+    at Module._compile (internal/modules/cjs/loader.js:955:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:991:10)
+    at Module.load (internal/modules/cjs/loader.js:811:32)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (net.js:1333:8)
+    at processTicksAndRejections (internal/process/task_queues.js:81:21) {
+  code: 'EADDRINUSE',
+  errno: 'EADDRINUSE',
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[33m[nodemon] 2.0.2[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching dir(s): *.*[39m
+[33m[nodemon] watching extensions: js,mjs,json[39m
+[32m[nodemon] starting `node bot/site.js`[39m
+events.js:200
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (net.js:1306:16)
+    at listenInCluster (net.js:1354:12)
+    at Server.listen (net.js:1442:7)
+    at Server.listen.Server.attach (/var/www/www-root/data/www/azino-case.com/node_modules/socket.io/lib/index.js:273:9)
+    at new Server (/var/www/www-root/data/www/azino-case.com/node_modules/socket.io/lib/index.js:59:17)
+    at Function.Server [as listen] (/var/www/www-root/data/www/azino-case.com/node_modules/socket.io/lib/index.js:44:41)
+    at Object.<anonymous> (/var/www/www-root/data/www/azino-case.com/bot/site.js:2:31)
+    at Module._compile (internal/modules/cjs/loader.js:955:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:991:10)
+    at Module.load (internal/modules/cjs/loader.js:811:32)
+Emitted 'error' event on Server instance at:
+    at emitErrorNT (net.js:1333:8)
+    at processTicksAndRejections (internal/process/task_queues.js:81:21) {
+  code: 'EADDRINUSE',
+  errno: 'EADDRINUSE',
+  syscall: 'listen',
+  address: '::',
+  port: 3000
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[33m[nodemon] 2.0.2[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching dir(s): *.*[39m
+[33m[nodemon] watching extensions: js,mjs,json[39m
+[32m[nodemon] starting `node bot/site.js`[39m
+events.js:200
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EBADF: bad file descriptor, read
+Emitted 'error' event on ReadStream instance at:
+    at internal/fs/streams.js:167:12
+    at FSReqCallback.wrapper [as oncomplete] (fs.js:470:5) {
+  errno: -9,
+  code: 'EBADF',
+  syscall: 'read'
+}
+[32m[nodemon] restarting child process[39m
+[32m[nodemon] starting `node bot/site.js`[39m
+[32m[nodemon] restarting child process[39m
+[32m[nodemon] starting `node bot/site.js`[39m
+[32m[nodemon] restarting child process[39m
+[32m[nodemon] restarting child process[39m

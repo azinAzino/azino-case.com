@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="2048px" height="1514px" viewBox="0 0 2048 1514" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>Background</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="2049" height="1514"></rect>
+        <radialGradient cx="50%" cy="4.23602238%" fx="50%" fy="4.23602238%" r="56.5246705%" gradientTransform="translate(0.500000,0.042360),scale(0.723768,1.000000),rotate(90.000000),translate(-0.500000,-0.042360)" id="radialGradient-3">
+            <stop stop-color="#802BC2" offset="0%"></stop>
+            <stop stop-color="#170049" offset="100%"></stop>
+        </radialGradient>
+        <linearGradient x1="50%" y1="2.24066023%" x2="50%" y2="60.1242476%" id="linearGradient-4">
+            <stop stop-color="#0C002D" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#000000" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.748278986">
+        <g id="Background">
+            <g transform="translate(-1.000000, 0.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#D8D8D8" xlink:href="#path-1"></use>
+                <g mask="url(#mask-2)">
+                    <g transform="translate(-200.000000, 0.000000)">
+                        <rect id="Purple-background" fill="url(#radialGradient-3)" x="200" y="0" width="2049" height="1483"></rect>
+                        <rect id="Fade" fill="url(#linearGradient-4)" x="203" y="763" width="2045" height="751"></rect>
+                        <g id="Texture" style="mix-blend-mode: overlay;" stroke-width="1" fill="none" fill-opacity="0.189999998">
+                            <polygon id="Path-2-Copy-2" fill="#FFFFFF" points="0.786611995 171.09375 2246.61059 1282.39062 1229.38109 0.09375 208.502802 0.09375"></polygon>
+                            <polygon id="Path-2-Copy-2" fill="#FFFFFF" points="210.134438 0.09375 2246.61059 1282.39062 1973.52383 2"></polygon>
+                            <polygon id="Path-2-Copy-6" fill="#FFFFFF" transform="translate(1228.372513, 641.242188) scale(-1, 1) translate(-1228.372513, -641.242188) " points="210.134438 0.09375 2246.61059 1282.39062 1973.52383 2"></polygon>
+                            <polygon id="Path-2-Copy-4" fill="#FFFFFF" points="206.357143 555.945313 2246.61059 1282.39062 812.967391 2 206.357143 2"></polygon>
+                            <polygon id="Path-2-Copy-5" fill="#FFFFFF" transform="translate(1226.483865, 642.195312) scale(-1, 1) translate(-1226.483865, -642.195312) " points="206.357143 555.945313 2246.61059 1282.39062 812.967391 2 206.357143 2"></polygon>
+                            <polygon id="Path-2-Copy" fill="#FFFFFF" transform="translate(1226.573430, 641.242188) scale(-1, 1) translate(-1226.573430, -641.242188) " points="210.134438 273.753906 2243.01242 1282.39062 1225.78292 0.09375 210.277387 1.61997254"></polygon>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

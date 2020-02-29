@@ -1,0 +1,10 @@
+
+.ui-datepicker-trigger img{
+    max-height:18px;
+}
+.ui-datepicker-trigger{
+    padding:0 3px;
+    margin:0;
+    background: none;
+    border:0px solid #000;
+}
