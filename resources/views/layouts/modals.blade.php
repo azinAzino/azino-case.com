@@ -151,7 +151,7 @@
                             class="pay-system__img">
                     </div>
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
-                        data-currency="10" data-provider="3">
+                        data-currency="115" data-provider="3">
                         <img src="/img/system/pay-icon_payeer_l.png" alt="{{ trans('Payeer') }}"
                             class="pay-system__img">
                     </div>
