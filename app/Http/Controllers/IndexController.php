@@ -396,7 +396,7 @@ class IndexController extends Controller
 			$settings = Settings::where('id', 1)->first();
 			$amount = number_format(($amount * 1.08), 2, '.', '');
 
-			if ($type == 10) {
+			if ($type == 10000) { // Payeer = 10
 				$m_shop = '921357081';
 				$m_orderid = $orderID;
 				$m_amount = number_format($amount, 2, '.', '');
@@ -471,8 +471,7 @@ class IndexController extends Controller
 				</form>
 				<? */
 
-			} elseif ($settings->payment_type == 0) // Если стоит тип оплаты по фрикассе
-			{
+			} elseif ($settings->payment_type == 0) {
 				$sign = md5($settings->fk_id . ':' . $amount . ':' . $settings->fk_secret1 . ':' . $orderID);
 				if ($type == 1) {
 					$type = 160;
