@@ -99,6 +99,9 @@
             <div class="modal-window__element-header text-block text-block_tf_up text-block_align_center">{{ trans('Choose a replenishment method') }}:</div>
             <div class="modal-window__element modal-window__pay-system-wrapper modal-window__element_with-header">
                 <div class="modal-window__pay-system pay-system">
+                    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper" data-currency="133" data-provider="3">
+                        <img src="/img/system/pay-icon_mc-visa_l.png" alt="{{ trans('FreeKassa Wallet') }}" class="pay-system__img">
+                    </div>
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper" data-currency="1" data-provider="3">
                         <img src="/img/system/pay-icon_mc-visa_l.png" alt="{{ trans('Bank card') }}" class="pay-system__img">
                     </div>
