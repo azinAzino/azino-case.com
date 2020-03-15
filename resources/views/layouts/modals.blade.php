@@ -108,7 +108,7 @@
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper" data-currency="4" data-provider="3">
                         <img src="/img/system/pay-icon_qiwi_l.png" alt="Qiwi" class="pay-system__img">
                     </div>
-                    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper" data-currency="10" data-provider="2">
+                    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper" data-currency="10" data-provider="3">
                         <img src="/img/system/pay-icon_payeer_l.png" alt="{{ trans('Payeer') }}" class="pay-system__img">
                     </div>
                     <!-- <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="19" data-provider="3">
