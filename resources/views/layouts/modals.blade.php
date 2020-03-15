@@ -160,24 +160,6 @@
                         <img src="/img/system/pay-icon_perfect_l.png" alt="{{ trans('Perfect Money') }}"
                             class="pay-system__img">
                     </div>
-                    <!-- <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="19" data-provider="3">
-                        <img src="/img/system/pay-icon_mts_l.png" alt="{{ trans('MTS') }}" class="pay-system__img">
-                    </div>
-                    <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="18" data-provider="3">
-                        <img src="/img/system/pay-icon_mf_l.png" alt="{{ trans('Megafon') }}" class="pay-system__img">
-                    </div>
-                    <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="21" data-provider="3">
-                        <img src="/img/system/pay-icon_bee_l.png" alt="{{ trans('Beeline') }}" class="pay-system__img">
-                    </div>
-                    <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="20" data-provider="3">
-                        <img src="/img/system/pay-icon_tele2_l.png" alt="{{ trans('TELE2') }}" class="pay-system__img">
-                    </div> -->
-                    <!-- <div class="pay-system__img-wrapper pay-system__more pay-system__more_show">
-                        <div class="pay-system__more-button">{{ trans('More') }}</div>
-                    </div>
-                    <div class="pay-system__img-wrapper pay-system__more pay-system__more_hide">
-                        <div class="pay-system__more-button">{{ trans('Hide') }}</div>
-                    </div> -->
                 </div>
                 <input type="hidden" class="payment-currency">
                 <input type="hidden" class="payment-provider">
@@ -398,15 +380,16 @@
             <div class="modal-window__element-header text-block text-block_tf_up text-block_align_center">
                 {{ trans('Choose a pay method') }}:</div>
             <div class="modal-window__element modal-window__pay-system-wrapper modal-window__element_with-header">
+                
                 <div class="modal-window__pay-system pay-system">
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
-                        data-currency="1" data-provider="3">
-                        <img src="/img/system/pay-icon_mc-visa_l.png" alt="{{ trans('Bank card') }}"
+                        data-currency="133" data-provider="3">
+                        <img src="/img/system/pay-icon_frekassawallet_l.png" alt="{{ trans('FreeKassa Wallet') }}"
                             class="pay-system__img">
                     </div>
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
-                        data-currency="5" data-provider="3">
-                        <img src="/img/system/pay-icon_ym_l.png" alt="{{ trans('Yandex.Money') }}"
+                        data-currency="80" data-provider="3">
+                        <img src="/img/system/pay-icon_sb_l.png" alt="{{ trans('SberBank Online') }}"
                             class="pay-system__img">
                     </div>
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
@@ -414,28 +397,32 @@
                         <img src="/img/system/pay-icon_qiwi_l.png" alt="Qiwi" class="pay-system__img">
                     </div>
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
-                        data-currency="10" data-provider="3">
+                        data-currency="5" data-provider="3">
+                        <img src="/img/system/pay-icon_ym_l.png" alt="{{ trans('Yandex.Money') }}"
+                            class="pay-system__img">
+                    </div>
+                </div>
+                <div class="modal-window__pay-system pay-system">
+                    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
+                        data-currency="1" data-provider="3">
+                        <img src="/img/system/pay-icon_mc-visa_l.png" alt="{{ trans('Bank card') }}"
+                            class="pay-system__img">
+                    </div>
+                    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
+                        data-currency="136" data-provider="3">
+                        <img src="/img/system/pay-icon_advcash_l.png" alt="{{ trans('AdvCash') }}"
+                            class="pay-system__img">
+                    </div>
+                    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
+                        data-currency="115" data-provider="3">
                         <img src="/img/system/pay-icon_payeer_l.png" alt="{{ trans('Payeer') }}"
                             class="pay-system__img">
                     </div>
-                    <!-- <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="19" data-provider="3">
-                        <img src="/img/system/pay-icon_mts_l.png" alt="{{ trans('MTS') }}" class="pay-system__img">
+                    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
+                        data-currency="64" data-provider="3">
+                        <img src="/img/system/pay-icon_perfect_l.png" alt="{{ trans('Perfect Money') }}"
+                            class="pay-system__img">
                     </div>
-                    <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="18" data-provider="3">
-                        <img src="/img/system/pay-icon_mf_l.png" alt="{{ trans('Megafon') }}" class="pay-system__img">
-                    </div>
-                    <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="21" data-provider="3">
-                        <img src="/img/system/pay-icon_bee_l.png" alt="{{ trans('Beeline') }}" class="pay-system__img">
-                    </div>
-                    <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="20" data-provider="3">
-                        <img src="/img/system/pay-icon_tele2_l.png" alt="{{ trans('TELE2') }}" class="pay-system__img">
-                    </div> -->
-                    <!-- <div class="pay-system__img-wrapper pay-system__more pay-system__more_show">
-                        <div class="pay-system__more-button">{{ trans('More') }}</div>
-                    </div>
-                    <div class="pay-system__img-wrapper pay-system__more pay-system__more_hide">
-                        <div class="pay-system__more-button">{{ trans('Hide') }}</div>
-                    </div> -->
                 </div>
                 <input type="hidden" class="payment-currency">
                 <input type="hidden" class="payment-provider">
@@ -475,15 +462,16 @@
             <div class="modal-window__element-header text-block text-block_tf_up text-block_align_center">
                 {{ trans('Choose a pay method') }}:</div>
             <div class="modal-window__element modal-window__pay-system-wrapper modal-window__element_with-header">
+                
                 <div class="modal-window__pay-system pay-system">
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
-                        data-currency="1" data-provider="3">
-                        <img src="/img/system/pay-icon_mc-visa_l.png" alt="{{ trans('Bank card') }}"
+                        data-currency="133" data-provider="3">
+                        <img src="/img/system/pay-icon_frekassawallet_l.png" alt="{{ trans('FreeKassa Wallet') }}"
                             class="pay-system__img">
                     </div>
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
-                        data-currency="5" data-provider="3">
-                        <img src="/img/system/pay-icon_ym_l.png" alt="{{ trans('Yandex.Money') }}"
+                        data-currency="80" data-provider="3">
+                        <img src="/img/system/pay-icon_sb_l.png" alt="{{ trans('SberBank Online') }}"
                             class="pay-system__img">
                     </div>
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
@@ -491,28 +479,32 @@
                         <img src="/img/system/pay-icon_qiwi_l.png" alt="Qiwi" class="pay-system__img">
                     </div>
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
-                        data-currency="10" data-provider="3">
+                        data-currency="5" data-provider="3">
+                        <img src="/img/system/pay-icon_ym_l.png" alt="{{ trans('Yandex.Money') }}"
+                            class="pay-system__img">
+                    </div>
+                </div>
+                <div class="modal-window__pay-system pay-system">
+                    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
+                        data-currency="1" data-provider="3">
+                        <img src="/img/system/pay-icon_mc-visa_l.png" alt="{{ trans('Bank card') }}"
+                            class="pay-system__img">
+                    </div>
+                    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
+                        data-currency="136" data-provider="3">
+                        <img src="/img/system/pay-icon_advcash_l.png" alt="{{ trans('AdvCash') }}"
+                            class="pay-system__img">
+                    </div>
+                    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
+                        data-currency="115" data-provider="3">
                         <img src="/img/system/pay-icon_payeer_l.png" alt="{{ trans('Payeer') }}"
                             class="pay-system__img">
                     </div>
-                    <!-- <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="19" data-provider="3">
-                        <img src="/img/system/pay-icon_mts_l.png" alt="{{ trans('MTS') }}" class="pay-system__img">
+                    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
+                        data-currency="64" data-provider="3">
+                        <img src="/img/system/pay-icon_perfect_l.png" alt="{{ trans('Perfect Money') }}"
+                            class="pay-system__img">
                     </div>
-                    <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="18" data-provider="3">
-                        <img src="/img/system/pay-icon_mf_l.png" alt="{{ trans('Megafon') }}" class="pay-system__img">
-                    </div>
-                    <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="21" data-provider="3">
-                        <img src="/img/system/pay-icon_bee_l.png" alt="{{ trans('Beeline') }}" class="pay-system__img">
-                    </div>
-                    <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="20" data-provider="3">
-                        <img src="/img/system/pay-icon_tele2_l.png" alt="{{ trans('TELE2') }}" class="pay-system__img">
-                    </div> -->
-                    <!-- <div class="pay-system__img-wrapper pay-system__more pay-system__more_show">
-                        <div class="pay-system__more-button">{{ trans('More') }}</div>
-                    </div>
-                    <div class="pay-system__img-wrapper pay-system__more pay-system__more_hide">
-                        <div class="pay-system__more-button">{{ trans('Hide') }}</div>
-                    </div> -->
                 </div>
                 <input type="hidden" class="payment-currency">
                 <input type="hidden" class="payment-provider">
@@ -547,13 +539,13 @@
             <div class="modal-window__element modal-window__pay-system-wrapper modal-window__element_with-header">
                 <div class="modal-window__pay-system pay-system">
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
-                        data-currency="1" data-provider="3">
-                        <img src="/img/system/pay-icon_mc-visa_l.png" alt="{{ trans('Bank card') }}"
+                        data-currency="133" data-provider="3">
+                        <img src="/img/system/pay-icon_frekassawallet_l.png" alt="{{ trans('FreeKassa Wallet') }}"
                             class="pay-system__img">
                     </div>
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
-                        data-currency="5" data-provider="3">
-                        <img src="/img/system/pay-icon_ym_l.png" alt="{{ trans('Yandex.Money') }}"
+                        data-currency="80" data-provider="3">
+                        <img src="/img/system/pay-icon_sb_l.png" alt="{{ trans('SberBank Online') }}"
                             class="pay-system__img">
                     </div>
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
@@ -561,28 +553,32 @@
                         <img src="/img/system/pay-icon_qiwi_l.png" alt="Qiwi" class="pay-system__img">
                     </div>
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
-                        data-currency="10" data-provider="3">
+                        data-currency="5" data-provider="3">
+                        <img src="/img/system/pay-icon_ym_l.png" alt="{{ trans('Yandex.Money') }}"
+                            class="pay-system__img">
+                    </div>
+                </div>
+                <div class="modal-window__pay-system pay-system">
+                    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
+                        data-currency="1" data-provider="3">
+                        <img src="/img/system/pay-icon_mc-visa_l.png" alt="{{ trans('Bank card') }}"
+                            class="pay-system__img">
+                    </div>
+                    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
+                        data-currency="136" data-provider="3">
+                        <img src="/img/system/pay-icon_advcash_l.png" alt="{{ trans('AdvCash') }}"
+                            class="pay-system__img">
+                    </div>
+                    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
+                        data-currency="115" data-provider="3">
                         <img src="/img/system/pay-icon_payeer_l.png" alt="{{ trans('Payeer') }}"
                             class="pay-system__img">
                     </div>
-                    <!-- <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="19" data-provider="3">
-                        <img src="/img/system/pay-icon_mts_l.png" alt="{{ trans('MTS') }}" class="pay-system__img">
+                    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
+                        data-currency="64" data-provider="3">
+                        <img src="/img/system/pay-icon_perfect_l.png" alt="{{ trans('Perfect Money') }}"
+                            class="pay-system__img">
                     </div>
-                    <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="18" data-provider="3">
-                        <img src="/img/system/pay-icon_mf_l.png" alt="{{ trans('Megafon') }}" class="pay-system__img">
-                    </div>
-                    <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="21" data-provider="3">
-                        <img src="/img/system/pay-icon_bee_l.png" alt="{{ trans('Beeline') }}" class="pay-system__img">
-                    </div>
-                    <div class="modal-window__img-wrapper_additionally modal-window__img-wrapper pay-system__img-wrapper" data-currency="20" data-provider="3">
-                        <img src="/img/system/pay-icon_tele2_l.png" alt="{{ trans('TELE2') }}" class="pay-system__img">
-                    </div> -->
-                    <!-- <div class="pay-system__img-wrapper pay-system__more pay-system__more_show">
-                        <div class="pay-system__more-button">{{ trans('More') }}</div>
-                    </div>
-                    <div class="pay-system__img-wrapper pay-system__more pay-system__more_hide">
-                        <div class="pay-system__more-button">{{ trans('Hide') }}</div>
-                    </div> -->
                 </div>
                 <input type="hidden" class="payment-currency">
                 <input type="hidden" class="payment-provider">
