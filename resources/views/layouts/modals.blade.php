@@ -138,6 +138,8 @@
                         <img src="/img/system/pay-icon_ym_l.png" alt="{{ trans('Yandex.Money') }}"
                             class="pay-system__img">
                     </div>
+                </div>
+                <div class="modal-window__pay-system pay-system">
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
                         data-currency="1" data-provider="3">
                         <img src="/img/system/pay-icon_mc-visa_l.png" alt="{{ trans('Bank card') }}"
