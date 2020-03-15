@@ -156,7 +156,7 @@
                             class="pay-system__img">
                     </div>
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
-                        data-currency="69" data-provider="3">
+                        data-currency="64" data-provider="3">
                         <img src="/img/system/pay-icon_perfect_l.png" alt="{{ trans('Perfect Money') }}"
                             class="pay-system__img">
                     </div>
