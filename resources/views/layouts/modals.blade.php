@@ -146,7 +146,7 @@
                             class="pay-system__img">
                     </div>
                     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper"
-                        data-currency="150" data-provider="3">
+                        data-currency="136" data-provider="3">
                         <img src="/img/system/pay-icon_advcash_l.png" alt="{{ trans('AdvCash') }}"
                             class="pay-system__img">
                     </div>
