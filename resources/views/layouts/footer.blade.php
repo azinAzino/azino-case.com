@@ -54,6 +54,7 @@
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="footer__pay-system-header text-block text-block_fs_m">{{ trans('We accept') }}:</div>
                 <div class="pay-system">
+                    <div class="pay-system__img-wrapper"><a href="//showstreams.tv/"><img src="//www.free-kassa.ru/img/fk_btn/14.png" title="Бесплатный видеохостинг"></a></div>
 					<div class="pay-system__img-wrapper"><img src="/img/system/pay-icon_visa_mc.png" alt="Visa/MasterCard" title="Visa/MasterCard" class="pay-system__img"/></div>
 					<div class="pay-system__img-wrapper"><img src="/img/system/pay-icon_ym.png" alt="{{ trans('Yandex.Money') }}" title="{{ trans('Yandex.Money') }}" class="pay-system__img"/></div>
 					<div class="pay-system__img-wrapper"><img src="/img/system/pay-icon_qiwi.png" alt="Qiwi" title="Qiwi" class="pay-system__img"/></div>
