@@ -473,6 +473,8 @@ class IndexController extends Controller
 
 			} elseif ($type == 64) {
 
+				$m_orderid = $orderID;
+				$m_amount = number_format($amount, 2, '.', '');
 				return json_encode([
 					'method' => "post",
 					'url' => "https://perfectmoney.com/api/step1.asp",
