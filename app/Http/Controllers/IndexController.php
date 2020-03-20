@@ -481,7 +481,7 @@ class IndexController extends Controller
 				$m_amount = number_format($amount, 2, '.', '');
 				return json_encode([
 					'method' => "post",
-					'url' => "https://perfectmoney.com/api/step1.asp",
+					'url' => "https://perfectmoney.is/api/step1.asp",
 					'hiddens' => [
 						'PAYEE_ACCOUNT' => "U11077229",
 						'PAYEE_NAME' => "azino-case.com",
