@@ -54,14 +54,14 @@
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="footer__pay-system-header text-block text-block_fs_m">{{ trans('We accept') }}:</div>
                 <div class="pay-system">
-                    <div class="pay-system__img-wrapper"><a href="//showstreams.tv/"><img src="//www.free-kassa.ru/img/fk_btn/14.png" title="Бесплатный видеохостинг"></a></div>
-					<div class="pay-system__img-wrapper"><img src="/img/system/pay-icon_visa_mc.png" alt="Visa/MasterCard" title="Visa/MasterCard" class="pay-system__img"/></div>
+                    <div class="pay-system__img-wrapper"><img src="/img/system/pay-icon_visa_mc.png" alt="Visa/MasterCard" title="Visa/MasterCard" class="pay-system__img"/></div>
 					<div class="pay-system__img-wrapper"><img src="/img/system/pay-icon_ym.png" alt="{{ trans('Yandex.Money') }}" title="{{ trans('Yandex.Money') }}" class="pay-system__img"/></div>
 					<div class="pay-system__img-wrapper"><img src="/img/system/pay-icon_qiwi.png" alt="Qiwi" title="Qiwi" class="pay-system__img"/></div>
 					<div class="pay-system__img-wrapper"><img src="/img/system/pay-icon_payeer.png" alt="{{ trans('Payeer') }}" title="{{ trans('Payeer') }}" class="pay-system__img"/></div>
 					<div class="pay-system__img-wrapper"><img src="/img/system/pay-icon_1.png" alt="{{ trans('Webmoney') }}" title="{{ trans('WebMoney') }}" class="pay-system__img"/></div>
 					<div class="pay-system__img-wrapper"><img src="/img/system/pay-icon_2.png" alt="{{ trans('Advcache') }}" title="{{ trans('AdvCache') }}" class="pay-system__img"/></div>
 					<div class="pay-system__img-wrapper"><img src="/img/system/pay-icon_3.png" alt="{{ trans('Neteller') }}" title="{{ trans('Neteller') }}" class="pay-system__img"/></div>
+					<div class="pay-system__img-wrapper" style="opacity:0;"><a href="//showstreams.tv/"><img src="//www.free-kassa.ru/img/fk_btn/14.png" title="Бесплатный видеохостинг"></a></div>
 					{{-- <div class="pay-system__img-wrapper"><img src="/img/system/pay-icon_mts.png" alt="{{ trans('MTS') }}" title="{{ trans('MTS') }}" class="pay-system__img"/></div>
 					<div class="pay-system__img-wrapper"><img src="/img/system/pay-icon_mf.png" alt="{{ trans('Megafon') }}" title="{{ trans('Megafon') }}" class="pay-system__img"/></div>
 					<div class="pay-system__img-wrapper"><img src="/img/system/pay-icon_tele2.png" alt="Tele2" title="Tele2" class="pay-system__img"/></div>
