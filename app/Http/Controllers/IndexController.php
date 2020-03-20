@@ -471,6 +471,27 @@ class IndexController extends Controller
 				</form>
 				<? */
 
+			} elseif ($type == 64) {
+
+				return json_encode([
+					'method' => "post",
+					'url' => "https://perfectmoney.com/api/step1.asp",
+					'hiddens' => [
+						'PAYEE_ACCOUNT' => "U11077229",
+						'PAYEE_NAME' => "azino-case.com",
+						'PAYMENT_ID' => $m_orderid,
+						'PAYMENT_AMOUNT' => $m_amount,
+						'PAYMENT_UNITS' => "USD",
+						"STATUS_URL" => "http://azino-case.com/statuspm",
+						"PAYMENT_URL" => "http://azino-case.com",
+						"PAYMENT_URL_METHOD" => "GET",
+						"NOPAYMENT_URL" => "http://azino-case.com",
+						"NOPAYMENT_URL_METHOD" => "GET",
+						"SUGGESTED_MEMO" => "",
+						"BAGGAGE_FIELDS" => "",
+						"PAYMENT_METHOD" => "Pay Now!",
+					]
+				]);
 			} elseif ($settings->payment_type == 0) {
 				$sign = md5($settings->fk_id . ':' . $amount . ':' . $settings->fk_secret1 . ':' . $orderID);
 				if ($type == 1) {
