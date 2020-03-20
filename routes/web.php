@@ -59,6 +59,9 @@ Route::any('/checkpayment', 'IndexController@getpayment')->name('checkpayment');
 Route::get('/fail', 'IndexController@success')->name('fail');
 Route::post('/payeer/status', 'IndexController@payeerStatus')->name('payeer-status-post');
 Route::get('/payeer/status', 'IndexController@payeerStatus')->name('payeer-status-get');
+Route::post('/statuspm', 'IndexController@pmStatus')->name('pm-status-post');
+
+
 
 Route::get('/success', function () {
 	return redirect('/');

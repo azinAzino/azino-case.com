@@ -245,6 +245,10 @@ class IndexController extends Controller
 		}
 	}
 
+	public function pmStatus(Request $r){
+		file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/1.txt', print_r($r->all(), true), FILE_APPEND);
+	}
+
 	public function profile_finance()
 	{
 		if (Auth::guest()) {
