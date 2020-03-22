@@ -264,7 +264,7 @@ class IndexController extends Controller
 			$r->post('PAYMENT_ID') . ':' . $r->post('PAYEE_ACCOUNT') . ':' .
 			$r->post('PAYMENT_AMOUNT') . ':' . $r->post('PAYMENT_UNITS') . ':' .
 			$r->post('PAYMENT_BATCH_NUM') . ':' .
-			$r->post('PAYER_ACCOUNT') . ':' . 'o3o857Kr6tgrbDePVEnQrfWdH' . ':' .
+			$r->post('PAYER_ACCOUNT') . ':' . strtoupper(md5('o3o857Kr6tgrbDePVEnQrfWdH')) . ':' .
 			$r->post('TIMESTAMPGMT');
 
 		$hash = strtoupper(md5($string));
@@ -579,9 +579,8 @@ class IndexController extends Controller
 						'PAYMENT_AMOUNT' => $m_amount,
 						'PAYMENT_UNITS' => "USD",
 						"STATUS_URL" => "http://azino-case.com/statuspm",
-						"STATUS_URL_METHOD" => "POST",
-						"PAYMENT_URL" => "http://azino-case.com/statuspm",
-						"PAYMENT_URL_METHOD" => "POST",
+						"PAYMENT_URL" => "http://azino-case.com",
+						"PAYMENT_URL_METHOD" => "GET",
 						"NOPAYMENT_URL" => "http://azino-case.com",
 						"NOPAYMENT_URL_METHOD" => "GET",
 						"SUGGESTED_MEMO" => "",
