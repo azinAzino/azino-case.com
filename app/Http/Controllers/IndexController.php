@@ -269,7 +269,7 @@ class IndexController extends Controller
 
 		$hash = strtoupper(md5($string));
 		
-		if ($hash == $r->post('V2_HASH') && (float)$r->post('PAYMENT_AMOUNT') == (float)$payment->amount) {
+		if ($hash == $r->post('V2_HASH') && (float)$r->post('PAYMENT_AMOUNT') >= (float)$payment->amount) {
 
 			$opration = DB::table('operations')->where('id', $payment->id)->first();
 
