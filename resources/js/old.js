@@ -9421,11 +9421,6 @@ function number_format(number, decimals, dec_point, thousands_sep) {
                             var form = document.createElement('form');
                             form.setAttribute('action', t.url);
                             form.setAttribute('method', t.method);
-                            var input = document.createElement('input');
-                            input.setAttribute('type', 'hidden');
-                            input.setAttribute('name', '_token');
-                            input.setAttribute('value', $('meta[name="csrf-token"]').attr('content'));
-                            form.appendChild(input);
                             for (var f in t.hiddens) {
                                 var input = document.createElement('input');
                                 input.setAttribute('type', 'hidden');

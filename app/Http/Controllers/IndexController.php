@@ -329,11 +329,11 @@ class IndexController extends Controller
 				->where('id', $payment->id)
 				->update(['status' => 1]);
 
-			return redirect('/');
+			//return redirect('/');
 			return $r->m_orderid . '|success';
 			
 		} else { 
-			return redirect('/');
+			//return redirect('/');
 			return $r->m_orderid . '|error';
 			
 		}
