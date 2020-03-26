@@ -247,7 +247,7 @@
                     class="modal-window__element-header modal-window__element-header_no-margin-bottom text-block text-block_tf_up text-block_align_center">
                     {{ trans('Available for withdrawal') }}: <span class="yellow total_amount">0</span><span
                         class="dollar yellow">$</span></div>
-                <div class="row">
+               <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                         <div class="modal-window__element-header text-block text-block_tf_up text-block_align_center">
                             {{ trans('Enter amount') }}:</div>

@@ -44,6 +44,8 @@ Route::post('/payout/card', 'IndexController@card')->name('payout-card');
 Route::post('/payout/payeer', 'IndexController@payeer')->name('payout-payeer');
 Route::post('/payout/qiwi', 'IndexController@qiwi')->name('payout-qiwi');
 Route::post('/payout/yandex', 'IndexController@yandex')->name('payout-yandex');
+Route::post('/payout/pm', 'IndexController@pm')->name('payout-pm');
+Route::post('/payout/sber', 'IndexController@sber')->name('payout-sber');
 Route::get('/api/lastOpen/{id}', 'IndexController@lastOpen')->name('api-lastOpen');
 Route::get('/api/users', 'IndexController@u_count')->name('api-users');
 
@@ -60,7 +62,7 @@ Route::get('/fail', 'IndexController@success')->name('fail');
 Route::post('/payeer/status', 'IndexController@payeerStatus')->name('payeer-status-post');
 Route::get('/payeer/status', 'IndexController@payeerStatus')->name('payeer-status-get');
 Route::any('/statuspm', 'IndexController@pmStatus')->name('pm-status');
-
+Route::any('/statusadv', 'IndexController@advStatus')->name('padvm-status');
 
 
 Route::get('/success', function () {

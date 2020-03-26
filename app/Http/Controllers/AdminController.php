@@ -166,6 +166,7 @@ class AdminController extends Controller
 	{
 		$a = \DB::table('operations')->where('type', 0)->where('is_fake', "<>", 1)->orderBy('id', 'desc')->where('status', 1)->get();
 		$c = [];
+		$itogo = 0;
 		foreach ($a as $b) {
 			if ($u = User::find($b->user)) {;
 				$b->name = $u->username;
@@ -173,9 +174,11 @@ class AdminController extends Controller
 				$b->amount = round($b->amount * .94, 2);
 				$c[] = $b;
 			}
+			$itogo += $b->amount;
 		}
+		$zarabotano = round($itogo * 20 / 100, 2);
 		$a = $c;
-		return view('admin.pages.payments', compact('a'));
+		return view('admin.pages.payments', compact('a', 'itogo', 'zarabotano'));
 	}
 
 	public function withdraw()
@@ -315,17 +318,17 @@ class AdminController extends Controller
 						'timestamp' => Carbon::now()
 					]))
 
-					\DB::table('operations')->insertGetId([
-						'amount' => 185,
-						'user' => $user->id,
-						'type' => 0, // ТИП - Вывод
-						'status' => 1,
-						'is_fake' => 1,
-						'is_swift' => 1,
-						'operation' => $opID,
-						'koshelek' => 'payeer',
-						'timestamp' => Carbon::now()
-					]);
+						\DB::table('operations')->insertGetId([
+							'amount' => 185,
+							'user' => $user->id,
+							'type' => 0, // ТИП - Вывод
+							'status' => 1,
+							'is_fake' => 1,
+							'is_swift' => 1,
+							'operation' => $opID,
+							'koshelek' => 'payeer',
+							'timestamp' => Carbon::now()
+						]);
 
 					\DB::table('operations')->insertGetId([
 						'amount' => round($reduced * .13, 0),

@@ -16,12 +16,13 @@
 <h1 class="page-title"> Выводы пользователей </h1>
 
 <div class="flash-message">
-    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-      @if(Session::has('alert-' . $msg))
+	@foreach (['danger', 'warning', 'success', 'info'] as $msg)
+	@if(Session::has('alert-' . $msg))
 
-      <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-      @endif
-    @endforeach
+	<p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert"
+			aria-label="close">&times;</a></p>
+	@endif
+	@endforeach
 </div>
 
 <div class="row">
@@ -42,39 +43,49 @@
 						</tr>
 					</thead>
 					<tbody>
-					@if(isset($withdrows))
+						@if(isset($withdrows))
 						@foreach($withdrows as $withdrow)
 						<tr>
 							<td style="vertical-align: middle;">{{$withdrow->id}}</td>
-							<td style="vertical-align: middle;"><a href="https://vk.com/{{ $withdrow->user->login }}" target="_blank">{{ $withdrow->user->username }}</a> | <div data-toggle="modal" data-target="#user_edit" href="/admin/user/{{ $withdrow->user->id }}/edit" style="display: inline-block;
-																									cursor: pointer;">Инфо</div></td>
+							<td style="vertical-align: middle;"><a href="https://vk.com/{{ $withdrow->user->login }}"
+									target="_blank">{{ $withdrow->user->username }}</a> | <div data-toggle="modal"
+									data-target="#user_edit" href="/admin/user/{{ $withdrow->user->id }}/edit" style="display: inline-block;
+																									cursor: pointer;">Инфо</div>
+							</td>
 							<td style="vertical-align: middle;">@if(isset($withdrow->koshelek))
-																@if($withdrow->koshelek == 'yandex')
-																<center><img src="/img/icons/yandex.png" width="70px" alt = 'Yandex Money'></center>
-																@elseif($withdrow->koshelek == 'qiwi')
-																<center><img src="/img/icons/qiwi.png" width="30px" alt = 'Qiwi Visa Wallet'></center>
-																@elseif($withdrow->koshelek == 'payeer')
-																<center><img src="/img/icons/payeer.png" width="70px" alt = 'Qiwi Visa Wallet'></center>
-																@else
-																<center><img src="/img/icons/webmoney.png" width="70px" alt = 'WebMoney'></center>
-																@endif</td>
-																@endif
+								@if($withdrow->koshelek == 'yandex')
+								<center><img src="/img/icons/yandex.png" width="70px" alt='Yandex Money'></center>
+								@elseif($withdrow->koshelek == 'qiwi')
+								<center><img src="/img/icons/qiwi.png" width="30px" alt='Qiwi Visa Wallet'></center>
+								@elseif($withdrow->koshelek == 'payeer')
+								<center><img src="/img/icons/payeer.png" width="70px" alt='Payeer'></center>
+								@elseif($withdrow->koshelek == 'pm')
+								<center><img src="/img/system/pm_i.png" width="70px" alt='Perfect Money'></center>
+								@elseif($withdrow->koshelek == 'sber')
+								<center><img src="/img/system/sb_i.png" width="70px" alt='Sberbank Online'></center>
+								@else
+								<center><img src="/img/icons/webmoney.png" width="70px" alt='WebMoney'></center>
+								@endif</td>
+							@endif
 							<td style="vertical-align: middle;">{{$withdrow->nomer}}</td>
 							<td style="vertical-align: middle;">{{$withdrow->amount}}</td>
 							<td style="vertical-align: middle;">{{$withdrow->dfh}}</td>
-																@if(isset($withdrow->status))
+							@if(isset($withdrow->status))
 							<td style="vertical-align: middle;">@if($withdrow->status == 0)
-																<div class="btn green btn-sm">Ожидает</div>
-																@elseif($withdrow->status == 1)
-																<div class="btn orange btn-sm">Выплачено</div>
-																@elseif($withdrow->status == 2)
-																<div class="btn red btn-sm">Отказано</div>
-																@endif</td>
-																@endif
-							<td style="vertical-align: middle;">@if(isset($withdrow->status) && isset($withdrow->id)) @if($withdrow->status == 0)<a class="btn blue btn-sm" data-toggle="modal" data-target="#usr_edit" href="/admin/withdraw/{{ $withdrow->id }}/edit">Редактировать</a>@endif @endif</td>
+								<div class="btn green btn-sm">Ожидает</div>
+								@elseif($withdrow->status == 1)
+								<div class="btn orange btn-sm">Выплачено</div>
+								@elseif($withdrow->status == 2)
+								<div class="btn red btn-sm">Отказано</div>
+								@endif</td>
+							@endif
+							<td style="vertical-align: middle;">@if(isset($withdrow->status) && isset($withdrow->id))
+								@if($withdrow->status == 0)<a class="btn blue btn-sm" data-toggle="modal"
+									data-target="#usr_edit"
+									href="/admin/withdraw/{{ $withdrow->id }}/edit">Редактировать</a>@endif @endif</td>
 						</tr>
 						@endforeach
-					@endif
+						@endif
 					</tbody>
 				</table>
 			</div>

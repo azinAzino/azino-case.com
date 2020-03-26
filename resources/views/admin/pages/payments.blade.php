@@ -2,13 +2,23 @@
 
 @section('content')
 <div class="top-bar">
-	<h3>{{ __('Last 20 Payments') }}</h3>
+	<h3>{{ __('Payments') }}</h3>
+</div>
+<div class="res-payments">
+	<dl>
+		<dt>{{ __('Всего заводов:') }}</dt>
+		<dd>{{$itogo}}</dd>
+		<dt>{{ __('Заработано оператором:') }}</dt>
+		<dd>{{$zarabotano}}</dd>
+	</dl>
 </div>
 <div class="portlet light bordered">
 	<div class="portlet-body">
 		<p id="date_filter">
-			<span id="date-label-from" class="date-label">{{ __('From') }}: </span><input class="date_range_filter date" type="text" id="datepicker_from" />
-			<span id="date-label-to" class="date-label">{{ __('To') }}:<input class="date_range_filter date" type="text" id="datepicker_to" />
+			<span id="date-label-from" class="date-label">{{ __('From') }}: </span><input class="date_range_filter date"
+				type="text" id="datepicker_from" />
+			<span id="date-label-to" class="date-label">{{ __('To') }}:<input class="date_range_filter date" type="text"
+					id="datepicker_to" />
 		</p>
 		<table id="paymentsTable" class="table table-striped table-bordered">
 			<thead>

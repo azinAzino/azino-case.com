@@ -245,7 +245,8 @@ class IndexController extends Controller
 		}
 	}
 
-	public function pmStatus(Request $r)
+
+	public function advStatus(Request $r)
 	{
 		file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/1.txt', print_r($r->all(), true));
 
@@ -253,23 +254,28 @@ class IndexController extends Controller
 
 		//if (!in_array($r->ip(), array('185.71.65.92', '185.71.65.189', '149.202.17.210'))) return;
 
-		$payment =  DB::table('operations')->where('id', $r->post('PAYMENT_ID'))->first();
+		$payment =  DB::table('operations')->where('id', $r->post('ac_order_id'))->first();
 
 		if (empty($payment)) {
 			return redirect('/');
 			return $r->post('PAYMENT_ID') . '|error';
 		}
 
-		$string =
-			$r->post('PAYMENT_ID') . ':' . $r->post('PAYEE_ACCOUNT') . ':' .
-			$r->post('PAYMENT_AMOUNT') . ':' . $r->post('PAYMENT_UNITS') . ':' .
-			$r->post('PAYMENT_BATCH_NUM') . ':' .
-			$r->post('PAYER_ACCOUNT') . ':' . strtoupper(md5('o3o857Kr6tgrbDePVEnQrfWdH')) . ':' .
-			$r->post('TIMESTAMPGMT');
+		$string = hash(
+			'sha256',
+			$r->post('ac_transfer') . ':' .
+				$r->post('ac_start_date') . ':' .
+				$r->post('ac_sci_name') . ':' .
+				$r->post('ac_src_wallet') . ':' .
+				$r->post('ac_dest_wallet') . ':' .
+				$r->post('ac_order_id') . ':' .
+				$r->post('ac_amount') . ':' .
+				'qw64nK30$t'
+		);
 
 		$hash = strtoupper(md5($string));
-		
-		if ($hash == $r->post('V2_HASH') && (float)$r->post('PAYMENT_AMOUNT') >= (float)$payment->amount) {
+
+		if ($hash == $r->post('ac_hash') && (float) $r->post('ac_amount') >= (float) $payment->amount) {
 
 			$opration = DB::table('operations')->where('id', $payment->id)->first();
 
@@ -331,11 +337,101 @@ class IndexController extends Controller
 
 			//return redirect('/');
 			return $r->m_orderid . '|success';
-			
-		} else { 
+		} else {
 			//return redirect('/');
 			return $r->m_orderid . '|error';
-			
+		}
+	}
+
+	public function pmStatus(Request $r)
+	{
+		file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/1.txt', print_r($r->all(), true));
+
+		$settings = Settings::where('id', 1)->first();
+
+		//if (!in_array($r->ip(), array('185.71.65.92', '185.71.65.189', '149.202.17.210'))) return;
+
+		$payment =  DB::table('operations')->where('id', $r->post('PAYMENT_ID'))->first();
+
+		if (empty($payment)) {
+			return redirect('/');
+			return $r->post('PAYMENT_ID') . '|error';
+		}
+
+		$string =
+			$r->post('PAYMENT_ID') . ':' . $r->post('PAYEE_ACCOUNT') . ':' .
+			$r->post('PAYMENT_AMOUNT') . ':' . $r->post('PAYMENT_UNITS') . ':' .
+			$r->post('PAYMENT_BATCH_NUM') . ':' .
+			$r->post('PAYER_ACCOUNT') . ':' . strtoupper(md5('o3o857Kr6tgrbDePVEnQrfWdH')) . ':' .
+			$r->post('TIMESTAMPGMT');
+
+		$hash = strtoupper(md5($string));
+
+		if ($hash == $r->post('V2_HASH') && (float) $r->post('PAYMENT_AMOUNT') >= (float) $payment->amount) {
+
+			$opration = DB::table('operations')->where('id', $payment->id)->first();
+
+			if ($opration->operation) {
+
+				$opration1 = DB::table('operations')->where('id', $opration->operation)->first();
+
+				if ($opration1) {
+
+					if ($opration->is_tax) {
+
+						DB::table('operations')->where('id', $opration->operation)->update(['tax' => 1]);
+					} elseif ($opration->is_swift) {
+
+						DB::table('operations')->where('id', $opration->operation)->update(['swift' => 1]);
+					}
+				}
+			} else {
+
+				$user = User::where('id', $payment->user)->first();
+				$user->money = $user->money + $payment->amount;
+				$user->save();
+
+				$te = User::where('id', $user->ref_user)->first();
+				if (!empty($te)) {
+					$bon = ($settings->ref_percent / 100) * $payment->amount;
+					$te->money =   $te->money + $bon;
+					$te->save();
+					$int_id =  DB::table('operations')->insertGetId([
+						'amount' => $bon,
+						'user' => $te->id,
+						'type' => 3, // ТИП - Партнер
+						'status' => 1,
+						'timestamp' => Carbon::now()
+					]);
+				}
+
+				if (!$user->deposit) {
+
+					$user->money = $user->money + $payment->amount;
+
+					$int_id =  DB::table('operations')->insertGetId([
+
+						'amount' => $payment->amount,
+						'user' => $user->id,
+						'type' => 2, // ТИП - Бонус
+						'status' => 1,
+						'timestamp' => Carbon::now()
+
+					]);
+				}
+				$user->deposit = $user->deposit + $payment->amount;
+				$user->save();
+			}
+
+			DB::table('operations')
+				->where('id', $payment->id)
+				->update(['status' => 1]);
+
+			//return redirect('/');
+			return $r->m_orderid . '|success';
+		} else {
+			//return redirect('/');
+			return $r->m_orderid . '|error';
 		}
 	}
 
@@ -564,7 +660,31 @@ class IndexController extends Controller
 				<input type="submit" name="m_process" value="send" />
 				</form>
 				<? */
-
+			} elseif ($type == 136) {
+				/*
+				<form method="post" action="https://wallet.advcash.com/sci/">
+					<input type="hidden" name="ac_account_email" value="marsel.monet@yandex.by" />
+					<input type="hidden" name="ac_sci_name" value="Azino-Case" />
+					<input type="text" name="ac_amount" value="1.00" />
+					<input type="text" name="ac_currency" value="USD" />
+					<input type="text" name="ac_order_id" value="123456789" />
+					<input type="text" name="ac_sign" value="208b0f75aaf578efc18b9c1f7acf3c9449f083e636a9d21d4e09bc0f5dbb1b2f" />
+		   		</form>
+		   		*/
+				$m_orderid = $orderID;
+				$m_amount = number_format($amount, 2, '.', '');
+				return json_encode([
+					'method' => "post",
+					'url' => "https://wallet.advcash.com/sci/",
+					'hiddens' => [
+						'ac_account_email' => "marsel.monet@yandex.by",
+						'ac_sci_name' => "Azino-Case",
+						'ac_amount' => $m_amount,
+						'ac_currency' => "USD",
+						'ac_order_id' => $m_orderid,
+						'ac_sign' => hash('sha256', 'marsel.monet@yandex.by:Azino-Case:' . $m_amount . ':USD:qw64nK30$t:' . $m_orderid)
+					]
+				]);
 			} elseif ($type == 64) {
 
 				$m_orderid = $orderID;
@@ -827,7 +947,7 @@ class IndexController extends Controller
 	public function pavailable()
 	{
 		if (!Auth::guest()) {
-			return '{"status":200,"amount":' . Auth::user()->money . ',"purses":{"qiwi":null,"yandex":null,"payeer":null}}';
+			return '{"status":200,"amount":' . Auth::user()->money . ',"purses":{"qiwi":null,"yandex":null,"payeer":null,"pm":null,"sber":null}}';
 		}
 	}
 
@@ -1219,6 +1339,120 @@ class IndexController extends Controller
 				'type' => 1, // ТИП - ВЫВОД
 				'status' => 0,
 				'koshelek' => 'yandex',
+				'nomer' => $r->purse,
+				'timestamp' => Carbon::now()
+			]);
+
+			return json_encode(["status" => 200, "balance" => $user->money]);
+		}
+	}
+	public function pm(Request $r)
+	{
+		if (!Auth::guest()) {
+			if ($r->amount == '') {
+				return Response::json([
+					'message' => 'The given data was invalid.',
+					'errors' => ['amount' => ['Введите сумму!']]
+				], 422);
+			}
+			if ($r->purse == '') {
+				return Response::json([
+					'message' => 'The given data was invalid.',
+					'errors' => ['purse' => [trans('Choose a system to withdraw') . '!']]
+				], 422);
+			}
+
+			$settings = Settings::where('id', 1)->first();
+
+			if ((float) $r->amount < (float) $settings->min_width) {
+				return Response::json([
+					'message' => 'The given data was invalid.',
+					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $settings->min_width . '!']]
+				], 422);
+			}
+
+			if (Auth::user()->money < $r->amount) {
+				return Response::json([
+					'message' => 'The given data was invalid.',
+					'errors' => ['amount' => [trans('Not enough funds on balance') . '!']]
+				], 422);
+			}
+
+			$ops = DB::table('operations')->where('user', Auth::user()->id)->where('type', 1)->where('status', 0)->count();
+
+			if ($ops >= 1) {
+				return Response::json([
+					'message' => 'The given data was invalid.',
+					'errors' => ['amount' => [trans('Wait for the previous output') . '!']]
+				], 422);
+			}
+
+			$user = Auth::user();
+			$user->money = $user->money - $r->amount;
+			$user->save();
+			$int_id =  DB::table('operations')->insertGetId([
+				'amount' => (float) $r->amount,
+				'user' => Auth::user()->id,
+				'type' => 1, // ТИП - ВЫВОД
+				'status' => 0,
+				'koshelek' => 'pm',
+				'nomer' => $r->purse,
+				'timestamp' => Carbon::now()
+			]);
+
+			return json_encode(["status" => 200, "balance" => $user->money]);
+		}
+	}
+	public function sber(Request $r)
+	{
+		if (!Auth::guest()) {
+			if ($r->amount == '') {
+				return Response::json([
+					'message' => 'The given data was invalid.',
+					'errors' => ['amount' => ['Введите сумму!']]
+				], 422);
+			}
+			if ($r->purse == '') {
+				return Response::json([
+					'message' => 'The given data was invalid.',
+					'errors' => ['purse' => [trans('Choose a system to withdraw') . '!']]
+				], 422);
+			}
+
+			$settings = Settings::where('id', 1)->first();
+
+			if ((float) $r->amount < (float) $settings->min_width) {
+				return Response::json([
+					'message' => 'The given data was invalid.',
+					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $settings->min_width . '!']]
+				], 422);
+			}
+
+			if (Auth::user()->money < $r->amount) {
+				return Response::json([
+					'message' => 'The given data was invalid.',
+					'errors' => ['amount' => [trans('Not enough funds on balance') . '!']]
+				], 422);
+			}
+
+			$ops = DB::table('operations')->where('user', Auth::user()->id)->where('type', 1)->where('status', 0)->count();
+
+			if ($ops >= 1) {
+				return Response::json([
+					'message' => 'The given data was invalid.',
+					'errors' => ['amount' => [trans('Wait for the previous output') . '!']]
+				], 422);
+			}
+
+			$user = Auth::user();
+			$user->money = $user->money - $r->amount;
+			$user->save();
+			$int_id =  DB::table('operations')->insertGetId([
+				'amount' => (float) $r->amount,
+				'user' => Auth::user()->id,
+				'type' => 1, // ТИП - ВЫВОД
+				'status' => 0,
+				'koshelek' => 'sber',
 				'nomer' => $r->purse,
 				'timestamp' => Carbon::now()
 			]);
