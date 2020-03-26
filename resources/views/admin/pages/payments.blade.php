@@ -1,15 +1,20 @@
 @extends('admin')
 
 @section('content')
+<style>
+	.res-payments dl {display: flex}
+	.res-payments dt {padding-right:10px;}
+	.res-payments dd {padding-right:10px; font-weight: 700;color: orange}
+</style>
 <div class="top-bar">
 	<h3>{{ __('Payments') }}</h3>
 </div>
 <div class="res-payments">
 	<dl>
 		<dt>{{ __('Всего заводов:') }}</dt>
-		<dd>{{$itogo}}</dd>
+		<dd id="payments-itog">{{number_format($itogo, 2, '.', ' ')}}$</dd>
 		<dt>{{ __('Заработано оператором:') }}</dt>
-		<dd>{{$zarabotano}}</dd>
+		<dd id="payments-zar">{{number_format($zarabotano, 2, '.', ' ')}}$</dd>
 	</dl>
 </div>
 <div class="portlet light bordered">
@@ -35,7 +40,7 @@
 				<tr>
 					<td>{{$b->id}}</td>
 					<td><a href="/user/{{$b->name_id}}" target="blank">{{$b->name}}</a></td>
-					<td>{{$b->amount}}$</td>
+					<td>{{$b->amount}}</td>
 					<td>{{$b->timestamp}}</td>
 				</tr>
 				@endforeach

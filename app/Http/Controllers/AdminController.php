@@ -176,7 +176,7 @@ class AdminController extends Controller
 			}
 			$itogo += $b->amount;
 		}
-		$zarabotano = round($itogo * 20 / 100, 2);
+		$zarabotano = $itogo * 20 / 100;
 		$a = $c;
 		return view('admin.pages.payments', compact('a', 'itogo', 'zarabotano'));
 	}
