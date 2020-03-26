@@ -2,7 +2,7 @@
 
 @section('content')
 <style>
-	.res-payments dl {display: flex}
+	.res-payments dl {display: flex;font-size:2em;}
 	.res-payments dt {padding-right:10px;}
 	.res-payments dd {padding-right:10px; font-weight: 700;color: orange}
 </style>
