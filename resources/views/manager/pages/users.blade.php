@@ -98,7 +98,7 @@
 <div class="modal fade" id="usr_edit" tabindex="-1" role="basic" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			@include('manager.includes.modal_users', ['user' => $user])
+			{{-- @include('manager.includes.modal_users', ['user' => $user]) --}}
 		</div>
 	</div>
 </div>
@@ -106,7 +106,7 @@
 <div class="modal fade" id="usr_replenish" tabindex="-1" role="basic" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			@include('manager.includes.modal_users_replenish', ['user' => $user])
+			{{-- @include('manager.includes.modal_users_replenish', ['user' => $user]) --}}
 		</div>
 	</div>
 </div>
@@ -114,7 +114,7 @@
 <div class="modal fade" id="usr_takeaway" tabindex="-1" role="basic" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			@include('manager.includes.modal_users_takeaway', ['user' => $user])
+			{{-- @include('manager.includes.modal_users_takeaway', ['user' => $user]) --}}
 		</div>
 	</div>
 </div>
