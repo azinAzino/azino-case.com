@@ -15,6 +15,7 @@ use App\Settings;
 use App\Reviews;
 use App\Games;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -109,6 +110,7 @@ class AdminController extends Controller
 	public function users()
 	{
 		$users = User::get();
+		$managers = User::whereIn('role', [10, 11])->get();
 		foreach ($users as $user) {
 			$user->payed = DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
 			$user->with =  DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 1)->sum('amount');
@@ -117,12 +119,13 @@ class AdminController extends Controller
 			if ($user->with == null) $user->with = 0;
 			if ($user->with0 == null) $user->with0 = 0;
 		}
-		return view('admin.pages.users', compact('users'));
+		return view('admin.pages.users', compact('users', 'managers'));
 	}
 
 	public function create_user()
 	{
-		return view('admin.includes.modal_users_create');
+		$managers = User::whereIn('role', [10, 11])->get();
+		return view('admin.includes.modal_users_create', compact('managers'));
 	}
 
 	public function edit_user($id)
@@ -134,8 +137,7 @@ class AdminController extends Controller
 		if ($user->payed == null) $user->payed = 0;
 		if ($user->with == null) $user->with = 0;
 		if ($user->with0 == null) $user->with0 = 0;
-		return view('admin.includes.modal_users', ['user' => $user]);
-		#['user' => $user, 'pay' => $pay, 'with' => $with, 'with0' => $with0]
+		return view('admin.includes.modal_users', compact('managers', 'user'));
 	}
 
 	public function replenish_user($id)
@@ -361,7 +363,8 @@ class AdminController extends Controller
 				'bonus_money' => $r->get('bonus_money'),
 				'ref_link' => $r->get('ref_link'),
 				'opened' => $r->get('opened'),
-				'deposit' => $r->get('deposit')
+				'deposit' => $r->get('deposit'),
+				'manager_id' => $r->get('manager_id') ? $r->get('manager_id') : Auth::user()->id,
 			]);
 			$r->session()->flash('alert-success', 'Настройки пользователя сохранены!');
 			return redirect('/admin/users');
@@ -394,12 +397,13 @@ class AdminController extends Controller
 				'avatar' => '/img/avatar.png',
 				'login' => "",
 				'login2' => "",
-				'role' => 1,
+				'role' => $r->role,
 				'is_yt' => 0,
 				'profit' => 0,
 				'opened' => 0,
 				'deposit' => $r->money,
-				'bonus_money' => 0
+				'bonus_money' => 0,
+				'manager_id' => $r->manager_id ? $r->manager_id : Auth::user()->id
 			]);
 
 			if (!empty($user)) {

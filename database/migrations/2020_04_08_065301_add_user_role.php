@@ -11,6 +11,7 @@ class AddUserRole extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->bigInteger('manager_id')->after('name');
             $table->unsignedSmallInteger('role')->after('name');
         });
 
@@ -39,6 +40,7 @@ class AddUserRole extends Migration
         );
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('role');
+            $table->dropColumn('manager_id');
         });
     }
 }

