@@ -508,7 +508,10 @@ class AdminController extends Controller
 			'fk_secret1' => $r->get('fk_secret1'),
 			'fk_secret2' => $r->get('fk_secret2'),
 			'pt_shopid' => $r->get('pt_shopid'),
-			'pt_secret' => $r->get('pt_secret')
+			'pt_secret' => $r->get('pt_secret'),
+			'piastrix_shop_id' => $r->get('piastrix_id'),
+			'piastrix_secret_key' => $r->get('fk_secret1'),
+			'piastrix_host' => $r->get('pt_shopid'),
 		]);
 
 		$r->session()->flash('alert-success', 'Настройки обновлены!');
