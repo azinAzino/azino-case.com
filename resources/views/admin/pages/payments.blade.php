@@ -30,6 +30,7 @@
 				<tr>
 					<th>#</th>
 					<th>{{ __('User') }}</th>
+					<th>{{ __('Manager') }}</th>
 					<th>{{ __('Amount') }}</th>
 					<th>{{ __('Date') }}</th>
 				</tr>
