@@ -34,6 +34,7 @@
 						<tr>
 							<th>ID</th>
 							<th>Пользователь</th>
+							<th>{{ trans('Manager') }}</th>
 							<th>Система</th>
 							<th>Кошелек</th>
 							<th>Сумма</th>
@@ -52,6 +53,7 @@
 									data-target="#user_edit" href="/admin/user/{{ $withdrow->user->id }}/edit" style="display: inline-block;
 																									cursor: pointer;">Инфо</div>
 							</td>
+							<td style="vertical-align: middle;">{{ !!$withdrow->user->manager && !in_array($withdrow->user->role, [10,11]) ? $withdrow->user->manager->name : ''}}</td>
 							<td style="vertical-align: middle;">@if(isset($withdrow->koshelek))
 								@if($withdrow->koshelek == 'yandex')
 								<center><img src="/img/icons/yandex.png" width="70px" alt='Yandex Money'></center>

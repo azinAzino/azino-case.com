@@ -40,6 +40,7 @@
 				<tr>
 					<td>{{$b->id}}</td>
 					<td><a href="/user/{{$b->name_id}}" target="blank">{{$b->name}}</a></td>
+					<td style="vertical-align: middle;">{{$b->manager}}</td>
 					<td>{{$b->amount}}</td>
 					<td>{{$b->timestamp}}</td>
 				</tr>

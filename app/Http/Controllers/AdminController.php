@@ -176,6 +176,7 @@ class AdminController extends Controller
 			if ($u = User::find($b->user)) {;
 				$b->name = $u->username;
 				$b->name_id = $u->id;
+				$b->manager = $u->manager_id && $u->manager && !in_array($u->role, [10,11]) ? $u->manager->name : '';
 				$b->amount = round($b->amount * .94, 2);
 				$c[] = $b;
 			}
