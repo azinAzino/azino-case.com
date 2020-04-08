@@ -67,7 +67,7 @@
     <!-- END PAGE LEVEL SCRIPTS -->
     <!-- BEGIN THEME LAYOUT SCRIPTS -->
     <script src="{{asset('assets/admin/scripts/layout.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/admin/scripts/demo.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/admin/scripts/manager.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/admin/scripts/quick-sidebar.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/admin/scripts/quick-nav.min.js')}}" type="text/javascript"></script>
     <!-- END THEME LAYOUT SCRIPTS -->
