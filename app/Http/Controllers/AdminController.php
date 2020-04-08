@@ -202,6 +202,8 @@ class AdminController extends Controller
 				if ($user->with0 == null) $user->with0 = 0;
 
 				$w->user = $user;
+				$manager = User::find($w->user->manager_id);
+				$w->manager = $manager && !in_array($w->user->role, [10,11]) ? $manager->name : '';
 				$date = $w->timestamp;
 				Carbon::setlocale('ru');
 				$w->dfh = Carbon::createFromFormat('Y-m-d H:i:s', $date)->diffForHumans();
