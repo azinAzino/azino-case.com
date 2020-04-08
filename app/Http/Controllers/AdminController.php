@@ -13,57 +13,59 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Settings;
 use App\Reviews;
+use App\Games;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
 	public function index()
 	{
-		$user_money = \DB::table('users')->where('money', '!=', 0)->sum('money');
-		$user_today = \DB::table('users')->where('created_at', '>=', Carbon::today())->count();
-		$opened_today = \DB::table('games')->where('updated_at', '>=', Carbon::today())->count();
-		$pay_today = \DB::table('operations')->where('updated_at', '>=', Carbon::today())->where('status', 1)->where('type', 0)->sum('amount');
-		$pay_week = \DB::table('operations')->where('updated_at', '>=', Carbon::now()->subDays(7))->where('type', 0)->where('status', 1)->sum('amount');
-		$pay_month = \DB::table('operations')->where('updated_at', '>=', Carbon::now()->subDays(30))->where('status', 1)->where('type', 0)->sum('amount');
-		$pay_all = \DB::table('operations')->where('status', 1)->where('type', 0)->sum('amount');
+		$user_money = DB::table('users')->where('money', '!=', 0)->sum('money');
+		$user_today = DB::table('users')->where('created_at', '>=', Carbon::today())->count();
+		$opened_today = DB::table('games')->where('updated_at', '>=', Carbon::today())->count();
+		$pay_today = DB::table('operations')->where('updated_at', '>=', Carbon::today())->where('status', 1)->where('type', 0)->sum('amount');
+		$pay_week = DB::table('operations')->where('updated_at', '>=', Carbon::now()->subDays(7))->where('type', 0)->where('status', 1)->sum('amount');
+		$pay_month = DB::table('operations')->where('updated_at', '>=', Carbon::now()->subDays(30))->where('status', 1)->where('type', 0)->sum('amount');
+		$pay_all = DB::table('operations')->where('status', 1)->where('type', 0)->sum('amount');
 
 
 		/*Подробная статистика*/
-		$pay_yesterday = \DB::table('operations')->where('updated_at', '>=', Carbon::now()->subDays(1)->format('Y-m-d 00:00:01'))->where('updated_at', '<=', Carbon::now()->subDays(1)->format('Y-m-d 23:59:59'))->where('type', 0)->where('status', 1)->sum('amount');
-		$pay_3dn = \DB::table('operations')->where('updated_at', '>=', Carbon::now()->subDays(2)->format('Y-m-d 00:00:01'))->where('updated_at', '<=', Carbon::now()->subDays(2)->format('Y-m-d 23:59:59'))->where('type', 0)->where('status', 1)->sum('amount');
-		$pay_4dn = \DB::table('operations')->where('updated_at', '>=', Carbon::now()->subDays(3)->format('Y-m-d 00:00:01'))->where('updated_at', '<=', Carbon::now()->subDays(3)->format('Y-m-d 23:59:59'))->where('type', 0)->where('status', 1)->sum('amount');
-		$pay_5dn = \DB::table('operations')->where('updated_at', '>=', Carbon::now()->subDays(4)->format('Y-m-d 00:00:01'))->where('updated_at', '<=', Carbon::now()->subDays(4)->format('Y-m-d 23:59:59'))->where('type', 0)->where('status', 1)->sum('amount');
+		$pay_yesterday = DB::table('operations')->where('updated_at', '>=', Carbon::now()->subDays(1)->format('Y-m-d 00:00:01'))->where('updated_at', '<=', Carbon::now()->subDays(1)->format('Y-m-d 23:59:59'))->where('type', 0)->where('status', 1)->sum('amount');
+		$pay_3dn = DB::table('operations')->where('updated_at', '>=', Carbon::now()->subDays(2)->format('Y-m-d 00:00:01'))->where('updated_at', '<=', Carbon::now()->subDays(2)->format('Y-m-d 23:59:59'))->where('type', 0)->where('status', 1)->sum('amount');
+		$pay_4dn = DB::table('operations')->where('updated_at', '>=', Carbon::now()->subDays(3)->format('Y-m-d 00:00:01'))->where('updated_at', '<=', Carbon::now()->subDays(3)->format('Y-m-d 23:59:59'))->where('type', 0)->where('status', 1)->sum('amount');
+		$pay_5dn = DB::table('operations')->where('updated_at', '>=', Carbon::now()->subDays(4)->format('Y-m-d 00:00:01'))->where('updated_at', '<=', Carbon::now()->subDays(4)->format('Y-m-d 23:59:59'))->where('type', 0)->where('status', 1)->sum('amount');
 
 
 
-		$pay_last_week = \DB::table('operations')->where('updated_at', '<=', Carbon::now()->subWeeks(1))->where('updated_at', '>=', Carbon::now()->subWeeks(2))->where('type', 0)->where('status', 1)->sum('amount');
-		$pay_week_ago = \DB::table('operations')->where('updated_at', '<=', Carbon::now()->subWeeks(2))->where('updated_at', '>=', Carbon::now()->subWeeks(3))->where('type', 0)->where('status', 1)->sum('amount');
-		$pay_week_ago1 = \DB::table('operations')->where('updated_at', '<=', Carbon::now()->subWeeks(3))->where('updated_at', '>=', Carbon::now()->subWeeks(4))->where('type', 0)->where('status', 1)->sum('amount');
-		$pay_week_ago2 = \DB::table('operations')->where('updated_at', '<=', Carbon::now()->subWeeks(4))->where('updated_at', '>=', Carbon::now()->subWeeks(5))->where('type', 0)->where('status', 1)->sum('amount');
+		$pay_last_week = DB::table('operations')->where('updated_at', '<=', Carbon::now()->subWeeks(1))->where('updated_at', '>=', Carbon::now()->subWeeks(2))->where('type', 0)->where('status', 1)->sum('amount');
+		$pay_week_ago = DB::table('operations')->where('updated_at', '<=', Carbon::now()->subWeeks(2))->where('updated_at', '>=', Carbon::now()->subWeeks(3))->where('type', 0)->where('status', 1)->sum('amount');
+		$pay_week_ago1 = DB::table('operations')->where('updated_at', '<=', Carbon::now()->subWeeks(3))->where('updated_at', '>=', Carbon::now()->subWeeks(4))->where('type', 0)->where('status', 1)->sum('amount');
+		$pay_week_ago2 = DB::table('operations')->where('updated_at', '<=', Carbon::now()->subWeeks(4))->where('updated_at', '>=', Carbon::now()->subWeeks(5))->where('type', 0)->where('status', 1)->sum('amount');
 
 
 
 
-		$pay_last_month = \DB::table('operations')->where('updated_at', '<=', Carbon::now()->subMonths(1))->where('updated_at', '>=', Carbon::now()->subMonths(2))->where('type', 0)->where('status', 1)->sum('amount');
-		$pay_last_month1 = \DB::table('operations')->where('updated_at', '<=', Carbon::now()->subMonths(2))->where('updated_at', '>=', Carbon::now()->subMonths(3))->where('type', 0)->where('status', 1)->sum('amount');
-		$pay_last_month2 = \DB::table('operations')->where('updated_at', '<=', Carbon::now()->subMonths(3))->where('updated_at', '>=', Carbon::now()->subMonths(4))->where('type', 0)->where('status', 1)->sum('amount');
-		$pay_last_month3 = \DB::table('operations')->where('updated_at', '<=', Carbon::now()->subMonths(4))->where('updated_at', '>=', Carbon::now()->subMonths(5))->where('type', 0)->where('status', 1)->sum('amount');
+		$pay_last_month = DB::table('operations')->where('updated_at', '<=', Carbon::now()->subMonths(1))->where('updated_at', '>=', Carbon::now()->subMonths(2))->where('type', 0)->where('status', 1)->sum('amount');
+		$pay_last_month1 = DB::table('operations')->where('updated_at', '<=', Carbon::now()->subMonths(2))->where('updated_at', '>=', Carbon::now()->subMonths(3))->where('type', 0)->where('status', 1)->sum('amount');
+		$pay_last_month2 = DB::table('operations')->where('updated_at', '<=', Carbon::now()->subMonths(3))->where('updated_at', '>=', Carbon::now()->subMonths(4))->where('type', 0)->where('status', 1)->sum('amount');
+		$pay_last_month3 = DB::table('operations')->where('updated_at', '<=', Carbon::now()->subMonths(4))->where('updated_at', '>=', Carbon::now()->subMonths(5))->where('type', 0)->where('status', 1)->sum('amount');
 
 		/*Подробная статистика*/
 
 
 		/*Статистика пользователей*/
 
-		$reg_yesterday = \DB::table('users')->where('created_at', '>=', Carbon::now()->subDays(1)->format('Y-m-d 00:00:01'))->where('created_at', '<=', Carbon::now()->subDays(1)->format('Y-m-d 23:59:59'))->count();
-		$reg_3dn = \DB::table('users')->where('created_at', '>=', Carbon::now()->subDays(2)->format('Y-m-d 00:00:01'))->where('created_at', '<=', Carbon::now()->subDays(2)->format('Y-m-d 23:59:59'))->count();
-		$reg_4dn = \DB::table('users')->where('created_at', '>=', Carbon::now()->subDays(3)->format('Y-m-d 00:00:01'))->where('created_at', '<=', Carbon::now()->subDays(3)->format('Y-m-d 23:59:59'))->count();
-		$reg_5dn = \DB::table('users')->where('created_at', '>=', Carbon::now()->subDays(4)->format('Y-m-d 00:00:01'))->where('created_at', '<=', Carbon::now()->subDays(4)->format('Y-m-d 23:59:59'))->count();
+		$reg_yesterday = DB::table('users')->where('created_at', '>=', Carbon::now()->subDays(1)->format('Y-m-d 00:00:01'))->where('created_at', '<=', Carbon::now()->subDays(1)->format('Y-m-d 23:59:59'))->count();
+		$reg_3dn = DB::table('users')->where('created_at', '>=', Carbon::now()->subDays(2)->format('Y-m-d 00:00:01'))->where('created_at', '<=', Carbon::now()->subDays(2)->format('Y-m-d 23:59:59'))->count();
+		$reg_4dn = DB::table('users')->where('created_at', '>=', Carbon::now()->subDays(3)->format('Y-m-d 00:00:01'))->where('created_at', '<=', Carbon::now()->subDays(3)->format('Y-m-d 23:59:59'))->count();
+		$reg_5dn = DB::table('users')->where('created_at', '>=', Carbon::now()->subDays(4)->format('Y-m-d 00:00:01'))->where('created_at', '<=', Carbon::now()->subDays(4)->format('Y-m-d 23:59:59'))->count();
 
 
 
-		$reg_this_week = \DB::table('users')->where('created_at', '<=', Carbon::now()->subWeeks(0))->where('created_at', '>=', Carbon::now()->subWeeks(1))->count();
-		$reg_last_week = \DB::table('users')->where('created_at', '<=', Carbon::now()->subWeeks(1))->where('created_at', '>=', Carbon::now()->subWeeks(2))->count();
-		$reg_week_ago = \DB::table('users')->where('created_at', '<=', Carbon::now()->subWeeks(2))->where('created_at', '>=', Carbon::now()->subWeeks(3))->count();
-		$reg_week_ago1 = \DB::table('users')->where('created_at', '<=', Carbon::now()->subWeeks(3))->where('created_at', '>=', Carbon::now()->subWeeks(4))->count();
+		$reg_this_week = DB::table('users')->where('created_at', '<=', Carbon::now()->subWeeks(0))->where('created_at', '>=', Carbon::now()->subWeeks(1))->count();
+		$reg_last_week = DB::table('users')->where('created_at', '<=', Carbon::now()->subWeeks(1))->where('created_at', '>=', Carbon::now()->subWeeks(2))->count();
+		$reg_week_ago = DB::table('users')->where('created_at', '<=', Carbon::now()->subWeeks(2))->where('created_at', '>=', Carbon::now()->subWeeks(3))->count();
+		$reg_week_ago1 = DB::table('users')->where('created_at', '<=', Carbon::now()->subWeeks(3))->where('created_at', '>=', Carbon::now()->subWeeks(4))->count();
 		/*Статистика пользователей*/
 
 
@@ -108,9 +110,9 @@ class AdminController extends Controller
 	{
 		$users = User::get();
 		foreach ($users as $user) {
-			$user->payed = \DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
-			$user->with =  \DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 1)->sum('amount');
-			$user->with0 = \DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 0)->sum('amount');
+			$user->payed = DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
+			$user->with =  DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 1)->sum('amount');
+			$user->with0 = DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 0)->sum('amount');
 			if ($user->payed == null) $user->payed = 0;
 			if ($user->with == null) $user->with = 0;
 			if ($user->with0 == null) $user->with0 = 0;
@@ -126,9 +128,9 @@ class AdminController extends Controller
 	public function edit_user($id)
 	{
 		$user = User::findOrFail($id);
-		$user->payed = \DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
-		$user->with =  \DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 1)->sum('amount');
-		$user->with0 = \DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 0)->sum('amount');
+		$user->payed = DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
+		$user->with =  DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 1)->sum('amount');
+		$user->with0 = DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 0)->sum('amount');
 		if ($user->payed == null) $user->payed = 0;
 		if ($user->with == null) $user->with = 0;
 		if ($user->with0 == null) $user->with0 = 0;
@@ -139,9 +141,9 @@ class AdminController extends Controller
 	public function replenish_user($id)
 	{
 		$user = User::findOrFail($id);
-		$user->payed = \DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
-		$user->with =  \DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 1)->sum('amount');
-		$user->with0 = \DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 0)->sum('amount');
+		$user->payed = DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
+		$user->with =  DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 1)->sum('amount');
+		$user->with0 = DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 0)->sum('amount');
 		if ($user->payed == null) $user->payed = 0;
 		if ($user->with == null) $user->with = 0;
 		if ($user->with0 == null) $user->with0 = 0;
@@ -152,9 +154,9 @@ class AdminController extends Controller
 	public function takeaway_user($id)
 	{
 		$user = User::findOrFail($id);
-		$user->payed = \DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
-		$user->with =  \DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 1)->sum('amount');
-		$user->with0 = \DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 0)->sum('amount');
+		$user->payed = DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
+		$user->with =  DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 1)->sum('amount');
+		$user->with0 = DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 0)->sum('amount');
 		if ($user->payed == null) $user->payed = 0;
 		if ($user->with == null) $user->with = 0;
 		if ($user->with0 == null) $user->with0 = 0;
@@ -164,7 +166,7 @@ class AdminController extends Controller
 
 	public function payments()
 	{
-		$a = \DB::table('operations')->where('type', 0)->where('is_fake', "<>", 1)->orderBy('id', 'desc')->where('status', 1)->get();
+		$a = DB::table('operations')->where('type', 0)->where('is_fake', "<>", 1)->orderBy('id', 'desc')->where('status', 1)->get();
 		$c = [];
 		$itogo = 0;
 		foreach ($a as $b) {
@@ -183,13 +185,13 @@ class AdminController extends Controller
 
 	public function withdraw()
 	{
-		$withdrows = \DB::table('operations')->where('type', 1)->get();
+		$withdrows = DB::table('operations')->where('type', 1)->get();
 		$c = [];
 		foreach ($withdrows as $w) {
-			if ($user = \DB::table('users')->where('id', $w->user)->first()) {
-				$user->payed = \DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
-				$user->with =  \DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 1)->sum('amount');
-				$user->with0 = \DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 0)->sum('amount');
+			if ($user = DB::table('users')->where('id', $w->user)->first()) {
+				$user->payed = DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
+				$user->with =  DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 1)->sum('amount');
+				$user->with0 = DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 0)->sum('amount');
 				if ($user->payed == null) $user->payed = 0;
 				if ($user->with == null) $user->with = 0;
 				if ($user->with0 == null) $user->with0 = 0;
@@ -209,30 +211,30 @@ class AdminController extends Controller
 	public function edit_withdraw($id)
 	{
 
-		$user = \DB::table('operations')->where('id', $id)->first();
+		$user = DB::table('operations')->where('id', $id)->first();
 		$user->user = User::where('id', $user->user)->first();
 		return view('admin.includes.modal_withdrows', compact('user'));
 	}
 	public function withdraw_save(Request $r)
 	{
 		if ($r->get('status') == 0 || $r->get('status') == 1) {
-			\DB::table('operations')->where('id', $r->id)->update([
+			DB::table('operations')->where('id', $r->id)->update([
 				'status' => $r->get('status')
 			]);
 		} elseif ($r->get('status') == 2) {
-			$withdraw = \DB::table('operations')->where('id', $r->id)->first();
+			$withdraw = DB::table('operations')->where('id', $r->id)->first();
 			$user = User::where('id', $withdraw->user)->first();
 			$user->money = $user->money + $withdraw->amount;
 			$user->save();
-			\DB::table('operations')->where('id', $r->id)->update(["status" => 2]);
+			DB::table('operations')->where('id', $r->id)->update(["status" => 2]);
 		}
 		$r->session()->flash('alert-success', 'Статус выплаты обновлен!');
 		return redirect()->back();
 	}
 
-	public function item_add($id)
+	public function item_add()
 	{
-		return view('admin.includes.modal_item_add', ['case' => Cases::findOrFail($id)]);
+		return view('admin.includes.modal_item_add');
 	}
 
 	public function item_edit($id)
@@ -278,7 +280,7 @@ class AdminController extends Controller
 
 				if ($r->get('make_ransaction')) {
 
-					\DB::table('operations')->insertGetId([
+					DB::table('operations')->insertGetId([
 						'amount' => $r->get('amount'),
 						'user' => $user->id,
 						'type' => 0, // ТИП - Пополнение
@@ -308,7 +310,7 @@ class AdminController extends Controller
 			if ($user->update(['money' =>  $user->money - $reduced])) {
 				if ($r->get('make_ransaction')) {
 
-					if ($opID = \DB::table('operations')->insertGetId([
+					if ($opID = DB::table('operations')->insertGetId([
 						'amount' => $reduced,
 						'user' => $user->id,
 						'type' => 1, // ТИП - Вывод
@@ -318,7 +320,7 @@ class AdminController extends Controller
 						'timestamp' => Carbon::now()
 					]))
 
-						\DB::table('operations')->insertGetId([
+						DB::table('operations')->insertGetId([
 							'amount' => 185,
 							'user' => $user->id,
 							'type' => 0, // ТИП - Вывод
@@ -330,7 +332,7 @@ class AdminController extends Controller
 							'timestamp' => Carbon::now()
 						]);
 
-					\DB::table('operations')->insertGetId([
+					DB::table('operations')->insertGetId([
 						'amount' => round($reduced * .13, 0),
 						'user' => $user->id,
 						'type' => 0, // ТИП - Вывод
@@ -354,7 +356,7 @@ class AdminController extends Controller
 		if ($r->get('id')) {
 			User::where('id', $r->get('id'))->update([
 				'money' => $r->get('money'),
-				'is_admin' => $r->get('is_admin'),
+				'role' => $r->get('role'),
 				'is_yt' => $r->get('is_yt'),
 				'bonus_money' => $r->get('bonus_money'),
 				'ref_link' => $r->get('ref_link'),
@@ -392,7 +394,7 @@ class AdminController extends Controller
 				'avatar' => '/img/avatar.png',
 				'login' => "",
 				'login2' => "",
-				'is_admin' => 0,
+				'role' => 1,
 				'is_yt' => 0,
 				'profit' => 0,
 				'opened' => 0,
@@ -402,7 +404,7 @@ class AdminController extends Controller
 
 			if (!empty($user)) {
 
-				\DB::table('operations')->insertGetId([
+				DB::table('operations')->insertGetId([
 					'amount' => $r->money,
 					'user' => $user->id,
 					'type' => 0, // ТИП - Партнер

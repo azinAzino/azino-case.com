@@ -101,7 +101,7 @@
                                         </div>
                                         <div class="profile-row__user-affiliate-header-text text-block">{{ __('Send your unique link to friends and get') }} {{$settings->ref_percent}}% {{ __('from each balance top-up by a friend! For example: if your friend tops up his balance by $100 - we will charge') }} ${{100*($settings->ref_percent/100)}} {{ __('to your account!') }}</div>
                                         <div class="profile-row__user-affiliate-input input-block">
-                                            @if(Auth::user()->ref_link != 'none')
+                                            @if(!!Auth::user()->ref_link)
                                             <input value="{{Auth::user()->ref_link}}" readonly="readonly" class="input-block__input input-block__input_size_full">
                                             @else
                                             <a href="/profile/partner/get-link" style="margin-top: 10px" id="get-partner-link" class="button-rounding button-rounding_big button-rounding_long button-rounding_hlight">{{ __('Get affiliate link') }}</a>

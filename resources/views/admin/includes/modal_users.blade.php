@@ -38,10 +38,11 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
-					<label class="control-label">{{ trans('Admin') }}</label>
-					<select class="form-control" tabindex="1" name="is_admin" value="{{ $user->is_admin }}">
-						<option value="1" @if($user->is_admin == 1) selected @endif>{{ trans('Yes') }}</option>
-						<option value="0" @if($user->is_admin == 0) selected @endif>{{ trans('No') }}</option>
+					<label class="control-label">{{ trans('Role') }}</label>
+					<select class="form-control" tabindex="1" name="role" value="{{ $user->role }}">
+						<option value="1" @if($user->role == 10) selected @endif>{{ trans('Admin') }}</option>
+						<option value="1" @if($user->role == 11) selected @endif>{{ trans('Manager') }}</option>
+						<option value="0" @if($user->role == 1) selected @endif>{{ trans('User') }}</option>
 					</select>
 				</div>
 			</div>

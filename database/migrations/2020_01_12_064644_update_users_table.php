@@ -24,7 +24,7 @@ class UpdateUsersTable extends Migration
             $table->integer('ref_user')->nullable();
             $table->integer('profit');
             $table->integer('opened');
-            $table->string('ref_link', 255)->nullable()->default("none");
+            $table->string('ref_link', 255)->nullable();
             $table->integer('deposit');
             $table->integer('bonus_money');
         });

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\RedirectResponse;
 
-class Access
+class AdminAccess
 {
     protected $auth;
 
@@ -19,7 +19,7 @@ class Access
     {
         if ($this->auth->check())
         {
-            if ($this->auth->user()->is_admin == 1)
+            if ($this->auth->user()->role == 10)
             {
                 return $next($request);
             }

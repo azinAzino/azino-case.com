@@ -82,7 +82,7 @@ class RegisterController extends Controller
             'money' => 0,
             'login' => "",
             'login2' => "",
-            'is_admin' => 0,
+            'role' => User::ROLE_USER,
             'is_yt' => 0,
             'profit' => 0,
             'opened' => 0,

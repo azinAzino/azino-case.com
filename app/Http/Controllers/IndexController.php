@@ -232,7 +232,7 @@ class IndexController extends Controller
 		if (Auth::guest()) {
 			return redirect()->back();
 		} else {
-			if (Auth::user()->ref_link != 'none') {
+			if (!!Auth::user()->ref_link) {
 				return redirect()->back();
 			}
 			$settings = Settings::where('id', 1)->first();
