@@ -251,6 +251,7 @@ class ManagerController extends Controller
 	//manager
 	public function payments()
 	{
+		$managers = User::whereIn('role', [10, 11])->get();
 		$a = DB::table('operations')->leftJoin('users', 'users.id', '=', 'operations.user')->where('users.manager_id', Auth::user()->id)->where('operations.type', 0)->where('operations.is_fake', "<>", 1)->orderBy('operations.id', 'desc')->where('operations.status', 1)->select(['operations.*', 'users.manager_id'])->get();
 		$c = [];
 		$itogo = 0;
@@ -265,12 +266,13 @@ class ManagerController extends Controller
 		}
 		$zarabotano = $itogo * 20 / 100;
 		$a = $c;
-		return view('manager.pages.payments', compact('a', 'itogo', 'zarabotano'));
+		return view('manager.pages.payments', compact('a', 'itogo', 'zarabotano', 'managers'));
 	}
 
 	//manager
 	public function withdraw()
 	{
+		$managers = User::whereIn('role', [10, 11])->get();
 		$withdrows = DB::table('operations')->leftJoin('users', 'users.id', '=', 'operations.user')->where('users.manager_id', Auth::user()->id)->where('operations.type', 1)->orderBy('operations.id', 'desc')->select(['operations.*', 'users.manager_id'])->get();
 		$c = [];
 		foreach ($withdrows as $w) {
@@ -291,7 +293,7 @@ class ManagerController extends Controller
 			}
 		}
 		$withdrows = $c;
-		return view('manager.pages.withdraw', compact('withdrows'));
+		return view('manager.pages.withdraw', compact('withdrows', 'managers'));
 	}
 
 	//manager

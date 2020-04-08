@@ -168,6 +168,7 @@ class AdminController extends Controller
 
 	public function payments()
 	{
+		$managers = User::whereIn('role', [10, 11])->get();
 		$a = DB::table('operations')->where('type', 0)->where('is_fake', "<>", 1)->orderBy('id', 'desc')->where('status', 1)->get();
 		$c = [];
 		$itogo = 0;
@@ -182,11 +183,12 @@ class AdminController extends Controller
 		}
 		$zarabotano = $itogo * 20 / 100;
 		$a = $c;
-		return view('admin.pages.payments', compact('a', 'itogo', 'zarabotano'));
+		return view('admin.pages.payments', compact('a', 'itogo', 'zarabotano', 'managers'));
 	}
 
 	public function withdraw()
 	{
+		$managers = User::whereIn('role', [10, 11])->get();
 		$withdrows = DB::table('operations')->where('type', 1)->get();
 		$c = [];
 		foreach ($withdrows as $w) {
@@ -207,7 +209,7 @@ class AdminController extends Controller
 			}
 		}
 		$withdrows = $c;
-		return view('admin.pages.withdraw', compact('withdrows'));
+		return view('admin.pages.withdraw', compact('withdrows', 'managers'));
 	}
 
 	public function edit_withdraw($id)
