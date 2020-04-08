@@ -47,6 +47,7 @@
 							<th>{{ trans('Name Lastname') }}</th>
 							<th>{{ trans('Balance') }}</th>
 							<th>{{ trans('Created') }}</th>
+							<th>{{ trans('Manager') }}</th>
 							<th>{{ trans('Manage') }}</th>
 						</tr>
 					</thead>
@@ -57,6 +58,7 @@
 							<td style="vertical-align: middle;">{{$user->username}}</td>
 							<td style="vertical-align: middle;">{{$user->money}}</td>
 							<td style="vertical-align: middle;">{{$user->created_at}}</td>
+							<td style="vertical-align: middle;">{{$user->manager->name}}</td>
 							<td align="center" style="vertical-align: middle;">
 								<button type="button" class="btn blue btn-sm" data-toggle="modal" data-target="#usr_edit" href="/admin/user/{{ $user->id }}/edit">{{ trans('Edit') }}</button>
 								<button type="button" class="btn green btn-sm" data-toggle="modal" data-target="#usr_replenish" href="/admin/user/{{ $user->id }}/replenish">{{ trans('Replenish') }}</button>

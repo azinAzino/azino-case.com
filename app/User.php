@@ -54,6 +54,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function manager(){
+        return $this->belongsTo('App\User', 'manager_id');
+    }
+
     /**
      * The attributes that should be cast to native types.
      *
