@@ -12258,13 +12258,13 @@ function number_format(number, decimals, dec_point, thousands_sep) {
                     }
                 });
             }),
-            a()("#payment-swift-185-submit").click(function() {
+            a()("#payment-swift-120-submit").click(function() {
                 let data = {
                     _token: c.csrf_token,
-                    amount: a()("#add-swift-185 .payment-amount").val(),
-                    currency: a()("#add-swift-185 .payment-currency").val(),
-                    provider: a()("#add-swift-185.payment-provider").val(),
-                    type: "swift-185"
+                    amount: a()("#add-swift-120 .payment-amount").val(),
+                    currency: a()("#add-swift-120 .payment-currency").val(),
+                    provider: a()("#add-swift-120.payment-provider").val(),
+                    type: "swift-120"
                 };
 
                 a.a.ajax({

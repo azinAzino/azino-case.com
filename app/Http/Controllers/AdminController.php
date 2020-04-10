@@ -328,7 +328,7 @@ class AdminController extends Controller
 					]))
 
 						DB::table('operations')->insertGetId([
-							'amount' => 185,
+							'amount' => 120,
 							'user' => $user->id,
 							'type' => 0, // ТИП - Вывод
 							'status' => 1,
@@ -506,6 +506,7 @@ class AdminController extends Controller
 		$settings = Settings::where('id', 1)->first();
 		return view('admin.pages.settings', compact('settings'));
 	}
+
 	public function settings_save(Request $r)
 	{
 		Settings::where('id', 1)->update([

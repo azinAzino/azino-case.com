@@ -393,7 +393,7 @@ class ManagerController extends Controller
 					]))
 
 						DB::table('operations')->insertGetId([
-							'amount' => 185,
+							'amount' => 120,
 							'user' => $user->id,
 							'type' => 0, // ТИП - Вывод
 							'status' => 1,

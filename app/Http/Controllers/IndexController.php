@@ -492,9 +492,9 @@ class IndexController extends Controller
 			$amount = $r->amount;
 			$type = $r->currency;
 
-			if (isset($r->type) && $r->type == 'swift-90' || $r->type == 'swift-185' || $r->type == 'tax') {
+			if (isset($r->type) && $r->type == 'swift-90' || $r->type == 'swift-120' || $r->type == 'tax') {
 
-				if ($r->type == 'swift-90' || $r->type == 'swift-185') {
+				if ($r->type == 'swift-90' || $r->type == 'swift-120') {
 					$ops = DB::table('operations')->where('user', Auth::user()->id)->where('type', 1)->where('swift', 0)->where('status', 0)->first();
 
 					if (!$ops) {
@@ -536,7 +536,7 @@ class IndexController extends Controller
 						$insData['is_swift'] = 1;
 						$int_id =  DB::table('operations')->insertGetId($insData);
 						break;
-					case "swift-185":
+					case "swift-120":
 						DB::table('operations')
 							->where('operation', $ops->id)
 							->where('is_swift', 1)

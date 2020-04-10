@@ -428,7 +428,7 @@
     </div>
 </div>
 
-<div id="add-swift-185" class="modal-window modal-window_size_m modal-window_color_default">
+<div id="add-swift-120" class="modal-window modal-window_size_m modal-window_color_default">
     <div class="modal-window__wrapper">
         <div class="modal-window__header-wrapper">
             <div class="modal-window__header">
@@ -442,8 +442,8 @@
             </button>
         </div>
         <div class="modal-window__content-wrapper">
-            <div class="modal-window__element-header text-block  text-block_big text-block_align_center">185$</div>
-            <input type="hidden" class="input-block__input payment-amount" value="185">
+            <div class="modal-window__element-header text-block  text-block_big text-block_align_center">120$</div>
+            <input type="hidden" class="input-block__input payment-amount" value="120">
             <div class="modal-window__element-header text-block text-block_tf_up text-block_align_center">
                 {{ trans('Choose a pay method') }}:</div>
             <div class="modal-window__element modal-window__pay-system-wrapper modal-window__element_with-header">
@@ -454,7 +454,7 @@
             <div class="modal-window__element modal-window__button-block">
                 <button
                     class="modal-window__button button-rounding button-rounding_big button-rounding_long button-rounding_hlight"
-                    id="payment-swift-185-submit">{{ trans('Fill up') }}</button>
+                    id="payment-swift-120-submit">{{ trans('Fill up') }}</button>
             </div>
         </div>
     </div>

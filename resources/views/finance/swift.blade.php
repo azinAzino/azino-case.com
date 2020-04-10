@@ -17,9 +17,9 @@
                 </div>
                 <div class="text-center">
                     <span class="h4 text-center">
-                        185&nbsp;$
+                        120&nbsp;$
                     </span>
-                    <a data-type="swift" data-amount="185" data-toggle="add-swift-185" class="alert-link modal-toggle user-block__cashin" href="#">
+                    <a data-type="swift" data-amount="120" data-toggle="add-swift-120" class="alert-link modal-toggle user-block__cashin" href="#">
                         {{ __('To pay') }}
                     </a>
                     <small>
