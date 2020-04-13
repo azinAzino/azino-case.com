@@ -19,6 +19,6 @@
 <script>
     window._translations = {!! cache('translations' . App::getLocale()) !!};
 </script>
-<script type="text/javascript" src="/js/app.js"></script>
+<script type="text/javascript" src="/js/app.js?{{ time() }}"></script>
 </body>
 </html>
