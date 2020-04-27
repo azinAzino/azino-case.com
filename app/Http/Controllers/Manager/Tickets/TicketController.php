@@ -50,6 +50,7 @@ class TicketController extends Controller
             $ticket = Ticket::create([
                 'user_id' => $question->user_id,
                 'manager_id' => $question->manager_id,
+                'direction' => 'answer',
                 'text' => $request->post('text'),
                 'ip' => $request->ip()
             ]);
