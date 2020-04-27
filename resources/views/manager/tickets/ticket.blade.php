@@ -23,7 +23,7 @@
     @endforeach
 </div>
 <div class="row">
-    <div style="overflow: hidden">
+    {{-- <div style="overflow: hidden">
         <div class="all_ticket">
             @foreach ($tickets as $tick)
             <div class="col-md-6">
@@ -40,7 +40,7 @@
             </div>
             @endforeach
         </div>
-    </div>
+    </div> --}}
     <div class="col-md-6" style="min-height: 365px;">
         <div class="tik_reply">
             <div id="send-mail-pattern">

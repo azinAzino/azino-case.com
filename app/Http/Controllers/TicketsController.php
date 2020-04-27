@@ -42,9 +42,8 @@ class TicketsController extends Controller
 
     public function index(Request $r)
     {
-        if ($r->post('new_ticket')) {
-        }
         $tickets = Ticket::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
+        Ticket::where('direction', 'answer')->update(['status' => 'read']);
         return view($this->folder . '.tickets.index', compact('tickets'));
     }
 

@@ -39,7 +39,7 @@
                         <a href="/faq">{{ trans('FAQ') }}</a>
                     </div>
                     <div class="footer__nav-link @yield('foo_help')">
-                        @if (defined('tickets'))
+                        @if (defined('TICKETS'))
                         <a href="/tickets"><span class="circle">{{ TICKETS }}</span>{{ trans('Help') }}</a>
                         @else
                         <a href="/help">{{ trans('Help') }}</a>
