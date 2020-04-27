@@ -55,12 +55,12 @@ class IndexController extends Controller
 			if ($utm == true) {
 				$utm_name = $utm->username;
 				$utm_avatar = $utm->avatar;
-				return view($this->folder.'.pages.index', compact('cases', 'top_users', 'utm_name', 'utm_avatar'));
+				return view($this->folder . '.pages.index', compact('cases', 'top_users', 'utm_name', 'utm_avatar'));
 			} else {
-				return view($this->folder.'.pages.index', compact('cases', 'top_users'));
+				return view($this->folder . '.pages.index', compact('cases', 'top_users'));
 			}
 		} else {
-			return view($this->folder.'.pages.index', compact('cases', 'top_users'));
+			return view($this->folder . '.pages.index', compact('cases', 'top_users'));
 		}
 	}
 	public function cart($id)
@@ -71,12 +71,12 @@ class IndexController extends Controller
 		}
 
 		$items = Items::where('card', $id)->orderBy('cost', 'desc')->get();
-		return view($this->folder.'.pages.cart', compact('card', 'items'));
+		return view($this->folder . '.pages.cart', compact('card', 'items'));
 	}
 	public function open(Request $r)
 	{
 
-		$lukkyArray = [0,3,4,7,8,11];
+		$lukkyArray = [0, 3, 4, 7, 8, 11];
 
 		if (!isset($r->id) || !isset($r->game_id) || !isset($r->number)) {
 			return 'err';
@@ -134,12 +134,9 @@ class IndexController extends Controller
 
 		$user->save();
 
-		if(in_array($r->number, $lukkyArray)){
-
-		} else {
+		if (!in_array(str_replace("egg", "", $r->number), $lukkyArray)) {
 			$chance = 0;
 		}
-
 
 		$pro = mt_rand(1, 100);
 
@@ -208,12 +205,12 @@ class IndexController extends Controller
 
 	public function help()
 	{
-		return view($this->folder.'.pages.help');
+		return view($this->folder . '.pages.help');
 	}
 
 	public function faq()
 	{
-		return view($this->folder.'.pages.faq');
+		return view($this->folder . '.pages.faq');
 	}
 
 	public function profile()
@@ -236,7 +233,7 @@ class IndexController extends Controller
 			$last_g = $h->id;
 		}
 		$this->showTaxSwift();
-		return view($this->folder.'.pages.profile', compact('usr_pos', 'history', 'last_g'));
+		return view($this->folder . '.pages.profile', compact('usr_pos', 'history', 'last_g'));
 	}
 	public function profile_partner()
 	{
@@ -247,7 +244,7 @@ class IndexController extends Controller
 		$usr_pos = User::where('profit', '>', Auth::user()->profit)->count() + 1;
 		$history = Games::where('user', Auth::user()->id)->limit(24)->orderBy('id', 'desc')->get();
 		$referals = User::where('ref_user', Auth::user()->id)->orderBy('id', 'desc')->get();
-		return view($this->folder.'.pages.partner', compact('usr_pos', 'history', 'usr_pos', 'referals'));
+		return view($this->folder . '.pages.partner', compact('usr_pos', 'history', 'usr_pos', 'referals'));
 	}
 
 	public function link()
@@ -474,7 +471,7 @@ class IndexController extends Controller
 			$operations = DB::table('operations')->where('user', Auth::user()->id)->where('is_tax', 0)->orderBy('id', 'desc')->limit(100)->get();
 		$usr_pos = User::where('profit', '>', Auth::user()->profit)->count() + 1;
 		$o = null;
-		return view($this->folder.'.pages.finance', compact('usr_pos', 'operations', 'o'));
+		return view($this->folder . '.pages.finance', compact('usr_pos', 'operations', 'o'));
 	}
 
 	protected function showTaxSwift()
@@ -496,7 +493,7 @@ class IndexController extends Controller
 
 	public function bonus()
 	{
-		return view($this->folder.'.pages.bonus');
+		return view($this->folder . '.pages.bonus');
 	}
 
 	public function payment(Request $r)
@@ -1502,11 +1499,11 @@ class IndexController extends Controller
 
 	public function terms()
 	{
-		return view($this->folder.'.pages.terms');
+		return view($this->folder . '.pages.terms');
 	}
 	public function privacy()
 	{
-		return view($this->folder.'.pages.privacy');
+		return view($this->folder . '.pages.privacy');
 	}
 
 	public function user($id)
@@ -1533,7 +1530,7 @@ class IndexController extends Controller
 			}
 			$last_g = $h->id;
 		}
-		return view($this->folder.'.pages.user', compact('user', 'usr_pos', 'history', 'last_g'));
+		return view($this->folder . '.pages.user', compact('user', 'usr_pos', 'history', 'last_g'));
 	}
 
 	public function top100()
@@ -1541,12 +1538,12 @@ class IndexController extends Controller
 		$top10 = User::orderBy('profit', 'desc')->limit(10)->get();
 
 		$top90 = User::orderBy('profit', 'desc')->skip(10)->limit(90)->get();
-		return view($this->folder.'.pages.top', compact('top10', 'top90'));
+		return view($this->folder . '.pages.top', compact('top10', 'top90'));
 	}
 	public function opinions()
 	{
 		$reviews = Reviews::orderBy('id', 'desc')->get();
-		return view($this->folder.'.pages.opinions', compact('reviews'));
+		return view($this->folder . '.pages.opinions', compact('reviews'));
 	}
 
 	public function success()
