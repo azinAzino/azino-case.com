@@ -169,19 +169,19 @@
                             </a>
                             <ul class="sub-menu">
                                 <li class="nav-item start ">
-                                    <a href="/admin/tickets/new" class="nav-link ">
+                                    <a href="/manager/tickets/new" class="nav-link ">
                                         <i class="icon-note"></i>
                                         <span class="title">Новые</span>
                                     </a>
                                 </li>
                                 <li class="nav-item start ">
-                                    <a href="/admin/tickets/in_process" class="nav-link ">
+                                    <a href="/manager/tickets/in_process" class="nav-link ">
                                         <i class="icon-grid"></i>
                                         <span class="title">Входящие</span>
                                     </a>
                                 </li>
                                 <li class="nav-item start ">
-                                    <a href="/admin/tickets/sent" class="nav-link ">
+                                    <a href="/manager/tickets/sent" class="nav-link ">
                                         <i class="icon-grid"></i>
                                         <span class="title">Отправленные</span>
                                     </a>

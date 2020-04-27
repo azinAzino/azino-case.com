@@ -139,13 +139,13 @@ Route::group(['middleware' => 'auth', 'middleware' => 'admin.access'], function 
 			'namespace' => 'Tickets'
 		], function () {
 
-			Route::get('new', function(){
+			Route::get('new', function () {
 				return view('admin.tickets.tickets', ['tickets' => Ticket::where('status', 'new')->get()]);
 			});
-			Route::get('in_process', function(){
+			Route::get('in_process', function () {
 				return view('admin.tickets.tickets', ['tickets' => Ticket::where('direction', 'question')->get()]);
 			});
-			Route::get('sent', function(){
+			Route::get('sent', function () {
 				return view('admin.tickets.tickets', ['tickets' => Ticket::where('direction', 'answer')->get()]);
 			});
 
@@ -157,16 +157,16 @@ Route::group(['middleware' => 'auth', 'middleware' => 'admin.access'], function 
 			Route::get('/delete/{id}', 'TicketController@delete');
 			Route::post('/answer/{id}', 'TicketController@store');
 
-			
 
-			Route::get('/get_patterns/{id}', function($id){
+
+			Route::get('/get_patterns/{id}', function ($id) {
 				return view('admin.tickets.pattern_list', ['templates' => TicketTemplate::where('ticket_category_id', $id)->get()]);
 			});
-			Route::get('/get_patterns', function(){
+			Route::get('/get_patterns', function () {
 				return view('admin.tickets.pattern_list', ['templates' => TicketTemplate::all()]);
 			});
 
-			Route::get('/pattern/{id}', function($id){
+			Route::get('/pattern/{id}', function ($id) {
 				return TicketTemplate::findOrfail($id)->text;
 			});
 
@@ -233,48 +233,40 @@ Route::group(['prefix' => 'manager', 'middleware' => 'auth', 'middleware' => 'ma
 
 
 
-
 	Route::group([
-		'prefix' => '/manager',
-		'namespace' => 'Manager'
+		'prefix' => 'tickets',
+		'namespace' => 'Manager\Tickets'
 	], function () {
-		/// Tickets
-		Route::group([
-			'prefix' => '/tickets',
-			'namespace' => 'Tickets'
-		], function () {
 
-			Route::get('new', function(){
-				return view('manager.tickets.tickets', ['tickets' => Ticket::where('status', 'new')->where('manager_id', Auth::user()->id)->get()]);
-			});
-			Route::get('in_process', function(){
-				return view('manager.tickets.tickets', ['tickets' => Ticket::where('direction', 'question')->where('manager_id', Auth::user()->id)->get()]);
-			});
-			Route::get('sent', function(){
-				return view('manager.tickets.tickets', ['tickets' => Ticket::where('direction', 'answer')->where('manager_id', Auth::user()->id)->get()]);
-			});
-
-			Route::post('/update/{id}', 'TicketController@update');
-			Route::get('/edit/{id}', 'TicketController@edit');
-			Route::get('/show/{id}', 'TicketController@show');
-			Route::get('/history/{id}', 'TicketController@history');
-			Route::post('/bulk_delete', 'TicketController@deleteAll');
-			Route::get('/delete/{id}', 'TicketController@delete');
-			Route::post('/answer/{id}', 'TicketController@store');
-
-			Route::get('/get_patterns/{id}', function($id){
-				return view('manager.tickets.pattern_list', ['templates' => TicketTemplate::where('ticket_category_id', $id)->get()]);
-			});
-			Route::get('/get_patterns', function(){
-				return view('manager.tickets.pattern_list', ['templates' => TicketTemplate::all()]);
-			});
-
-			Route::get('/pattern/{id}', function($id){
-				return TicketTemplate::findOrfail($id)->text;
-			});
+		Route::get('new', function () {
+			return view('manager.tickets.tickets', ['tickets' => Ticket::where('status', 'new')->where('manager_id', Auth::user()->id)->get()]);
 		});
-		/// End Tickets
-	});
+		Route::get('in_process', function () {
+			return view('manager.tickets.tickets', ['tickets' => Ticket::where('direction', 'question')->where('manager_id', Auth::user()->id)->get()]);
+		});
+		Route::get('sent', function () {
+			return view('manager.tickets.tickets', ['tickets' => Ticket::where('direction', 'answer')->where('manager_id', Auth::user()->id)->get()]);
+		});
 
+		Route::post('/update/{id}', 'TicketController@update');
+		Route::get('/edit/{id}', 'TicketController@edit');
+		Route::get('/show/{id}', 'TicketController@show');
+		Route::get('/history/{id}', 'TicketController@history');
+		Route::post('/bulk_delete', 'TicketController@deleteAll');
+		Route::get('/delete/{id}', 'TicketController@delete');
+		Route::post('/answer/{id}', 'TicketController@store');
+
+		Route::get('/get_patterns/{id}', function ($id) {
+			return view('manager.tickets.pattern_list', ['templates' => TicketTemplate::where('ticket_category_id', $id)->get()]);
+		});
+		Route::get('/get_patterns', function () {
+			return view('manager.tickets.pattern_list', ['templates' => TicketTemplate::all()]);
+		});
+
+		Route::get('/pattern/{id}', function ($id) {
+			return TicketTemplate::findOrfail($id)->text;
+		});
+	});
+	/// End Tickets
 
 });
