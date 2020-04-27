@@ -81,9 +81,10 @@ class TicketController extends Controller
     public function show($id)
     {
         $ticket = Ticket::find($id);
+        $tickets = Ticket::where('status', 'new')->where('manager_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
         $categories = TicketCategory::all();
         $templates = TicketTemplate::all();
-        return view('manager.tickets.ticket', compact('ticket', 'categories', 'templates'));
+        return view('manager.tickets.ticket', compact('ticket', 'tickets', 'categories', 'templates'));
     }
 
 

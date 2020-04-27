@@ -25,21 +25,20 @@
 <div class="row">
     <div style="overflow: hidden">
         <div class="all_ticket">
+            @foreach ($tickets as $tick)
             <div class="col-md-6">
                 <div class=" tik_view">
                     <div class="ttl">
-                        <i class="fa fa-clock-o"></i><small class="ticket_create_date" data-index="1">2020-04-27
-                            02:01</small>
-                        <small>Время ожидания ответа: </small><small class="ticket_wait_answer" data-index="1">0 дней 6
-                            часов 49 минут</small>
+                        <i class="fa fa-clock-o"></i><small class="ticket_create_date" data-index="1">
+                            {{ $tick->created_at }}</small>
+                        <small>Время ожидания ответа: </small><small class="ticket_wait_answer" data-index="1"></small>
                         <input type="checkbox" id="toggled_read"
-                            onclick="form_view_toggle_read(event, '5ea63d077cee417920668aba')">
+                            onclick="form_view_toggle_read(event, {{ $tick->id }})">
                     </div>
-                    <div class="txt">
-                        <p>asfb sdt wer</p>
-                    </div>
+                    <div class="txt">{{ $tick->text }}</div>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
     <div class="col-md-6" style="min-height: 365px;">
