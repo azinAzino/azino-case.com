@@ -17,8 +17,7 @@ class CreateSiteItemImageTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('site_id');
             $table->bigInteger('item_id');
-            $table->string('file');
-            $table->string('filename')->nullable();
+            $table->string('image');
             $table->timestamps();
         });
     }

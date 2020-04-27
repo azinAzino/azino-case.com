@@ -17,8 +17,8 @@ class CreateSiteCardImageTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('site_id');
             $table->bigInteger('card_id');
-            $table->string('file');
-            $table->string('filename')->nullable();
+            $table->string('image');
+            $table->string('item_image');
             $table->timestamps();
         });
     }
