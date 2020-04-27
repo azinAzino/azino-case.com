@@ -143,10 +143,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'admin.access'], function 
 				return view('admin.tickets.tickets', ['tickets' => Ticket::where('status', 'new')->get()]);
 			});
 			Route::get('in_process', function () {
-				return view('admin.tickets.tickets', ['tickets' => Ticket::where('direction', 'question')->get()]);
-			});
-			Route::get('sent', function () {
-				return view('admin.tickets.tickets', ['tickets' => Ticket::where('direction', 'answer')->get()]);
+				return view('admin.tickets.tickets', ['tickets' => Ticket::where('status', 'read')->get()]);
 			});
 
 			Route::post('/update/{id}', 'TicketController@update');
@@ -242,10 +239,7 @@ Route::group(['prefix' => 'manager', 'middleware' => 'auth', 'middleware' => 'ma
 			return view('manager.tickets.tickets', ['tickets' => Ticket::where('status', 'new')->where('manager_id', Auth::user()->id)->get()]);
 		});
 		Route::get('in_process', function () {
-			return view('manager.tickets.tickets', ['tickets' => Ticket::where('direction', 'question')->where('manager_id', Auth::user()->id)->get()]);
-		});
-		Route::get('sent', function () {
-			return view('manager.tickets.tickets', ['tickets' => Ticket::where('direction', 'answer')->where('manager_id', Auth::user()->id)->get()]);
+			return view('manager.tickets.tickets', ['tickets' => Ticket::where('status', 'read')->where('manager_id', Auth::user()->id)->get()]);
 		});
 
 		Route::post('/update/{id}', 'TicketController@update');

@@ -174,12 +174,6 @@
                                         <span class="title">Входящие</span>
                                     </a>
                                 </li>
-                                <li class="nav-item start ">
-                                    <a href="/admin/tickets/sent" class="nav-link ">
-                                        <i class="icon-grid"></i>
-                                        <span class="title">Отправленные</span>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
                         <li class="nav-item  ">

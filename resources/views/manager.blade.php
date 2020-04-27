@@ -180,12 +180,6 @@
                                         <span class="title">Входящие</span>
                                     </a>
                                 </li>
-                                <li class="nav-item start ">
-                                    <a href="/manager/tickets/sent" class="nav-link ">
-                                        <i class="icon-grid"></i>
-                                        <span class="title">Отправленные</span>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
                     </ul>
