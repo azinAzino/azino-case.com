@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Tickets;
+namespace App\Http\Controllers\Manager\Tickets;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -83,7 +83,7 @@ class TicketController extends Controller
         $ticket = Ticket::find($id);
         $categories = TicketCategory::all();
         $templates = TicketTemplate::all();
-        return view('admin.tickets.ticket', compact('ticket', 'categories', 'templates'));
+        return view('manager.tickets.ticket', compact('ticket', 'categories', 'templates'));
     }
 
 
@@ -95,10 +95,10 @@ class TicketController extends Controller
      */
     public function history($id)
     {
-        $tickets = Ticket::where('user_id', $id)->orderBy('id', 'DESC')->get();
+        $tickets = Ticket::where('user_id', $id)->where('manager_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
         $categories = TicketCategory::all();
         $templates = TicketTemplate::all();
-        return view('admin.tickets.history', compact('tickets', 'categories', 'templates'));
+        return view('manager.tickets.history', compact('tickets', 'categories', 'templates'));
     }
 
     
@@ -114,7 +114,7 @@ class TicketController extends Controller
         $ticket = Ticket::find($id);
         $categories = TicketCategory::all();
         $templates = TicketTemplate::all();
-        return view('admin.tickets.edit', compact('ticket', 'categories', 'templates'));
+        return view('manager.tickets.edit', compact('ticket', 'categories', 'templates'));
     }
 
     /**
