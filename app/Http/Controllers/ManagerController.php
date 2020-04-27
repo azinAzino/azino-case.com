@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Settings;
+use App\Operation;
 use App\Reviews;
 use App\Games;
 use Illuminate\Support\Facades\Auth;
@@ -311,8 +312,8 @@ class ManagerController extends Controller
 	//manager
 	public function withdraw_save(Request $r)
 	{
-		$operation = DB::table('operations')->where('id', $r->id);
-		$user = User::findOrFail('id', $operation->user);
+		$operation = Operation::findOrfail($r->id);
+		$user = User::findOrFail($operation->user);
 		if ($user->manager_id != Auth::user()->id) {
 			$r->session()->flash('alert-danger', 'Hack attack!!!');
 			return redirect('/manager/withdraw');

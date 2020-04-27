@@ -10,11 +10,11 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
-        "kordy/ticketit": "0.*",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^1.1",
         "predis/predis": "^1.1",
+        "stevebauman/location": "^5.0",
         "wildtuna/piastrix": "dev-master"
     },
     "require-dev": {

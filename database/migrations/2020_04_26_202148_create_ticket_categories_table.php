@@ -2,8 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class AddCompletedAtColumnToTicketitTable extends Migration
+class CreateTicketCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +13,10 @@ class AddCompletedAtColumnToTicketitTable extends Migration
      */
     public function up()
     {
-        Schema::table('ticketit', function (Blueprint $table) {
-            $table->timestamp('completed_at')->nullable();
+        Schema::create('ticket_categories', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('title');
+            $table->timestamps();
         });
     }
 
@@ -24,8 +27,6 @@ class AddCompletedAtColumnToTicketitTable extends Migration
      */
     public function down()
     {
-        Schema::table('ticketit', function (Blueprint $table) {
-            $table->dropColumn('completed_at');
-        });
+        Schema::dropIfExists('ticket_categories');
     }
 }

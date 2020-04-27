@@ -131,6 +131,7 @@ class AdminController extends Controller
 	public function edit_user($id)
 	{
 		$user = User::findOrFail($id);
+		$managers = User::whereIn('role', [10, 11])->get();
 		$user->payed = DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
 		$user->with =  DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 1)->sum('amount');
 		$user->with0 = DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 0)->sum('amount');
@@ -300,7 +301,7 @@ class AdminController extends Controller
 
 				$r->session()->flash('alert-success', trans('Balance updated!'));
 
-				return redirect('/admin/users');
+				return redirect()->back();
 			}
 		}
 	}
@@ -352,7 +353,7 @@ class AdminController extends Controller
 					]);
 				}
 				$r->session()->flash('alert-success', trans('Balance updated!'));
-				return redirect('/admin/users');
+				return redirect()->back();
 			}
 		}
 	}
@@ -372,7 +373,7 @@ class AdminController extends Controller
 				'manager_id' => $r->get('manager_id') ? $r->get('manager_id') : Auth::user()->id,
 			]);
 			$r->session()->flash('alert-success', 'Настройки пользователя сохранены!');
-			return redirect('/admin/users');
+			return redirect()->back();
 		} else {
 
 			$r->session()->flash('alert-danger', trans("Wrong data!"));

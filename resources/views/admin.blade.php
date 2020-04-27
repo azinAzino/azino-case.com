@@ -156,10 +156,31 @@
                             </a>
                         </li>
                         <li class="nav-item  ">
-                            <a href="/tickets-admin" class="nav-link nav-toggle">
-                                <i class="fa fa-user-secret" aria-hidden="true"></i>
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="icon-equalizer"></i>
                                 <span class="title">Тикеты</span>
+                                <span class="arrow open"></span>
                             </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item start ">
+                                    <a href="/admin/tickets/new" class="nav-link ">
+                                        <i class="icon-note"></i>
+                                        <span class="title">Новые</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item start ">
+                                    <a href="/admin/tickets/in_process" class="nav-link ">
+                                        <i class="icon-grid"></i>
+                                        <span class="title">Входящие</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item start ">
+                                    <a href="/admin/tickets/sent" class="nav-link ">
+                                        <i class="icon-grid"></i>
+                                        <span class="title">Отправленные</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item  ">
                             <a href="/admin/clear" class="nav-link nav-toggle">
@@ -187,6 +208,27 @@
                                     <a href="/admin/cases" class="nav-link ">
                                         <i class="icon-grid"></i>
                                         <span class="title">Список кейсов</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="icon-equalizer"></i>
+                                <span class="title">Управление тикетами</span>
+                                <span class="arrow open"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item start ">
+                                    <a href="/admin/tickets/categories" class="nav-link ">
+                                        <i class="icon-note"></i>
+                                        <span class="title">Категории</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item start ">
+                                    <a href="/admin/tickets/templates" class="nav-link ">
+                                        <i class="icon-grid"></i>
+                                        <span class="title">Шаблоны</span>
                                     </a>
                                 </li>
                             </ul>
