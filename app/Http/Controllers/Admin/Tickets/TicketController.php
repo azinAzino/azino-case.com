@@ -51,6 +51,7 @@ class TicketController extends Controller
                 'user_id' => $question->user_id,
                 'manager_id' => $question->manager_id,
                 'text' => $request->post('text'),
+                'direction' => 'answer',
                 'ip' => $request->ip()
             ]);
         if ($ticket) {
