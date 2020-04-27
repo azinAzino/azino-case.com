@@ -75,6 +75,9 @@ class IndexController extends Controller
 	}
 	public function open(Request $r)
 	{
+
+		$lukkyArray = [0,3,4,7,8,11];
+
 		if (!isset($r->id) || !isset($r->game_id) || !isset($r->number)) {
 			return 'err';
 		}
@@ -131,6 +134,12 @@ class IndexController extends Controller
 
 		$user->save();
 
+		if(in_array($r->number, $lukkyArray)){
+
+		} else {
+			$chance = 0;
+		}
+
 
 		$pro = mt_rand(1, 100);
 
@@ -145,6 +154,8 @@ class IndexController extends Controller
 				$item = Items::where('card', $r->id)->orderByRaw("RAND()")->first();
 			}
 		}
+
+
 		$game = Games::where('id', $general_game)->first();
 		if (!empty($game) && $game->general_game != 0) {
 			$general_game = $game->general_game;

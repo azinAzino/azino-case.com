@@ -11496,6 +11496,12 @@ function number_format(number, decimals, dec_point, thousands_sep) {
                         {
                             key: "_setWinner",
                             value: function() {
+                                // if (navigator.userAgent.toLowerCase().indexOf('chrome') == -1) {
+                                // 	socket = io.connect('http://ticketit.loc:3000/socket.io/', {'transports': ['xhr-polling']});
+                                // } else {
+                                // var socket = io.connect('http://ticketit.loc:3000');
+                                // }
+
                                 var t = this;
                                 a()(this.egg).changeClass(this.cellClass.open),
                                     this.sounds.heart.pause(),
