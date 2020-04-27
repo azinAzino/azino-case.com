@@ -20,22 +20,12 @@ use App\Games;
 use App\User;
 use App\Settings;
 use App\Reviews;
+use App\Site;
 use Illuminate\Support\Facades\View;
 
 class IndexController extends Controller
 {
 	const currency = 643; // pay-trio
-
-	private $folder;
-
-	public function __construct(Request $r)
-	{
-		$f = explode('.', $r->getHttpHost());
-		unset($f[count($f) - 1]);
-		$f = implode('.', $f);
-		$pattern = '/[^a-z0-9]/iu';
-		$this->folder = preg_replace($pattern, '', $f);
-	}
 
 	public function index(Request $r)
 	{

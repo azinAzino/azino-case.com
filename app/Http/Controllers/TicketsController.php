@@ -29,16 +29,6 @@ use Illuminate\Support\Facades\View;
 
 class TicketsController extends Controller
 {
-    private $folder;
-
-    public function __construct(Request $r)
-    {
-        $f = explode('.', $r->getHttpHost());
-        unset($f[count($f) - 1]);
-        $f = implode('.', $f);
-        $pattern = '/[^a-z0-9]/iu';
-        $this->folder = preg_replace($pattern, '', $f);
-    }
 
     public function index(Request $r)
     {

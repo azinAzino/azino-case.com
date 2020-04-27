@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 use App\Settings;
 use App\Reviews;
 use App\Games;
+use App\SiteCardImage;
+use App\SiteItemImage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -177,7 +179,7 @@ class AdminController extends Controller
 			if ($u = User::find($b->user)) {;
 				$b->name = $u->username;
 				$b->name_id = $u->id;
-				$b->manager = $u->manager_id && $u->manager && !in_array($u->role, [10,11]) ? $u->manager->name : '';
+				$b->manager = $u->manager_id && $u->manager && !in_array($u->role, [10, 11]) ? $u->manager->name : '';
 				$b->amount = round($b->amount * .94, 2);
 				$c[] = $b;
 			}
@@ -204,7 +206,7 @@ class AdminController extends Controller
 
 				$w->user = $user;
 				$manager = User::find($w->user->manager_id);
-				$w->manager = $manager && !in_array($w->user->role, [10,11]) ? $manager->name : '';
+				$w->manager = $manager && !in_array($w->user->role, [10, 11]) ? $manager->name : '';
 				$date = $w->timestamp;
 				Carbon::setlocale('ru');
 				$w->dfh = Carbon::createFromFormat('Y-m-d H:i:s', $date)->diffForHumans();
@@ -252,12 +254,18 @@ class AdminController extends Controller
 
 	public function item_create(Request $r)
 	{
-		Items::create([
-			'image' => $r->get('image'),
+		$item = Items::create([
 			'cost' => $r->get('cost'),
 			'card' => $r->get('id'),
 			'type' => $r->get('type')
 		]);
+		if ($item) {
+			SiteItemImage::create([
+				'image' => $r->get('image'),
+				'site_id' => SITE_ID,
+				'item_id' => $item->id
+			]);
+		}
 
 		$r->session()->flash('alert-success', 'Предмет добавлен!');
 		return redirect()->back();
@@ -265,11 +273,14 @@ class AdminController extends Controller
 
 	public function item_update(Request $r)
 	{
-		Items::where('id', $r->get('id'))->update([
-			'image' => $r->get('img'),
-			'cost' => $r->get('cost'),
-			'card' => $r->get('card'),
-			'type' => $r->get('type')
+		Items::where('id', $r->post('id'))->update([
+			'cost' => $r->post('cost'),
+			'card' => $r->post('card'),
+			'type' => $r->post('type')
+		]);
+
+		SiteItemImage::where('site_id', SITE_ID)->where('item_id', $r->post('id'))->update([
+			'image' => $r->post('img')
 		]);
 
 		$r->session()->flash('alert-success', 'Предмет обновлен!');
@@ -451,14 +462,20 @@ class AdminController extends Controller
 
 	public function add_case(Request $r)
 	{
-		Cards::create([
+		$card = Cards::create([
 			'name' => $r->get('name'),
 			'cost' => $r->get('cost'),
-			'image' => $r->get('image'),
-			'item_image' => $r->get('item_image'),
 			'chance' => $r->get('chance')
 		]);
 
+		if ($card) {
+			SiteCardImage::create([
+				'image' => $r->get('image'),
+				'item_image' => $r->get('item_image'),
+				'site_id' => SITE_ID,
+				'card_id' => $card->id
+			]);
+		}
 		$r->session()->flash('alert-success', 'Вы создали новый кейс!');
 		return redirect()->route('cases');
 	}
@@ -468,9 +485,12 @@ class AdminController extends Controller
 		Cards::where('id', $r->get('id'))->update([
 			'name' => $r->get('name'),
 			'cost' => $r->get('cost'),
+			'chance' => $r->get('chance')
+		]);
+
+		SiteCardImage::where('site_id', SITE_ID)->where('card_id', $r->get('id'))->update([
 			'image' => $r->get('image'),
 			'item_image' => $r->get('item_image'),
-			'chance' => $r->get('chance')
 		]);
 
 		$r->session()->flash('alert-success', 'Вы обновили кейс!');
