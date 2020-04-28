@@ -126,8 +126,6 @@ class IndexController extends Controller
 
 		if (!in_array(str_replace("egg", "", $r->number), $lukkyArray)) {
 			$chance = 0;
-		} else {
-			$chance = 100;
 		}
 
 		$pro = mt_rand(1, 100);
