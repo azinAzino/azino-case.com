@@ -10767,6 +10767,7 @@ button.close {
 .button-rounding_trans-light {
     border: 1px solid #ffa401;
     color: #ffa401;
+    background: #fff;
 }
 
 .button-rounding_trans-light:hover {
@@ -11775,6 +11776,7 @@ button.close {
     position: relative;
     border-radius: 10px;
     background: #000;
+    background-image: url(/img/slide/header__mob.png);
     margin: 0;
     overflow: hidden;
 }
@@ -11907,7 +11909,7 @@ button.close {
     display: block;
     height: auto;
     width: 100%;
-    background-color: #141a21;
+    background-color: #ffffff7d;
     overflow: hidden;
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
@@ -12329,7 +12331,7 @@ button.close {
 }
 
 .game__game-cell_disabled {
-    background-color: #141a21 !important;
+    background-color: #ffffff7a !important;
     cursor: default !important;
 }
 
@@ -12574,7 +12576,7 @@ button.close {
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(255, 255, 255, 0.48);
     border-radius: 10px;
     z-index: 100;
 }
@@ -12602,7 +12604,7 @@ button.close {
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(255, 255, 255, 0.27);
     border-radius: 10px;
     z-index: 100;
 }
