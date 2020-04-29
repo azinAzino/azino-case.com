@@ -180,6 +180,12 @@
                                         <span class="title">Входящие</span>
                                     </a>
                                 </li>
+                                <li class="nav-item start ">
+                                    <a href="/manager/tickets/create" class="nav-link ">
+                                        <i class="icon-grid"></i>
+                                        <span class="title">Создать</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>

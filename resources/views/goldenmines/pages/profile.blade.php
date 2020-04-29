@@ -4,6 +4,10 @@
 {{ __('Profile') }}
 @stop
 
+@section ('top')
+nav-line__link_active
+@stop
+
 @section('content')
 <div class="content">
 	<?php $settings = \DB::table('settings')->where('id', 1)->first();

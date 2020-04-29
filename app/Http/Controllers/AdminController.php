@@ -18,9 +18,19 @@ use App\SiteCardImage;
 use App\SiteItemImage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\User as UserResource;
 
 class AdminController extends Controller
 {
+
+	public function usersSearch(Request $r)
+	{
+		return response()->json([
+			'total_count' => 10,
+			'incomplete_results' => true,
+			'results' => UserResource::collection(User::where('username', 'like', '%' . $r->post('term') . '%')->limit(10)->get())
+		], 200);
+	}
 	public function index()
 	{
 		$user_money = DB::table('users')->where('money', '!=', 0)->sum('money');

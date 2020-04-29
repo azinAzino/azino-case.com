@@ -17,9 +17,21 @@ use App\Reviews;
 use App\Games;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\User as UserResource;
 
 class ManagerController extends Controller
 {
+
+
+	public function usersSearch(Request $r)
+	{
+		return response()->json([
+			'total_count' => 10,
+			'incomplete_results' => true,
+			'results' => UserResource::collection(User::where('manager_id', Auth::user()->id)->where('username', 'like', '%' . $r->post('term') . '%')->limit(10)->get())
+		], 200);
+	}
+
 	//manager
 	public function index()
 	{

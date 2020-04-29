@@ -36,11 +36,16 @@ nav-line__link_active
                     <picture><img src="/img/slide/stick_fix.png" alt="Stick" width="100%" height="100%"></picture>
                 </div>
             </div>
-            <div class="slide__btn-group"><a href="/ru/signup" data-role="tabs" class="button slide__button"><span
-                        class="button__content button__content--board">Регистрация</span></a><a href="/ru/login"
-                    data-role="tabs" class="button slide__button"><span
-                        class="button__content button__content--board button__content--board_purple">Вход в
-                        аккаунт</span></a></div>
+
+            @if(Auth::guest())
+            <div class="slide__btn-group"><a href="/ru/signup" data-toggle="login"
+                    data-title="Войти <span>на сайт</span>" class="modal-toggle button slide__button"><span
+                        class="button__content button__content--board">Вход в
+                        аккаунт</span></a><a href="/ru/login" data-toggle="register"
+                    data-title="Регистрация <span>на сайте</span>" class="modal-toggle button slide__button"><span
+                        class="button__content button__content--board button__content--board_purple">Регистрация</span></a>
+            </div>
+            @endif
         </div>
     </section>
     <div class="pre-why"></div>

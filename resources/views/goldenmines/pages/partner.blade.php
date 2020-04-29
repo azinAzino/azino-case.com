@@ -4,6 +4,9 @@
 {{ __('Your profile') }}
 @stop
 
+@section ('top')
+nav-line__link_active
+@stop
 
 
 @section('content')

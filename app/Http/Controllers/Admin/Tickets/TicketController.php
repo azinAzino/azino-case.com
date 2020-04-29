@@ -31,7 +31,9 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        $categories = TicketCategory::all();
+        $templates = TicketTemplate::all();
+        return view('admin.tickets.create', compact('categories', 'templates'));
     }
 
 
@@ -42,11 +44,19 @@ class TicketController extends Controller
     //  * @param  \Illuminate\Http\Request  $request
     //  * @return \Illuminate\Http\Response
     //  */
-    public function store(Request $request, $id)
+    public function store(Request $request, $id = false)
     {
-        $question = Ticket::findOrfail($id);
         $ticket = false;
-        if ($request->post('text'))
+        if ($request->post('user_id')) {
+            $ticket = Ticket::create([
+                'user_id' => $request->post('user_id'),
+                'manager_id' => Auth::user()->id,
+                'text' => $request->post('text'),
+                'direction' => 'answer',
+                'ip' => $request->ip()
+            ]);
+        } elseif ($request->post('text')) {
+            $question = Ticket::findOrfail($id);
             $ticket = Ticket::create([
                 'user_id' => $question->user_id,
                 'manager_id' => $question->manager_id,
@@ -54,16 +64,17 @@ class TicketController extends Controller
                 'direction' => 'answer',
                 'ip' => $request->ip()
             ]);
+        }
         if ($ticket) {
-            if($request->hasFile('attachments')){
-                foreach($request->file('attachments') as $file){
-                    @mkdir(public_path().'/uploads/tickets/'.$ticket->id.'/', 0755, true);
-                    $newfile = Str::random(20).'.'.$file->getClientOriginalExtension();
-                    if($file->move(public_path().'/uploads/tickets/'.$ticket->id.'/', $newfile)){
+            if ($request->hasFile('attachments')) {
+                foreach ($request->file('attachments') as $file) {
+                    @mkdir(public_path() . '/uploads/tickets/' . $ticket->id . '/', 0755, true);
+                    $newfile = Str::random(20) . '.' . $file->getClientOriginalExtension();
+                    if ($file->move(public_path() . '/uploads/tickets/' . $ticket->id . '/', $newfile)) {
                         TicketAttachment::create([
                             'ticket_id' => $ticket->id,
                             'file' => $newfile,
-                            'filename'=>$file->getClientOriginalName()
+                            'filename' => $file->getClientOriginalName()
                         ]);
                     }
                 }
@@ -102,7 +113,7 @@ class TicketController extends Controller
         return view('admin.tickets.history', compact('tickets', 'categories', 'templates'));
     }
 
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -130,7 +141,7 @@ class TicketController extends Controller
         $ticket = Ticket::findOrfail($id);
         $ticket->update(['text' => $request->post('text')]);
         $request->session()->flash('alert-success', __('Tickets category created'));
-		return redirect("/admin/tickets/history/$ticket->user_id");
+        return redirect("/admin/tickets/history/$ticket->user_id");
     }
 
     /**
@@ -144,12 +155,14 @@ class TicketController extends Controller
         //
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         Ticket::findOrfail($id)->delete();
-		return redirect()->back();
+        return redirect()->back();
     }
 
-    public function deleteAll(Request $request){
+    public function deleteAll(Request $request)
+    {
         Ticket::whereIn('id', $request['to_remove'])->delete();
     }
 }

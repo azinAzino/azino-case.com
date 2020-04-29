@@ -4,6 +4,9 @@
 {{ __('Profile') }}
 @stop
 
+@section ('top')
+nav-line__link_active
+@stop
 
 @section('banner')
 <a href="/bonus" class=" bonus-banner bonus-banner_auth  ">

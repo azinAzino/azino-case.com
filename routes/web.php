@@ -128,6 +128,7 @@ Route::group(['middleware' => 'auth', 'middleware' => 'admin.access'], function 
 	Route::post('/admin/opinions/create', 'AdminController@opinion_create');
 
 
+	Route::post('/admin/users/get', 'AdminController@usersSearch');
 
 	Route::group([
 		'prefix' => '/admin',
@@ -153,6 +154,8 @@ Route::group(['middleware' => 'auth', 'middleware' => 'admin.access'], function 
 			Route::post('/bulk_delete', 'TicketController@deleteAll');
 			Route::get('/delete/{id}', 'TicketController@delete');
 			Route::post('/answer/{id}', 'TicketController@store');
+			Route::post('/answer', 'TicketController@store');
+			Route::get('/create', 'TicketController@create');
 
 
 
@@ -210,6 +213,7 @@ Route::group(['prefix' => 'manager', 'middleware' => 'auth', 'middleware' => 'ma
 	Route::get('payments', 'ManagerController@payments');
 
 
+	Route::post('/users/get', 'ManagerController@usersSearch');
 
 	Route::group([
 		'prefix' => 'tickets',
@@ -230,6 +234,8 @@ Route::group(['prefix' => 'manager', 'middleware' => 'auth', 'middleware' => 'ma
 		Route::post('/bulk_delete', 'TicketController@deleteAll');
 		Route::get('/delete/{id}', 'TicketController@delete');
 		Route::post('/answer/{id}', 'TicketController@store');
+		Route::post('/answer', 'TicketController@store');
+		Route::get('/create', 'TicketController@create');
 
 		Route::get('/get_patterns/{id}', function ($id) {
 			return view('manager.tickets.pattern_list', ['templates' => TicketTemplate::where('ticket_category_id', $id)->get()]);

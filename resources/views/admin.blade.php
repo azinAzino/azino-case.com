@@ -174,6 +174,12 @@
                                         <span class="title">Входящие</span>
                                     </a>
                                 </li>
+                                <li class="nav-item start ">
+                                    <a href="/admin/tickets/create" class="nav-link ">
+                                        <i class="icon-grid"></i>
+                                        <span class="title">Создать</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item  ">

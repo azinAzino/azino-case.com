@@ -24,6 +24,7 @@ class TicketController extends Controller
         //
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -31,7 +32,9 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        $categories = TicketCategory::all();
+        $templates = TicketTemplate::all();
+        return view('manager.tickets.create', compact('categories', 'templates'));
     }
 
 
@@ -42,33 +45,41 @@ class TicketController extends Controller
     //  * @param  \Illuminate\Http\Request  $request
     //  * @return \Illuminate\Http\Response
     //  */
-    public function store(Request $request, $id)
+    public function store(Request $request, $id = false)
     {
-        $question = Ticket::findOrfail($id);
         $ticket = false;
-        if ($request->post('text'))
+        if ($request->post('user_id')) {
+            $ticket = Ticket::create([
+                'user_id' => $request->post('user_id'),
+                'manager_id' => Auth::user()->id,
+                'text' => $request->post('text'),
+                'direction' => 'answer',
+                'ip' => $request->ip()
+            ]);
+        } elseif ($request->post('text')) {
+            $question = Ticket::findOrfail($id);
             $ticket = Ticket::create([
                 'user_id' => $question->user_id,
                 'manager_id' => $question->manager_id,
-                'direction' => 'answer',
                 'text' => $request->post('text'),
+                'direction' => 'answer',
                 'ip' => $request->ip()
             ]);
+        }
         if ($ticket) {
-            if($request->hasFile('attachments')){
-                foreach($request->file('attachments') as $file){
-                    @mkdir(public_path().'/uploads/tickets/'.$ticket->id.'/', 0755, true);
-                    $newfile = Str::random(20).'.'.$file->getClientOriginalExtension();
-                    if($file->move(public_path().'/uploads/tickets/'.$ticket->id.'/', $newfile)){
+            if ($request->hasFile('attachments')) {
+                foreach ($request->file('attachments') as $file) {
+                    @mkdir(public_path() . '/uploads/tickets/' . $ticket->id . '/', 0755, true);
+                    $newfile = Str::random(20) . '.' . $file->getClientOriginalExtension();
+                    if ($file->move(public_path() . '/uploads/tickets/' . $ticket->id . '/', $newfile)) {
                         TicketAttachment::create([
                             'ticket_id' => $ticket->id,
                             'file' => $newfile,
-                            'filename'=>$file->getClientOriginalName()
+                            'filename' => $file->getClientOriginalName()
                         ]);
                     }
                 }
             }
-            Ticket::where('id', '<', $ticket->id)->update(['status' => 'read']);
             $request->session()->flash('alert-success', __('Ticket sent!'));
         }
         return redirect()->back();

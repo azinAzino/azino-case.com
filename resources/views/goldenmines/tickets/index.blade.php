@@ -1,4 +1,4 @@
-@extends('azinocase.layout')
+@extends('goldenmines.layout')
 
 @section ('title')
 {{ __('Tickets') }}
@@ -66,7 +66,7 @@ tickets-page
                         </div>
                     </div>
                     @else
-                    <div class="panel panel-info mt-4 ticket w-100">
+                    <div class="panel panel-success mt-4 ticket w-100">
                         <div class="panel-heading">
                             {{ __('From you') }}
                             <span class="date">{{ $ticket->created_at }}</span>
@@ -90,17 +90,16 @@ tickets-page
 </div>
 <style>
     .tickets-block .container .tickets-container {
-        background-color: #1e2832;
+        background-color: #a9a7a7;
         padding: 4rem 1rem 1rem;
         border-radius: 10px;
         overflow: hidden;
         margin: 4rem auto;
-        color: #fff;
     }
 
     .tickets-block .container .tickets-container-inner {
         padding: 25px;
-        background-color: rgba(0, 0, 0, .6);
+        background-color: #fff;
         border-radius: 10px;
         margin-bottom: 25px;
     }
@@ -114,30 +113,10 @@ tickets-page
         outline: none;
         font: 18px opensans, Helvetica, Arial, sans-serif;
         font-weight: 400;
-        color: #fff;
         padding: 15px 10px;
         -webkit-transition: all .2s;
         transition: all .2s;
         resize: vertical;
-    }
-
-    .tickets-block .container .tickets-container-inner .panel {
-        background-color: transparent;
-        color: #fff;
-    }
-
-    .tickets-block .container .tickets-container-inner .panel-danger>.panel-heading {
-        color: #ebccd1;
-        fill: #ebccd1;
-        background-color: #f2dede44;
-        border-color: #ebccd1;
-    }
-
-    .tickets-block .container .tickets-container-inner .panel-info>.panel-heading {
-        color: #bce8f1;
-        fill: #bce8f1;
-        background-color: #d9edf744;
-        border-color: #bce8f1;
     }
 </style>
 @stop

@@ -1,0 +1,319 @@
+.text-block_big {
+    font-size: 2.6rem;
+}
+
+.commission-block {
+    display: block;
+    width: 100%;
+    padding: 20px 15px 15px;
+    border: 4px solid #5b9b21;
+    background: #e9e9e9;
+    color: #3c3c3c;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.commission-block span {
+    width: 100%;
+    display: block;
+    font-weight: bold;
+}
+
+.commission-block a {
+    font-weight: bold;
+    font-size: 20px;
+    display: inline-block;
+    display: block;
+    text-align: center;
+}
+
+.commission-block__btns {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.commission-block__btns div {
+    margin: 0 15px;
+}
+
+.commission-block__btns div small {
+    font-size: 12px;
+}
+
+.commission-block__btns div:nth-child(1) a,
+.commission-block__btns div:nth-child(2) a {
+    color: #5b9b21 !important;
+}
+
+.commission-block__btns div:nth-child(3) {
+    margin-top: 37px;
+}
+
+.commission-block__btns div:nth-child(3) a {
+    color: #3c3c3c !important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+input:-internal-autofill-selected {
+    background-color: transparent;
+}
+
+.modal-window__wrapper .error-text {
+    color: red !important;
+    position: absolute;
+}
+
+.HelpLg__wrapper .nav-pills > li.active > a,
+.HelpLg__wrapper .nav-pills > li.active > a:focus,
+.HelpLg__wrapper .nav-pills > li.active > a:hover {
+}
+
+.HelpLg__wrapper a:not(.btn) {
+    color: #ffa401;
+}
+
+.HelpLg__wrapper .dropdown-menu > li > a:focus,
+.HelpLg__wrapper .dropdown-menu > li > a:hover {
+    color: #ffa401;
+}
+
+.HelpLg__wrapper .dropdown-menu > .active > a,
+.HelpLg__wrapper .dropdown-menu > .active > a:focus,
+.HelpLg__wrapper .dropdown-menu > .active > a:hover {
+    background-color: #ffa401;
+    color: #ffffff;
+}
+
+.HelpLg__wrapper
+    table.dataTable.dtr-inline.collapsed
+    > tbody
+    > tr[role="row"]
+    > td:first-child:before,
+.HelpLg__wrapper
+    table.dataTable.dtr-inline.collapsed
+    > tbody
+    > tr[role="row"]
+    > th:first-child:before {
+    background-color: #ffa401;
+}
+.HelpLg__wrapper .pagination > .active > a,
+.HelpLg__wrapper .pagination > .active > a:focus,
+.HelpLg__wrapper .pagination > .active > a:hover,
+.HelpLg__wrapper .pagination > .active > span,
+.HelpLg__wrapper .pagination > .active > span:focus,
+.HelpLg__wrapper .pagination > .active > span:hover {
+    background-color: #ffa401;
+    border-color: #ffa401;
+}
+.HelpLg__wrapper .nav-pills > li.active > a,
+.HelpLg__wrapper .nav-pills > li.active > a:focus,
+.HelpLg__wrapper .nav-pills > li.active > a:hover {
+    background-color: #ffa401;
+    border-color: #ffa401;
+}
+.HelpLg__wrapper .list-group-item.active > .badge,
+.nav-pills > .active > a > .badge {
+    color: #ffa401;
+}
+.HelpLg__wrapper .badge {
+    background-color: #ffa401;
+}
+
+.HelpLg__wrapper input.btn,
+.HelpLg__wrapper button.btn,
+.HelpLg__wrapper a.btn {
+    border-radius: 5em;
+    box-shadow: none;
+}
+
+.HelpLg__wrapper input.btn-primary,
+.HelpLg__wrapper button.btn-primary,
+.HelpLg__wrapper a.btn-primary {
+    border: 3px solid #ffa401;
+    background-color: #ffa401;
+    color: #ddd;
+}
+
+.btn-default {
+    color: #ddd;
+    background-color: transparent;
+    border-color: #ccc;
+}
+
+.HelpLg__wrapper input.btn-primary:hover,
+.HelpLg__wrapper button.btn-primary:hover,
+.HelpLg__wrapper a.btn-primary:hover {
+    border: 3px solid #ffa401;
+    background-color: transparent;
+    border-radius: 5em;
+    box-shadow: none;
+    color: #ffa401;
+}
+
+.modal-window .pay-system__img-wrapper {
+    line-height: 74px;
+    font-size: 1.6em;
+    font-weight: bold;
+    border:1px solid #ddd;
+    line-height: 74px;
+    font-size: 1.6em;
+    width: 90px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 60px;
+    background-position: center center;
+    background-color: #fff;
+    font-weight: 700;
+}
+
+.PodLogin .table-bordered,
+.PodLogin .table-bordered > tbody > tr > td,
+.PodLogin .table-bordered > tbody > tr > th,
+.PodLogin .table-bordered > tfoot > tr > td,
+.PodLogin .table-bordered > tfoot > tr > th,
+.PodLogin .table-bordered > thead > tr > td,
+.PodLogin .table-bordered > thead > tr > th {
+    border-color: #1e2832;
+}
+.PodLogin .panel.panel-default > .panel-heading {
+    background-color: transparent;
+    border-color: transparent;
+    color: #ddd;
+}
+
+.PodLogin .form-control {
+    background-color: transparent;
+    border: 2px solid #1e2832;
+    border-radius: 6px;
+    outline: none;
+    font-weight: 400;
+    color: #ddd;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+    box-shadow: none;
+}
+.PodLogin .form-control:focus {
+    border: 2px solid #ffa401;
+}
+.PodLogin .table tr,
+.PodLogin .table td,
+.PodLogin .table th,
+.PodLogin .table,
+.PodLogin .table {
+    background-color: transparent !important;
+    border-color: #1e2832 !important;
+    font-weight: normal;
+}
+
+.PodLogin .nav-tabs-justified > .active > a,
+.PodLogin .nav-tabs-justified > .active > a:focus,
+.PodLogin .nav-tabs-justified > .active > a:hover,
+.PodLogin .nav-tabs.nav-justified > .active > a,
+.PodLogin .nav-tabs.nav-justified > .active > a:focus,
+.PodLogin .nav-tabs.nav-justified > .active > a:hover {
+    border-color: #1e2832 !important;
+    background-color: #1e2832;
+}
+@media (min-width: 768px) {
+    .PodLogin .nav-tabs-justified > li > a,
+    .PodLogin .nav-tabs.nav-justified > li > a {
+        border-color: #1e2832;
+    }
+}
+
+.PodLogin .nav > li > a:focus,
+.PodLogin .nav > li > a:hover {
+    text-decoration: none;
+    background-color: transparent;
+}
+.PodLogin .dropdown-menu {
+    background-color: #1e2832;
+}
+.dropdown-menu > li > a:focus,
+.dropdown-menu > li > a:hover {
+    background-color: #666;
+}
+
+.PodLogin .panel .panel-body {
+    border-color: #1e2832;
+}
+.PodLogin table.dataTable thead .sorting:after {
+    opacity: 0.5;
+}
+.PodLogin table.dataTable * {
+    color: #ddd !important;
+}
+
+.PodLogin .well {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px solid #1e2832;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.PodLogin .well legend {
+    color: #ddd;
+    border-bottom: 1px solid #1e2832;
+}
+
+.PodLogin .well label {
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+.PodLogin h2 {
+    font-weight: normal;
+}
+
+.PodLogin .panel {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-color: #1e2832;
+}
+
+.PodLogin .pagination > .disabled > a,
+.PodLogin .pagination > .disabled > a:focus,
+.PodLogin .pagination > .disabled > a:hover,
+.PodLogin .pagination > .disabled > span,
+.PodLogin .pagination > .disabled > span:focus,
+.PodLogin .pagination > .disabled > span:hover {
+    background-color: transparent;
+    border-color: #1e2832;
+}
+.PodLogin .pagination > .active > a,
+.PodLogin .pagination > .active > a:focus,
+.PodLogin .pagination > .active > a:hover,
+.PodLogin .pagination > .active > span,
+.PodLogin .pagination > .active > span:focus,
+.PodLogin .pagination > .active > span:hover {
+    color: #ddd;
+}
+
+.modal-content {
+    background-color: #000;
+    box-shadow: none;
+}
+
+.modal-dialog {
+    padding: 1.4em;
+    background-color: #1e2832;
+    color: #fff;
+}
+
+.modal-header,
+.modal-footer {
+    border-color: #1e2832;
+}

@@ -71,11 +71,6 @@
             <form method="POST" enctype="multipart/form-data" action="/admin/tickets/answer/{{  $ticket->id }}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="tik_txt_col_right">
-                    <input id="csrf_token" name="csrf_token" type="hidden"
-                        value="IjRhNTkxYTAzMWY2N2RmZmU1MzE5MmZmYTFmY2M5NDczNDNjY2M1Y2Yi.XqZIbg.mA33biD52T9aZJyerKSPGnbfVt4">
-
-
-
                     <label>Текст</label>
                     <textarea class="form-control" id="text" name="text" required="">Здравствуйте, уважаемый игрок!
 
@@ -85,7 +80,7 @@
 
                     </div>
                     <div class="upload">
-                        <input accept=".png,.jpg,.jpeg" id="attachments" multiple="" name="attachments" type="file">
+                        <input accept=".png,.jpg,.jpeg" id="attachments" multiple="" name="attachments[]" type="file">
                     </div>
                     <div class="control-group  btns">
                         <div class="controls text-center">
