@@ -66,7 +66,7 @@ class IndexController extends Controller
 	public function open(Request $r)
 	{
 
-		$lukkyArray = [0, 3, 4, 7, 8, 11];
+		$lukkyArray = isset($r->mobile) ? [2, 5, 8, 11] : [3, 7, 11];
 
 		if (!isset($r->id) || !isset($r->game_id) || !isset($r->number)) {
 			return 'err';
@@ -124,7 +124,7 @@ class IndexController extends Controller
 
 		$user->save();
 
-		if (!in_array(str_replace("egg", "", $r->number), $lukkyArray)) {
+		if (!in_array((int)str_replace("egg", "", $r->number), $lukkyArray)) {
 			$chance = 0;
 		}
 
