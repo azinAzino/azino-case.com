@@ -11420,7 +11420,7 @@ function number_format(number, decimals, dec_point, thousands_sep) {
                                                     "data-cart-id"
                                                 ),
                                                 game_id: this.gameId,
-                                                mobile: (window.outerWidth() < 992)*1,
+                                                mobile: (window.outerWidth < 992)*1,
                                                 number: a()(this.egg).attr("id")
                                             },
                                             dataType: "json",
