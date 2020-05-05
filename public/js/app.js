@@ -353,9 +353,8 @@ var updateEggs = function updateEggs(t) {
 };
 
 var updateLive = function updateLive(t) {
-  console.log(t);
-  if (location.host.indexOf('golden-mines.club')) t.photo = '/img/avatar2.png';
-  console.log(location);
+  console.log(t)
+  if (location.host.indexOf('golden-mines.club') != -1) t.photo = '/img/avatar2.png';
   var e = '<div class="coin-block-min__coin-glow"></div><img src="' + t.image + '" alt="" class="coin-block-min__coin-img"><div class="coin-block-min__ava-link"><div class="circle-ava"><a href="' + t.link + '"><img src="' + t.photo + '" alt="" class="circle-ava__img"></a></div></div>';
   $(".coin-block-min__new").html(e).addClass("coin-block-min_" + t.light).removeClass("coin-block-min__new");
   $(".coin-block-min__new_min").addClass("coin-block-min__new").removeClass("coin-block-min__new_min");
