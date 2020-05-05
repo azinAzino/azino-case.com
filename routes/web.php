@@ -140,12 +140,8 @@ Route::group(['middleware' => 'auth', 'middleware' => 'admin.access'], function 
 			'namespace' => 'Tickets'
 		], function () {
 
-			Route::get('new', function () {
-				return view('admin.tickets.tickets', ['tickets' => Ticket::where('status', 'new')->get()]);
-			});
-			Route::get('in_process', function () {
-				return view('admin.tickets.tickets', ['tickets' => Ticket::where('status', 'read')->get()]);
-			});
+			Route::get('/new', 'TicketController@new');
+			Route::get('/in_process', 'TicketController@in_process');
 
 			Route::post('/update/{id}', 'TicketController@update');
 			Route::get('/edit/{id}', 'TicketController@edit');
@@ -220,12 +216,9 @@ Route::group(['prefix' => 'manager', 'middleware' => 'auth', 'middleware' => 'ma
 		'namespace' => 'Manager\Tickets'
 	], function () {
 
-		Route::get('new', function () {
-			return view('manager.tickets.tickets', ['tickets' => Ticket::where('status', 'new')->where('manager_id', Auth::user()->id)->get()]);
-		});
-		Route::get('in_process', function () {
-			return view('manager.tickets.tickets', ['tickets' => Ticket::where('status', 'read')->where('manager_id', Auth::user()->id)->get()]);
-		});
+
+		Route::get('/new', 'TicketController@new');
+		Route::get('/in_process', 'TicketController@in_process');
 
 		Route::post('/update/{id}', 'TicketController@update');
 		Route::get('/edit/{id}', 'TicketController@edit');
