@@ -11131,9 +11131,6 @@ function number_format(number, decimals, dec_point, thousands_sep) {
                         {
                             key: "updateLive",
                             value: function(t) {
-                                console.log(window)
-                                console.log(location.host)
-                                if(location.host.indexOf('golden-mines.club')) t.photo = '/img/avatar2.png';
                                 var e =
                                     '<div class="coin-block-min__coin-glow"></div><img src="' +
                                     t.image +
