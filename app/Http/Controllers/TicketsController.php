@@ -31,7 +31,7 @@ class TicketsController extends Controller
 {
 
     public function index(Request $r)
-    {
+    {die;
         $tickets = Ticket::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
         Ticket::where('direction', 'answer')->where('user_id', Auth::user()->id)->update(['status' => 'read']);
         return view($this->folder . '.tickets.index', compact('tickets'));
