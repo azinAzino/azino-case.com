@@ -16,9 +16,11 @@ use App\Reviews;
 use App\Games;
 use App\SiteCardImage;
 use App\SiteItemImage;
+use App\SiteCardName;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\User as UserResource;
+use Illuminate\Support\Facades\App;
 
 class AdminController extends Controller
 {

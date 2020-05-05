@@ -19,9 +19,9 @@ class Cards extends Model
     {
         return SiteCardImage::where('card_id', $this->id)->where('site_id', SITE_ID)->first()->item_image;
     }
-    public function getLangNameAttribute()
+    public function getNameAttribute()
     {
         $name = SiteCardName::where('site_id', SITE_ID)->where('card_id', $this->id)->where('language_id', App::getLocale())->first();
-        return $name ? $name->name : $this->name;
+        return $name ? $name->name : '';
     }
 }
