@@ -21,12 +21,12 @@ nav-line__link_active
 			<div class="HelpLg__header">{{ __('Help') }}</div>
 			<div class="HelpLg__button-row row">
 				<div class="Help__button-col col-md-4 col-sm-6 col-xs-12">
-					<a href="mailto:info@azino-case.com" target="_blank">
+					<a href="mailto:info@golden-mies.club" target="_blank">
 						<div class="HelpButton">
-							<div class="HelpButton__img-wrapper"> <img class="HelpButton__img" src="/img/system/1.png" alt="info@azino-case.com"> </div>
+							<div class="HelpButton__img-wrapper"> <img class="HelpButton__img" src="/img/system/1.png" alt="info@golden-mies.club"> </div>
 							<div class="HelpButton__text">
 								<div class="HelpButton__title"> {{ __('For any questions') }} </div>
-								<div class="HelpButton__link-wrapper"> <span class="HelpButton__link"> info@azino-case.com </span>
+								<div class="HelpButton__link-wrapper"> <span class="HelpButton__link"> info@golden-mies.club </span>
 								</div>
 							</div>
 						</div>
@@ -36,7 +36,7 @@ nav-line__link_active
 					@if(Auth::guest())
 					<a href="#" class="modal-toggle" data-toggle="login" data-title="{{ trans('Log in') }} &lt;span&gt;{{ trans('to the site') }}&lt;/span&gt;">
 						<div class="HelpButton">
-							<div class="HelpButton__img-wrapper"> <img class="HelpButton__img" src="/img/system/2.png" alt="info@azino-case.com"> </div>
+							<div class="HelpButton__img-wrapper"> <img class="HelpButton__img" src="/img/system/2.png" alt="info@golden-mies.club"> </div>
 							<div class="HelpButton__text">
 								<div class="HelpButton__title"> {{ __('Tech Support') }} </div>
 								<div class="HelpButton__link-wrapper"> <span class="HelpButton__link"> {{ __('Write') }} </span>
@@ -47,7 +47,7 @@ nav-line__link_active
 					@else
 					<a href="/tickets">
 						<div class="HelpButton">
-							<div class="HelpButton__img-wrapper"> <img class="HelpButton__img" src="/img/system/2.png" alt="info@azino-case.com"> </div>
+							<div class="HelpButton__img-wrapper"> <img class="HelpButton__img" src="/img/system/2.png" alt="info@golden-mies.club"> </div>
 							<div class="HelpButton__text">
 								<div class="HelpButton__title"> {{ __('Tech Support') }} </div>
 								<div class="HelpButton__link-wrapper"> <span class="HelpButton__link"> {{ __('Write') }} </span>
@@ -58,12 +58,12 @@ nav-line__link_active
 					@endif
 				</div>
 				<div class="Help__button-col col-md-4 col-sm-6 col-xs-12">
-					<a href="mailto:reklama@azino-case.com" target="_blank">
+					<a href="mailto:reklama@golden-mies.club" target="_blank">
 						<div class="HelpButton">
-							<div class="HelpButton__img-wrapper"> <img class="HelpButton__img" src="/img/system/3.png" alt=" reklama@azino-case.com"> </div>
+							<div class="HelpButton__img-wrapper"> <img class="HelpButton__img" src="/img/system/3.png" alt=" reklama@golden-mies.club"> </div>
 							<div class="HelpButton__text">
 								<div class="HelpButton__title"> {{ __('Advertising Suggestions') }} </div>
-								<div class="HelpButton__link-wrapper"> <span class="HelpButton__link">  reklama@azino-case.com </span>
+								<div class="HelpButton__link-wrapper"> <span class="HelpButton__link">  reklama@golden-mies.club </span>
 								</div>
 							</div>
 						</div>

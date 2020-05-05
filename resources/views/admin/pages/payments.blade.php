@@ -12,9 +12,9 @@
 <div class="res-payments">
 	<dl>
 		<dt>{{ __('Всего заводов:') }}</dt>
-		<dd id="payments-itog">{{number_format($itogo, 2, '.', ' ')}}$</dd>
+		<dd id="payments-itog" style="white-space: nowrap;">{{number_format($itogo, 2, '.', ' ')}}$</dd>
 		<dt>{{ __('Заработано оператором:') }}</dt>
-		<dd id="payments-zar">{{number_format($zarabotano, 2, '.', ' ')}}$</dd>
+		<dd id="payments-zar" style="white-space: nowrap;">{{number_format($zarabotano, 2, '.', ' ')}}$</dd>
 	</dl>
 </div>
 <div class="portlet light bordered">

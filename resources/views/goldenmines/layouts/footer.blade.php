@@ -7,8 +7,8 @@
                     <div class="footer__mini-description text-block text-block_color_gray text-block_fs_m">
                         {{ trans('Cases with money') }}!</div>
                     <div class="footer__terms text-block text-block_color_gray text-block_fs_m">
-                        {{ trans('Write to us') }}: <a href="email:info@azino-case.com"><span
-                                class="text-block__link">info@azino-case.com</span></a></div>
+                        {{ trans('Write to us') }}: <a href="email:info@golden-mies.club"><span
+                                class="text-block__link">info@golden-mies.club</span></a></div>
                     <div class="footer__terms text-block text-block_color_gray text-block_fs_s">
                         {{ trans('By logging in you accept') }}
                         <a href="/terms" class="text-block__link">{{ trans('the terms of use') }}</a>
@@ -57,7 +57,7 @@
                 <div class="footer__mini-description text-block text-block_color_gray text-block_fs_m">
                     {{ trans('Cases with money!') }}</div>
                 <div class="footer__terms text-block text-block_color_gray text-block_fs_m">{{ trans('Write to us') }}:
-                    <a href="mailto:info@azino-case.com"><span class="text-block__link">info@azino-case.com</span></a>
+                    <a href="mailto:info@golden-mies.club"><span class="text-block__link">info@golden-mies.club</span></a>
                 </div>
                 <div class="footer__terms text-block text-block_color_gray text-block_fs_s">
                     {{ trans('By logging in you accept') }}

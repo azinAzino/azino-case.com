@@ -192,8 +192,8 @@ class AdminController extends Controller
 				$b->manager = $u->manager_id && $u->manager && !in_array($u->role, [10, 11]) ? $u->manager->name : '';
 				$b->amount = round($b->amount * .94, 2);
 				$c[] = $b;
+				$itogo += $b->amount;
 			}
-			$itogo += $b->amount;
 		}
 		$zarabotano = $itogo * 20 / 100;
 		$a = $c;
@@ -473,7 +473,7 @@ class AdminController extends Controller
 	public function add_case(Request $r)
 	{
 		$card = Cards::create([
-			'name' => $r->get('name'),
+			// 'name' => $r->get('name'),
 			'cost' => $r->get('cost'),
 			'chance' => $r->get('chance')
 		]);
@@ -483,6 +483,12 @@ class AdminController extends Controller
 				'image' => $r->get('image'),
 				'item_image' => $r->get('item_image'),
 				'site_id' => SITE_ID,
+				'card_id' => $card->id
+			]);
+			SiteCardName::create([
+				'site_id' => SITE_ID,
+				'language_id' => App::getLocale(),
+				'name' => $r->get('name'),
 				'card_id' => $card->id
 			]);
 		}
@@ -501,6 +507,10 @@ class AdminController extends Controller
 		SiteCardImage::where('site_id', SITE_ID)->where('card_id', $r->get('id'))->update([
 			'image' => $r->get('image'),
 			'item_image' => $r->get('item_image'),
+		]);
+
+		SiteCardName::where('site_id', SITE_ID)->where('card_id', $r->get('id'))->where('language_id', App::getLocale())->update([
+			'name' => $r->get('name'),
 		]);
 
 		$r->session()->flash('alert-success', 'Вы обновили кейс!');
