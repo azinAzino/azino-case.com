@@ -67,6 +67,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+
+    public function getAvatarAttribute(){
+        return "/img/avatar".SITE_ID.".png";
+    }
+
     public static function generatePassword()
     {
 
