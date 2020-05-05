@@ -14,6 +14,7 @@ html {
 
 body {
     margin: 0;
+    background-image: url(/img/why_bg.png);
 }
 
 article,
@@ -9816,13 +9817,10 @@ button.close {
     z-index: 2;
     -webkit-transition: height 0.2s;
     transition: height 0.2s;
-    background-image: url("/img/header-texture.png"),
-        -webkit-gradient(linear, left top, left bottom, from(rgba(79, 3, 86, 0.7)), to(rgba(38, 8, 64, 0.7)));
-    background-image: url("/img/header-texture.png"),
-        linear-gradient(180deg, rgba(79, 3, 86, 0.7), rgba(38, 8, 64, 0.7));
-    -webkit-box-shadow: inset 0 -1px 0 0 rgba(9, 1, 21, 0.7),
+    background-color: rgba(8, 62, 15, 0.7);
+    -webkit-box-shadow: inset 0 -1px 0 0 rgba(33, 62, 8, .7),
         0 1px 0 0 hsla(0, 0%, 100%, 0.15);
-    box-shadow: inset 0 -1px 0 0 rgba(9, 1, 21, 0.7),
+    box-shadow: inset 0 -1px 0 0 rgba(33, 62, 8, .7),
         0 1px 0 0 hsla(0, 0%, 100%, 0.15);
 }
 
@@ -9871,6 +9869,18 @@ button.close {
     height: 30px;
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
+}
+.logo-wrapper a{
+    text-align: left;
+    display: block;
+    color: #ffd700;
+    line-height: 39px;
+    font-size: 30px;
+    font-family: Arial;
+    font-weight: 700;
+}
+.header_fixed .logo-wrapper a{
+    line-height: 1em;
 }
 
 @media (max-width: 499px) {

@@ -1,7 +1,7 @@
 @include('goldenmines.layouts.head')
 
 @if(Auth::guest())
-<body data-user-id="0" data-user-balance="0">
+<body data-user-id="0" data-user-balance="0" @yield('body_bg')>
 @else
 <body data-user-id="{{Auth::user()->id}}" data-user-balance="@if(Auth::user()->deposit == 0 && Auth::user()->money == 0) {{Auth::user()->bonus_money}} @else {{Auth::user()->money}} @endif">
 @endif

@@ -3,12 +3,15 @@
 {{ __('Cases with money') }}
 @stop
 
+@section ('body_bg')
+style="background:none;"
+@stop
 
 @section ('index')
 nav-line__link_active
 @stop
 @section ('content')
-<div class="content" style="top:-256px;margin-bottom: -256px;">
+<div class="content" style="top:-256px;margin-bottom: -256px;background:none;">
     <section class="slide c-parallax">
         <div style="background-image:url(/img/slide/header__mob.png)" class="slide__picture c-parallax__picture">
         </div>

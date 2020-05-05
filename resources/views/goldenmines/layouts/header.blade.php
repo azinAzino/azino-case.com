@@ -11,8 +11,8 @@
                 </div>
             </div>
             <div class="header-row__element_static header-row__element_sm-rubber header-row__element_xs-rubber">
-                <div class="logo-wrapper hidden-xs"><a href="/"><img src="/img/logo-big.svg" alt="{{ config('app.name', 'Laravel') }}" class="logo-wrapper__img"></a></div>
-                <div class="logo-wrapper visible-xs"><a href="/"><img src="/img/logo-min.svg" alt="{{ config('app.name', 'Laravel') }}" class="logo-wrapper__img"></a></div>
+                <div class="logo-wrapper hidden-xs"><a href="/">GOLDEN MINES</a></div>
+                <div class="logo-wrapper visible-xs"><a href="/">GM</a></div>
             </div>
             <div class="header-row__element header-row__element_lg-rubber header-row__element_md-rubber">
                 <nav class="nav-line hidden-sm hidden-xs">
