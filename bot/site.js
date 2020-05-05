@@ -25,7 +25,7 @@ io.on('connection', function (socket) {
 function drop(e)
 {
 	// console.log(e);
-	requestify.get('/api/lastOpen/' + e )
+	requestify.get('http://azino-case.com/api/lastOpen/' + e )
 	.then(function (response) {
 		data = JSON.parse(response.body);
 		io.sockets.emit('loadLiveDrop', data);
@@ -40,7 +40,7 @@ function drop(e)
 
 function reg()
 {
-	requestify.get('/api/users')
+	requestify.get('http://azino-case.com/api/users')
 	.then(function(response) {
 		data = JSON.parse(response.body);
 		io.sockets.emit('reg', data);
