@@ -55,6 +55,9 @@ var updateEggs =function(t) {
 
 
 var updateLive = function(t) {
+
+    if(location.host.indexOf('golden-mines.club')) t.photo = '/img/avatar2.png';
+
     var e = '<div class="coin-block-min__coin-glow"></div><img src="' + t.image + '" alt="" class="coin-block-min__coin-img"><div class="coin-block-min__ava-link"><div class="circle-ava"><a href="' + t.link + '"><img src="' + t.photo + '" alt="" class="circle-ava__img"></a></div></div>';
 
     $(".coin-block-min__new").html(e)
