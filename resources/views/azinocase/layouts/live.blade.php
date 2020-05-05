@@ -13,7 +13,7 @@
 				$user = \DB::table('users')->where('id', $d->user)->first();
 				
 				$d->price = $item->cost;
-				$d->avatar = "/img/avatar".SITE_ID.".png";
+				$d->avatar = "/img/avatar1.png";
 			}
 		?>
         <div class="live-win__stat-wrapper">
