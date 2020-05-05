@@ -26,13 +26,13 @@ class TicketController extends Controller
 
     public function new()
     {
-        $tickets = Ticket::where('status', 'new')->where('manager_id', Auth::user()->id)->get();
-        return view('manager.tickets.tickets', compact('tickets'));
+        $tickets = Ticket::where('status', 'new')->get();
+        return view('admin.tickets.tickets', compact('tickets'));
     }
     public function in_process()
     {
-        $tickets = Ticket::where('status', 'in_process')->where('manager_id', Auth::user()->id)->get();
-        return view('manager.tickets.tickets', compact('tickets'));
+        $tickets = Ticket::where('status', 'in_process')->get();
+        return view('admin.tickets.tickets', compact('tickets'));
     }
     /**
      * Show the form for creating a new resource.
