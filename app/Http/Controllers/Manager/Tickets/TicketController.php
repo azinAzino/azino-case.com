@@ -30,7 +30,7 @@ class TicketController extends Controller
     }
     public function in_process()
     {
-        $tickets = Ticket::where('status', 'in_process')->where('manager_id', Auth::user()->id)->get();
+        $tickets = Ticket::where('status', 'read')->where('manager_id', Auth::user()->id)->get();
         return view('manager.tickets.tickets', compact('tickets'));
     }
 
