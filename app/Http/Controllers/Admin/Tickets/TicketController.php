@@ -31,7 +31,7 @@ class TicketController extends Controller
     }
     public function in_process()
     {
-        $tickets = Ticket::where('status', 'in_process')->get();
+        $tickets = Ticket::where('status', 'read')->get();
         return view('admin.tickets.tickets', compact('tickets'));
     }
     /**
