@@ -89,6 +89,7 @@ class TicketController extends Controller
                     }
                 }
             }
+            Ticket::where('id', '<', $ticket->id)->where('user_id', $ticket->user_id)->update(['status' => 'read']);
             $request->session()->flash('alert-success', __('Ticket sent!'));
         }
         return redirect()->back();
