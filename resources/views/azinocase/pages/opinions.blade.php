@@ -13,7 +13,7 @@ nav-line__link_active
 @section('content')
 <div class="content">
 	<?php
-	$settings = \DB::table('settings')->where('id', 1)->first();
+	$settings = \DB::table('settings')->where('id', SITE_ID)->first();
 	?>
 	<div class="container">
 		<div class="button-line"><a href="/" class="button-line__button button-rounding button-rounding_trans-big button-rounding_trans-hlight">{{ __('Back') }}

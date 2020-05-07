@@ -16,7 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <?php 
     global $settings;
-    $settings = DB::table('settings')->where('id', 1)->first();
+    $settings = DB::table('settings')->where('id', SITE_ID)->first();
     ?>
 	<script> var vk_group = '{{$settings->vk_group}}'; </script>
 </head>

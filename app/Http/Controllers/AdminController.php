@@ -546,13 +546,13 @@ class AdminController extends Controller
 
 	public function settings()
 	{
-		$settings = Settings::where('id', 1)->first();
+		$settings = Settings::where('id', SITE_ID)->first();
 		return view('admin.pages.settings', compact('settings'));
 	}
 
 	public function settings_save(Request $r)
 	{
-		Settings::where('id', 1)->update([
+		Settings::where('id', SITE_ID)->update([
 			'vk_group' => $r->get('vk_group'),
 			'vk_token' => $r->get('vk_token'),
 			'min_dep' => $r->get('min_dep'),
@@ -564,9 +564,8 @@ class AdminController extends Controller
 			'fk_secret2' => $r->get('fk_secret2'),
 			'pt_shopid' => $r->get('pt_shopid'),
 			'pt_secret' => $r->get('pt_secret'),
-			'piastrix_shop_id' => $r->get('piastrix_id'),
-			'piastrix_secret_key' => $r->get('fk_secret1'),
-			'piastrix_host' => $r->get('pt_shopid'),
+			'payeer_shopid' => $r->get('payeer_shopid'),
+			'payeer_secret' => $r->get('payeer_secret'),
 		]);
 
 		$r->session()->flash('alert-success', 'Настройки обновлены!');

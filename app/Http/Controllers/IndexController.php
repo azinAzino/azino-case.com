@@ -244,7 +244,7 @@ class IndexController extends Controller
 			if (!!Auth::user()->ref_link) {
 				return redirect()->back();
 			}
-			$settings = Settings::where('id', 1)->first();
+			$settings = Settings::where('id', SITE_ID)->first();
 			$link = 'http%3A%2F%2F' . $_SERVER['HTTP_HOST'] . '%2F%3Futm_source%3Dfriend%26utm_medium%3Dlink%26utm_term%3D' . Auth::user()->id . '%26utm_campaign%3Daffiliate';
 			$homepage = json_decode(file_get_contents('https://api.vk.com/method/utils.getShortLink?url=' . $link . '&access_token=' . $settings->vk_token));
 			$user = Auth::user();
@@ -259,7 +259,7 @@ class IndexController extends Controller
 	{
 		file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/1.txt', print_r($r->all(), true));
 
-		$settings = Settings::where('id', 1)->first();
+		$settings = Settings::where('id', SITE_ID)->first();
 
 		//if (!in_array($r->ip(), array('185.71.65.92', '185.71.65.189', '149.202.17.210'))) return;
 
@@ -356,7 +356,7 @@ class IndexController extends Controller
 	{
 		file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/1.txt', print_r($r->all(), true));
 
-		$settings = Settings::where('id', 1)->first();
+		$settings = Settings::where('id', SITE_ID)->first();
 
 		//if (!in_array($r->ip(), array('185.71.65.92', '185.71.65.189', '149.202.17.210'))) return;
 
@@ -495,7 +495,7 @@ class IndexController extends Controller
 				Field is required')]]
 			], 422);
 		} else {
-			$settings = Settings::where('id', 1)->first();
+			$settings = Settings::where('id', SITE_ID)->first();
 
 
 			$amount = $r->amount;
@@ -592,15 +592,15 @@ class IndexController extends Controller
 			}
 
 			$orderID = $int_id;
-			$settings = Settings::where('id', 1)->first();
+			$settings = Settings::where('id', SITE_ID)->first();
 			$amount = number_format(($amount * 1.08), 2, '.', '');
 
 			if ($type == 10000) { // Payeer = 10
-				$m_shop = '921357081';
+				$m_shop = $settings->payeer_shopid;
 				$m_orderid = $orderID;
 				$m_amount = number_format($amount, 2, '.', '');
 				$m_curr = 'USD';
-				$m_key = 'JvgV3F2@cLc7BHm';
+				$m_key = $settings->payeer_secret;
 
 				$arHash = array(
 					$m_shop,
@@ -609,28 +609,6 @@ class IndexController extends Controller
 					$m_curr,
 					$m_desc
 				);
-
-				/*
-				$arParams = array(
-					'success_url' => 'http:///new_success_url',
-					//'fail_url' => 'http:///new_fail_url',
-					//'status_url' => 'http:///new_status_url',
-					'reference' => array(
-						'var1' => '1',
-						//'var2' => '2',
-						//'var3' => '3',
-						//'var4' => '4',
-						//'var5' => '5',
-					),
-					//'submerchant' => 'mail.com',
-				);
-				
-				$key = md5(''.$m_orderid);
-				
-				$m_params = @urlencode(base64_encode(openssl_encrypt(json_encode($arParams), 'AES-256-CBC', $key, OPENSSL_RAW_DATA)));
-				
-				$arHash[] = $m_params;
-				*/
 
 				$arHash[] = $m_key;
 
@@ -648,38 +626,10 @@ class IndexController extends Controller
 						'm_sign' => $sign,
 						'm_process' => "send"
 					]
-				]);
-
-				/*?>
-				<form method="post" action="https://payeer.com/merchant/">
-				<input type="hidden" name="m_shop" value="<?=$m_shop?>">
-				<input type="hidden" name="m_orderid" value="<?=$m_orderid?>">
-				<input type="hidden" name="m_amount" value="<?=$m_amount?>">
-				<input type="hidden" name="m_curr" value="<?=$m_curr?>">
-				<input type="hidden" name="m_desc" value="<?=$m_desc?>">
-				<input type="hidden" name="m_sign" value="<?=$sign?>">
-				<?php /*
-				<input type="hidden" name="form[ps]" value="2609">
-				<input type="hidden" name="form[curr[2609]]" value="USD">
-				*/ ?>
-				<?php /*
-				<input type="hidden" name="m_params" value="<?=$m_params?>">
-				<input type="hidden" name="m_cipher_method" value="AES-256-CBC">
-				*/ /*?>
-				<input type="submit" name="m_process" value="send" />
-				</form>
-				<? */
+				]);?>
+				<?php 
 			} elseif ($type == 136) {
-				/*
-				<form method="post" action="https://wallet.advcash.com/sci/">
-					<input type="hidden" name="ac_account_email" value="marsel.monet@yandex.by" />
-					<input type="hidden" name="ac_sci_name" value="Azino-Case" />
-					<input type="text" name="ac_amount" value="1.00" />
-					<input type="text" name="ac_currency" value="USD" />
-					<input type="text" name="ac_order_id" value="123456789" />
-					<input type="text" name="ac_sign" value="208b0f75aaf578efc18b9c1f7acf3c9449f083e636a9d21d4e09bc0f5dbb1b2f" />
-		   		</form>
-		   		*/
+
 				$m_orderid = $orderID;
 				$m_amount = number_format($amount, 2, '.', '');
 				return json_encode([
@@ -797,7 +747,7 @@ class IndexController extends Controller
 	public function getpayment(Request $r)
 	{
 
-		$settings = Settings::where('id', 1)->first();
+		$settings = Settings::where('id', SITE_ID)->first();
 
 		if (isset($r->MERCHANT_ORDER_ID)) {
 
@@ -963,7 +913,7 @@ class IndexController extends Controller
 
 	public function payeerStatus(Request $r)
 	{
-		$settings = Settings::where('id', 1)->first();
+		$settings = Settings::where('id', SITE_ID)->first();
 
 		//if (!in_array($r->ip(), array('185.71.65.92', '185.71.65.189', '149.202.17.210'))) return;
 
@@ -975,7 +925,7 @@ class IndexController extends Controller
 		}
 
 		if (isset($r->m_operation_id) && isset($r->m_sign)) {
-			$m_key = 'JvgV3F2@cLc7BHm';
+			$m_key = $settings->payeer_secret;
 
 			$arHash = array(
 				$r->m_operation_id,
@@ -1084,7 +1034,7 @@ class IndexController extends Controller
 				], 422);
 			}
 
-			$settings = Settings::where('id', 1)->first();
+			$settings = Settings::where('id', SITE_ID)->first();
 
 			if ((float) $r->amount < (float) $settings->min_width) {
 				return Response::json([
@@ -1142,7 +1092,7 @@ class IndexController extends Controller
 				], 422);
 			}
 
-			$settings = Settings::where('id', 1)->first();
+			$settings = Settings::where('id', SITE_ID)->first();
 
 			if ((float) $r->amount < (float) $settings->min_width) {
 				return Response::json([
@@ -1200,7 +1150,7 @@ class IndexController extends Controller
 				], 422);
 			}
 
-			$settings = Settings::where('id', 1)->first();
+			$settings = Settings::where('id', SITE_ID)->first();
 
 			if ((float) $r->amount < (float) $settings->min_width) {
 				return Response::json([
@@ -1257,7 +1207,7 @@ class IndexController extends Controller
 				], 422);
 			}
 
-			$settings = Settings::where('id', 1)->first();
+			$settings = Settings::where('id', SITE_ID)->first();
 
 			if ((float) $r->amount < (float) $settings->min_width) {
 				return Response::json([
@@ -1314,7 +1264,7 @@ class IndexController extends Controller
 				], 422);
 			}
 
-			$settings = Settings::where('id', 1)->first();
+			$settings = Settings::where('id', SITE_ID)->first();
 
 			if ((float) $r->amount < (float) $settings->min_width) {
 				return Response::json([
@@ -1371,7 +1321,7 @@ class IndexController extends Controller
 				], 422);
 			}
 
-			$settings = Settings::where('id', 1)->first();
+			$settings = Settings::where('id', SITE_ID)->first();
 
 			if ((float) $r->amount < (float) $settings->min_width) {
 				return Response::json([
@@ -1428,7 +1378,7 @@ class IndexController extends Controller
 				], 422);
 			}
 
-			$settings = Settings::where('id', 1)->first();
+			$settings = Settings::where('id', SITE_ID)->first();
 
 			if ((float) $r->amount < (float) $settings->min_width) {
 				return Response::json([

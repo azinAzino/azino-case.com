@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="content">
-<?php  $settings = \DB::table('settings')->where('id', 1)->first(); 
+<?php  $settings = \DB::table('settings')->where('id', SITE_ID)->first(); 
 		$my_refs = \DB::table('users')->where('ref_user',$user->id)->count();
 		$zarabotal = \DB::table('operations')->where('ref_user',$user->id)->where('type', 0)->where('status', 1)->sum('amount');
 		if($zarabotal == '')

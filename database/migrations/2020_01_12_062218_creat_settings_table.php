@@ -25,7 +25,9 @@ class CreatSettingsTable extends Migration
             $table->integer('fk_secret1');
             $table->string('fk_secret2', 255);
             $table->string('pt_shopid', 255);
-            $table->integer('pt_secret');
+            $table->string('pt_secret', 255);
+            $table->string('payeer_shopid', 255);
+            $table->string('payeer_secret', 255);
             $table->timestamps();
         });
     }

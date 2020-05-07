@@ -14,7 +14,7 @@ class LoginController extends Controller
 {
     public function vklogin(Request $r)
     {
-		$settings = Settings::where('id', 1)->first();
+		$settings = Settings::where('id', SITE_ID)->first();
         $client_id = '5771677';
         $client_secret = 'OG54RLqYjZms27ZsDajS';
         $redirect_uri = 'azino-case.com';
