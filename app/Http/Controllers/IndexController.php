@@ -595,7 +595,7 @@ class IndexController extends Controller
 			$settings = Settings::where('id', SITE_ID)->first();
 			$amount = number_format(($amount * 1.08), 2, '.', '');
 
-			if ($type == 10000) { // Payeer = 10
+			if ($type == 10) { // Payeer = 10
 				$m_shop = $settings->payeer_shopid;
 				$m_orderid = $orderID;
 				$m_amount = number_format($amount, 2, '.', '');
