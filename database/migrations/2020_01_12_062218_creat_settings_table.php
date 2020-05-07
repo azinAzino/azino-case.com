@@ -28,6 +28,7 @@ class CreatSettingsTable extends Migration
             $table->string('pt_secret', 255);
             $table->string('payeer_shopid', 255);
             $table->string('payeer_secret', 255);
+            $table->text('created_text');
             $table->timestamps();
         });
     }

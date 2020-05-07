@@ -3,12 +3,14 @@
 	<h4 class="modal-title">{{ trans('User Created') }}</h4>
 </div>
 <div class="modal-body">
-    Зарегистрировал Вам кабинет<br />
-    Сайт, где Вы будете работать: http://golden-mines.club/ <br/>
-	{{ trans('Логин') }}: {{ Session::get('created_name') }}<br/>
-	{{ trans('Пароль') }}: {{ Session::get('created_password') }}<br/>
-	{{ trans('Пополнил вам баланс на') }}: {{ Session::get('created_money') }}<br/>
+    <p>Зарегистрировал Вам кабинет</p>
+    <p>Сайт, где Вы будете работать: {{ $settings->url }} </p>
+	<p>{{ trans('Логин') }}: {{ Session::get('created_name') }}</p>
+	<p>{{ trans('Пароль') }}: {{ Session::get('created_password') }}</p>
+	<p>{{ trans('Пополнил вам баланс на') }}: {{ Session::get('created_money') }}</p>
+	<p>{!! nl2br($settings->created_text) !!}</p>
 </div>
 <div class="modal-footer">
 </div>
 </form>
+

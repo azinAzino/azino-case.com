@@ -215,6 +215,14 @@
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label class="control-label">Текст после создания пользователя</label>
+									<textarea class="form-control" rows="10" name="created_text" placeholder="">{{ $settings->created_text }}</textarea>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="form-actions right">
 						<button type="submit" class="btn blue"><i class="fa fa-check"></i> Сохранить </button>

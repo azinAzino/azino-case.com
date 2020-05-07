@@ -6,6 +6,7 @@ use App\User;
 use App\Cards;
 use App\Items;
 use App\Withdraw;
+use App\Site;
 use App\Promo;
 use App\Support;
 use Carbon\Carbon;
@@ -124,6 +125,8 @@ class AdminController extends Controller
 	public function users()
 	{
 		$users = User::get();
+		$settings = Settings::where('id', SITE_ID)->first();
+		$site = Site::where('id', SITE_ID)->first();
 		$managers = User::whereIn('role', [10, 11])->get();
 		foreach ($users as $user) {
 			$user->payed = DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
@@ -133,26 +136,30 @@ class AdminController extends Controller
 			if ($user->with == null) $user->with = 0;
 			if ($user->with0 == null) $user->with0 = 0;
 		}
-		return view('admin.pages.users', compact('users', 'managers'));
+		return view('admin.pages.users', compact('users', 'managers', 'settings', 'site'));
 	}
 
 	public function create_user()
 	{
+		$settings = Settings::where('id', SITE_ID)->first();
+		$site = Site::where('id', SITE_ID)->first();
 		$managers = User::whereIn('role', [10, 11])->get();
-		return view('admin.includes.modal_users_create', compact('managers'));
+		return view('admin.includes.modal_users_create', compact('managers', 'settings', 'site'));
 	}
 
 	public function edit_user($id)
 	{
 		$user = User::findOrFail($id);
 		$managers = User::whereIn('role', [10, 11])->get();
+		$settings = Settings::where('id', SITE_ID)->first();
+		$site = Site::where('id', SITE_ID)->first();
 		$user->payed = DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
 		$user->with =  DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 1)->sum('amount');
 		$user->with0 = DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 0)->sum('amount');
 		if ($user->payed == null) $user->payed = 0;
 		if ($user->with == null) $user->with = 0;
 		if ($user->with0 == null) $user->with0 = 0;
-		return view('admin.includes.modal_users', compact('managers', 'user'));
+		return view('admin.includes.modal_users', compact('managers', 'user', 'settings', 'site'));
 	}
 
 	public function replenish_user($id)
@@ -566,6 +573,7 @@ class AdminController extends Controller
 			'pt_secret' => $r->get('pt_secret'),
 			'payeer_shopid' => $r->get('payeer_shopid'),
 			'payeer_secret' => $r->get('payeer_secret'),
+			'created_text' => $r->get('created_text'),
 		]);
 
 		$r->session()->flash('alert-success', 'Настройки обновлены!');

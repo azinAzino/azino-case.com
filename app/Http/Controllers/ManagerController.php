@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Settings;
 use App\Operation;
 use App\Reviews;
+use App\Site;
 use App\Games;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -124,6 +125,8 @@ class ManagerController extends Controller
 	//manager
 	public function users()
 	{
+		$settings = Settings::where('id', SITE_ID)->first();
+		$site = Site::where('id', SITE_ID)->first();
 		$users = User::where('manager_id', Auth::user()->id)->get();
 		foreach ($users as $user) {
 			$user->payed = DB::table('operations')->where('operations.user', $user->id)->where('operations.type', 0)->where('status', 1)->sum('operations.amount');
@@ -133,13 +136,15 @@ class ManagerController extends Controller
 			if ($user->with == null) $user->with = 0;
 			if ($user->with0 == null) $user->with0 = 0;
 		}
-		return view('manager.pages.users', compact('users'));
+		return view('manager.pages.users', compact('users', 'settings', 'site'));
 	}
 
 	//manager
 	public function create_user()
 	{
-		return view('manager.includes.modal_users_create');
+		$settings = Settings::where('id', SITE_ID)->first();
+		$site = Site::where('id', SITE_ID)->first();
+		return view('manager.includes.modal_users_create', compact('settings', 'site'));
 	}
 
 	//manager
