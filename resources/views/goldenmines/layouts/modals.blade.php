@@ -52,7 +52,7 @@
     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper" data-currency="136"
         data-provider="3" style="background-image:url(/img/system/advcash_i.png)">
     </div>
-    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper" data-currency="115"
+    <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper" data-currency="10"
         data-provider="3" style="background-image:url(/img/system/payeer_i.png)">
     </div>
     <div class="modal-window__img-wrapper_main modal-window__img-wrapper pay-system__img-wrapper" data-currency="64"
