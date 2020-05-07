@@ -588,7 +588,8 @@ class IndexController extends Controller
 					'ref_user' => Auth::user()->ref_user,
 					'timestamp' => Carbon::now()
 				]);
-				$m_desc = base64_encode(__('Refill balance on azino-case.com'));
+				$site = Site::find(SITE_ID);
+				$m_desc = base64_encode(__('Пополнение баланса на ' . $site->url));
 			}
 
 			$orderID = $int_id;
