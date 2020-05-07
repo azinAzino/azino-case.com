@@ -10529,8 +10529,8 @@ button.close {
 }
 
 .modal-window__img-wrapper_select {
-    border: 2px solid #ffa401;
-    background-color: transparent;
+    border: 2px solid #ffa401 !important;
+    background-color: transparent !important;
 }
 
 .modal-window__user-ava {
