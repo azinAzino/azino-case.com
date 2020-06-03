@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\RedirectResponse;
 
-class ManagerAccess
+class AdministratorAccess
 {
     protected $auth;
 
@@ -19,7 +19,7 @@ class ManagerAccess
     {
         if ($this->auth->check())
         {
-            if ($this->auth->user()->role == 11 || $this->auth->user()->role == 10)
+            if ($this->auth->user()->role == 12 || $this->auth->user()->role == 10)
             {
                 return $next($request);
             }

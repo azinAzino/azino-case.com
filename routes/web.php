@@ -181,6 +181,35 @@ Route::group(['middleware' => 'auth', 'middleware' => 'admin.access'], function 
 /*adminka*/
 
 
+/*administrator*/
+Route::group(['middleware' => 'auth', 'middleware' => 'administrator.access'], function () {
+	Route::get('/administrator', ['as' => 'admin', 'uses' => 'AdministratorController@index']);
+	/* Players */
+	Route::get('/administrator/users', ['as' => 'users', 'uses' => 'AdministratorController@users']);
+	Route::get('/administrator/user/create', ['as' => 'user.create', 'uses' => 'AdministratorController@create_user']);
+	Route::post('/administrator/user/create', ['as' => 'user.save', 'uses' => 'AdministratorController@user_save']);
+	Route::post('/administrator/user/save', ['as' => 'user.save', 'uses' => 'AdministratorController@user_save']);
+	Route::post('/administrator/user/save', ['as' => 'user.save', 'uses' => 'AdministratorController@user_save']);
+	Route::post('/administrator/user/balance_replenish', ['as' => 'user.balance_replenish', 'uses' => 'AdministratorController@user_balance_replenish']);
+	Route::post('/administrator/user/balance_reduce', ['as' => 'user.balance_reduce', 'uses' => 'AdministratorController@user_balance_reduce']);
+
+	Route::get('/administrator/user/{id}/edit', ['as' => 'user.edit', 'uses' => 'AdministratorController@edit_user']);
+	Route::get('/administrator/user/{id}/replenish', ['as' => 'user.edit', 'uses' => 'AdministratorController@replenish_user']);
+	Route::get('/administrator/user/{id}/takeaway', ['as' => 'user.edit', 'uses' => 'AdministratorController@takeaway_user']);
+	Route::get('/administrator/user/{id}/ban', 'AdministratorController@ban_user');
+	/* Withdraw */
+	Route::get('/administrator/withdraw', ['as' => 'withdraw', 'uses' => 'AdministratorController@withdraw']);
+	Route::post('/administrator/withdraw/save', ['as' => 'withdraw.save', 'uses' => 'AdministratorController@withdraw_save']);
+	Route::get('/administrator/withdraw/{id}/edit', ['as' => 'withdraw.edit', 'uses' => 'AdministratorController@edit_withdraw']);
+	/*Payments*/
+	Route::get('/administrator/payments', 'AdministratorController@payments');
+
+
+	Route::post('/administrator/users/get', 'AdministratorController@usersSearch');
+});
+/*administrator*/
+
+
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/logout', 'LoginController@logout')->name('logout');
 });

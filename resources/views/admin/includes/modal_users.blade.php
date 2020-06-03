@@ -41,6 +41,7 @@
 					<label class="control-label">{{ trans('Role') }}</label>
 					<select class="form-control" tabindex="1" name="role" value="{{ $user->role }}">
 						<option value="10" @if($user->role == 10) selected @endif>{{ trans('Admin') }}</option>
+						<option value="12" @if($user->role == 12) selected @endif>{{ trans('Administrator') }}</option>
 						<option value="11" @if($user->role == 11) selected @endif>{{ trans('Manager') }}</option>
 						<option value="1" @if($user->role == 1) selected @endif>{{ trans('User') }}</option>
 					</select>
