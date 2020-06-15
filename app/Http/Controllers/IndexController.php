@@ -6,16 +6,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-
 use App\Cards;
 use App\Items;
 use App\Games;
@@ -125,7 +121,7 @@ class IndexController extends Controller
 
 		$user->save();
 
-		if (!in_array((int)str_replace("egg", "", $r->number), $lukkyArray)) {
+		if (!in_array((int) str_replace("egg", "", $r->number), $lukkyArray)) {
 			$chance = 0;
 		}
 
@@ -256,6 +252,50 @@ class IndexController extends Controller
 		}
 	}
 
+	private function getPaymentMoney($payment)
+	{
+		$settings = Settings::where('id', SITE_ID)->first();
+		$opration = DB::table('operations')->where('id', $payment->id)->first();
+		if ($opration->operation) {
+			$opration1 = DB::table('operations')->where('id', $opration->operation)->first();
+			if (!empty($opration1))
+				if ($opration->is_tax)
+					DB::table('operations')->where('id', $opration->operation)->update(['tax' => 1]);
+				elseif ($opration->is_swift)
+					DB::table('operations')->where('id', $opration->operation)->update(['swift' => 1]);
+		} else {
+			$user = User::where('id', $payment->user)->first();
+			$user->money = $user->money + $payment->amount;
+			$user->save();
+			$te = User::where('id', $user->ref_user)->first();
+			if (!empty($te)) {
+				$bon = ($settings->ref_percent / 100) * $payment->amount;
+				$te->money =   $te->money + $bon;
+				$te->save();
+				$int_id =  DB::table('operations')->insertGetId([
+					'amount' => $bon,
+					'user' => $te->id,
+					'type' => 3, // ТИП - Партнер
+					'status' => 1,
+					'timestamp' => Carbon::now()
+				]);
+			}
+			if (!$user->deposit) {
+				$user->money = $user->money + $payment->amount;
+				$int_id =  DB::table('operations')->insertGetId([
+					'amount' => $payment->amount,
+					'user' => $user->id,
+					'type' => 2, // ТИП - Бонус
+					'status' => 1,
+					'timestamp' => Carbon::now()
+				]);
+			}
+			$user->deposit = $user->deposit + $payment->amount;
+			$user->save();
+		}
+		DB::table('operations')->where('id', $payment->id)->update(['status' => 1]);
+		return true;
+	}
 
 	public function advStatus(Request $r)
 	{
@@ -286,77 +326,15 @@ class IndexController extends Controller
 
 		$hash = strtoupper(md5($string));
 
-		if ($hash == $r->post('ac_hash') && (float) $r->post('ac_amount') >= (float) $payment->amount) {
+		if ($hash == $r->post('ac_hash') && (float) $r->post('ac_amount') >= (float) $payment->amount)
 
-			$opration = DB::table('operations')->where('id', $payment->id)->first();
+			if ($this->getPaymentMoney($payment)) return $r->m_orderid . '|success';
 
-			if ($opration->operation) {
-
-				$opration1 = DB::table('operations')->where('id', $opration->operation)->first();
-
-				if ($opration1) {
-
-					if ($opration->is_tax) {
-
-						DB::table('operations')->where('id', $opration->operation)->update(['tax' => 1]);
-					} elseif ($opration->is_swift) {
-
-						DB::table('operations')->where('id', $opration->operation)->update(['swift' => 1]);
-					}
-				}
-			} else {
-
-				$user = User::where('id', $payment->user)->first();
-				$user->money = $user->money + $payment->amount;
-				$user->save();
-
-				$te = User::where('id', $user->ref_user)->first();
-				if (!empty($te)) {
-					$bon = ($settings->ref_percent / 100) * $payment->amount;
-					$te->money =   $te->money + $bon;
-					$te->save();
-					$int_id =  DB::table('operations')->insertGetId([
-						'amount' => $bon,
-						'user' => $te->id,
-						'type' => 3, // ТИП - Партнер
-						'status' => 1,
-						'timestamp' => Carbon::now()
-					]);
-				}
-
-				if (!$user->deposit) {
-
-					$user->money = $user->money + $payment->amount;
-
-					$int_id =  DB::table('operations')->insertGetId([
-
-						'amount' => $payment->amount,
-						'user' => $user->id,
-						'type' => 2, // ТИП - Бонус
-						'status' => 1,
-						'timestamp' => Carbon::now()
-
-					]);
-				}
-				$user->deposit = $user->deposit + $payment->amount;
-				$user->save();
-			}
-
-			DB::table('operations')
-				->where('id', $payment->id)
-				->update(['status' => 1]);
-
-			//return redirect('/');
-			return $r->m_orderid . '|success';
-		} else {
-			//return redirect('/');
-			return $r->m_orderid . '|error';
-		}
+		return $r->m_orderid . '|error';
 	}
 
 	public function pmStatus(Request $r)
 	{
-		file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/1.txt', print_r($r->all(), true));
 
 		$settings = Settings::where('id', SITE_ID)->first();
 
@@ -378,72 +356,11 @@ class IndexController extends Controller
 
 		$hash = strtoupper(md5($string));
 
-		if ($hash == $r->post('V2_HASH') && (float) $r->post('PAYMENT_AMOUNT') >= (float) $payment->amount) {
+		if ($hash == $r->post('V2_HASH') && (float) $r->post('PAYMENT_AMOUNT') >= (float) $payment->amount)
 
-			$opration = DB::table('operations')->where('id', $payment->id)->first();
+			if ($this->getPaymentMoney($payment)) return 'success';
 
-			if ($opration->operation) {
-
-				$opration1 = DB::table('operations')->where('id', $opration->operation)->first();
-
-				if ($opration1) {
-
-					if ($opration->is_tax) {
-
-						DB::table('operations')->where('id', $opration->operation)->update(['tax' => 1]);
-					} elseif ($opration->is_swift) {
-
-						DB::table('operations')->where('id', $opration->operation)->update(['swift' => 1]);
-					}
-				}
-			} else {
-
-				$user = User::where('id', $payment->user)->first();
-				$user->money = $user->money + $payment->amount;
-				$user->save();
-
-				$te = User::where('id', $user->ref_user)->first();
-				if (!empty($te)) {
-					$bon = ($settings->ref_percent / 100) * $payment->amount;
-					$te->money =   $te->money + $bon;
-					$te->save();
-					$int_id =  DB::table('operations')->insertGetId([
-						'amount' => $bon,
-						'user' => $te->id,
-						'type' => 3, // ТИП - Партнер
-						'status' => 1,
-						'timestamp' => Carbon::now()
-					]);
-				}
-
-				if (!$user->deposit) {
-
-					$user->money = $user->money + $payment->amount;
-
-					$int_id =  DB::table('operations')->insertGetId([
-
-						'amount' => $payment->amount,
-						'user' => $user->id,
-						'type' => 2, // ТИП - Бонус
-						'status' => 1,
-						'timestamp' => Carbon::now()
-
-					]);
-				}
-				$user->deposit = $user->deposit + $payment->amount;
-				$user->save();
-			}
-
-			DB::table('operations')
-				->where('id', $payment->id)
-				->update(['status' => 1]);
-
-			//return redirect('/');
-			return $r->m_orderid . '|success';
-		} else {
-			//return redirect('/');
-			return $r->m_orderid . '|error';
-		}
+		return 'error';
 	}
 
 	public function profile_finance()
@@ -629,8 +546,8 @@ class IndexController extends Controller
 						'm_sign' => $sign,
 						'm_process' => "send"
 					]
-				]);?>
-				<?php 
+				]); ?>
+				<?php
 			} elseif ($type == 136) {
 
 				$m_orderid = $orderID;
@@ -651,19 +568,20 @@ class IndexController extends Controller
 
 				$m_orderid = $orderID;
 				$m_amount = number_format($amount, 2, '.', '');
+				$url = $this->site->url;
 				return json_encode([
 					'method' => "post",
 					'url' => "https://perfectmoney.is/api/step1.asp",
 					'hiddens' => [
 						'PAYEE_ACCOUNT' => "U11077229",
-						'PAYEE_NAME' => "azino-case.com",
+						'PAYEE_NAME' => $this->site->url,
 						'PAYMENT_ID' => $m_orderid,
 						'PAYMENT_AMOUNT' => $m_amount,
 						'PAYMENT_UNITS' => "USD",
-						"STATUS_URL" => "http://azino-case.com/statuspm",
-						"PAYMENT_URL" => "http://azino-case.com",
+						"STATUS_URL" => $this->site->url . "/statuspm",
+						"PAYMENT_URL" => $this->site->url,
 						"PAYMENT_URL_METHOD" => "GET",
-						"NOPAYMENT_URL" => "http://azino-case.com",
+						"NOPAYMENT_URL" => $this->site->url,
 						"NOPAYMENT_URL_METHOD" => "GET",
 						"SUGGESTED_MEMO" => "",
 						"BAGGAGE_FIELDS" => "",
@@ -753,11 +671,8 @@ class IndexController extends Controller
 		$settings = Settings::where('id', SITE_ID)->first();
 
 		if (isset($r->MERCHANT_ORDER_ID)) {
-
 			$sign = md5($settings->fk_id . ':' . $r->AMOUNT . ':' . $settings->fk_secret2 . ':' . $r->MERCHANT_ORDER_ID);
-
 			$payment = DB::table('operations')->where('id', $r->MERCHANT_ORDER_ID)->first();
-
 			if (empty($payment)) {
 				return "err[#1]";
 			} else {
@@ -771,65 +686,11 @@ class IndexController extends Controller
 						if ($payment->type != 0) {
 							return "err[#4]";
 						}
-
-						$opration = DB::table('operations')->where('id', $payment->id)->first();
-
-						if ($opration->operation) {
-
-							$opration1 = DB::table('operations')->where('id', $opration->operation)->first();
-
-							if (!empty($opration1)) {
-
-								if ($opration->is_tax) {
-
-									DB::table('operations')->where('id', $opration->operation)->update(['tax' => 1]);
-								} elseif ($opration->is_swift) {
-
-									DB::table('operations')->where('id', $opration->operation)->update(['swift' => 1]);
-								}
-							}
-						} else {
-
-							$user = User::where('id', $payment->user)->first();
-							$user->money = $user->money + $payment->amount;
-							$user->save();
-							$te = User::where('id', $user->ref_user)->first();
-							if (!empty($te)) {
-								$bon = ($settings->ref_percent / 100) * $payment->amount;
-								$te->money =   $te->money + $bon;
-								$te->save();
-								$int_id =  DB::table('operations')->insertGetId([
-									'amount' => $bon,
-									'user' => $te->id,
-									'type' => 3, // ТИП - Партнер
-									'status' => 1,
-									'timestamp' => Carbon::now()
-								]);
-							}
-
-							if (!$user->deposit) {
-
-								$user->money = $user->money + $payment->amount;
-
-								$int_id =  DB::table('operations')->insertGetId([
-
-									'amount' => $payment->amount,
-									'user' => $user->id,
-									'type' => 2, // ТИП - Бонус
-									'status' => 1,
-									'timestamp' => Carbon::now()
-
-								]);
-							}
-							$user->deposit = $user->deposit + $payment->amount;
-							$user->save();
-						}
-
-						DB::table('operations')->where('id', $payment->id)->update(['status' => 1]);
-						return 'YES';
+						if ($this->getPaymentMoney($payment)) return 'YES';
 					}
 				}
 			}
+			return 'err#4';
 		} elseif (isset($r->shop_invoice_id)) {
 			$payment =   DB::table('operations')->where('id', $r->shop_invoice_id)->first();
 			if (empty($payment)) {
@@ -841,69 +702,13 @@ class IndexController extends Controller
 					if ($payment->amount != $r->client_price) {
 						return "err#3";
 					} else {
-						if ($payment->type != 0) {
+						if ($payment->type != 0)
 							return "err#4";
-						}
-
-						$opration = DB::table('operations')->where('id', $payment->id)->first();
-
-						if ($opration->operation) {
-
-							$opration1 = DB::table('operations')->where('id', $opration->operation)->first();
-
-							if ($opration1) {
-
-								if ($opration->is_tax) {
-
-									DB::table('operations')->where('id', $opration->operation)->update(['tax' => 1]);
-								} elseif ($opration->is_swift) {
-
-									DB::table('operations')->where('id', $opration->operation)->update(['swift' => 1]);
-								}
-							}
-						} else {
-
-							$user = User::where('id', $payment->user)->first();
-							$user->money = $user->money + $payment->amount;
-							$user->save();
-
-							$te = User::where('id', $user->ref_user)->first();
-							if (!empty($te)) {
-								$bon = ($settings->ref_percent / 100) * $payment->amount;
-								$int_id =  DB::table('operations')->insertGetId([
-									'amount' => $bon,
-									'user' => $te->id,
-									'type' => 3, // ТИП - Партнер
-									'status' => 1,
-									'timestamp' => Carbon::now()
-								]);
-								$te->money =   $te->money + $bon;
-								$te->save();
-							}
-
-							if (!$user->deposit) {
-
-								$user->money = $user->money + $payment->amount;
-
-								$int_id =  DB::table('operations')->insertGetId([
-
-									'amount' => $payment->amount,
-									'user' => $user->id,
-									'type' => 2, // ТИП - Бонус
-									'status' => 1,
-									'timestamp' => Carbon::now()
-
-								]);
-							}
-							$user->deposit = $user->deposit + $payment->amount;
-							$user->save();
-						}
-
-						DB::table('operations')->where('id', $payment->id)->update(['status' => 1]);
-						return 'OK';
+						if ($this->getPaymentMoney($payment)) return 'OK';
 					}
 				}
 			}
+			return 'err#4';
 		}
 	}
 	public function pavailable()
