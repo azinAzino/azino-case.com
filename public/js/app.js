@@ -307,7 +307,7 @@ this.cellWin=a()(this.elClass.cellWin),a()(this.elClass.eggWin).attr("src",this.
 /***/ (function(module, exports) {
 
 window.onload = function () {
-  socket = io.connect('http://azino-case.com:3000', {
+  socket = io.connect('http://goldenmines.online:3000', {
     rememberTransport: false
   });
   socket.on('loadLiveDrop', function (t) {

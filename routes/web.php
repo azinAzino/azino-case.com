@@ -68,8 +68,13 @@ Auth::routes();
 Route::any('/checkpayment', 'IndexController@getpayment')->name('checkpayment');
 
 Route::get('/fail', 'IndexController@success')->name('fail');
+
+
 Route::post('/payeer/status', 'IndexController@payeerStatus')->name('payeer-status-post');
-Route::get('/payeer/status', 'IndexController@payeerStatus')->name('payeer-status-get');
+Route::get('/payeer/fail', 'IndexController@success')->name('payeer-status-get');
+Route::get('/payeer/success', 'IndexController@success')->name('payeer-status-get');
+
+
 Route::any('/statuspm', 'IndexController@pmStatus')->name('pm-status');
 Route::any('/statusadv', 'IndexController@advStatus')->name('padvm-status');
 

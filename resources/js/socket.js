@@ -1,6 +1,6 @@
 window.onload = function() {
 
-    socket = io.connect('http://azino-case.com:3000', {rememberTransport: false});
+    socket = io.connect('http://goldenmines.online:3000', {rememberTransport: false});
     
     socket.on('loadLiveDrop', function(t){
         var userId = $("body").attr("data-user-id");

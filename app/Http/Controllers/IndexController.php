@@ -460,7 +460,7 @@ class IndexController extends Controller
 							->where('is_swift', 1)
 							->where('status', 0)
 							->delete();
-						$m_desc = base64_encode(__('Pay swift on azino-case.com'));
+						$m_desc = base64_encode(__('Pay swift on goldenmines.online'));
 						$insData['is_swift'] = 1;
 						$int_id =  DB::table('operations')->insertGetId($insData);
 						break;
@@ -470,7 +470,7 @@ class IndexController extends Controller
 							->where('is_swift', 1)
 							->where('status', 0)
 							->delete();
-						$m_desc = base64_encode(__('Pay swift on azino-case.com'));
+						$m_desc = base64_encode(__('Pay swift on goldenmines.online'));
 						$insData['is_swift'] = 1;
 						$int_id =  DB::table('operations')->insertGetId($insData);
 						break;
@@ -480,7 +480,7 @@ class IndexController extends Controller
 							->where('is_tax', 1)
 							->where('status', 0)
 							->delete();
-						$m_desc = base64_encode(__('Pay tax on azino-case.com'));
+						$m_desc = base64_encode(__('Pay tax on goldenmines.online'));
 						$insData['is_tax'] = 1;
 						$amount = round($ops->amount * .13, 2);
 						$int_id =  DB::table('operations')->insertGetId($insData);
@@ -515,7 +515,7 @@ class IndexController extends Controller
 			$settings = Settings::where('id', SITE_ID)->first();
 			$amount = number_format(($amount * 1.08), 2, '.', '');
 
-			if ($type == 10000) { // Payeer = 10
+			if ($type == 10) { // Payeer = 10
 				$m_shop = $settings->payeer_shopid;
 				$m_orderid = $orderID;
 				$m_amount = number_format($amount, 2, '.', '');

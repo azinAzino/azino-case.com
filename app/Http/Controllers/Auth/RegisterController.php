@@ -106,7 +106,7 @@ class RegisterController extends Controller
     public function registered(Request $request, $user)
     {
 
-        Mail::to($user)->send(new UserRegistered($user));
+        //Mail::to($user)->send(new UserRegistered($user, $this->folder));
 
         return response()->json([
             'redirectTo' => '/'

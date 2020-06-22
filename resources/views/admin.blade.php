@@ -155,7 +155,7 @@
                                 <span class="title">Отзывы</span>
                             </a>
                         </li>
-                        {{-- <li class="nav-item  ">
+                        <li class="nav-item  ">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-equalizer"></i>
                                 <span class="title">Тикеты</span>
@@ -181,7 +181,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li> --}}
+                        </li>
                         <li class="nav-item  ">
                             <a href="/admin/clear" class="nav-link nav-toggle">
                                 <i class="fa fa-user-secret" aria-hidden="true"></i>
@@ -212,7 +212,7 @@
                                 </li>
                             </ul>
                         </li>
-                        {{-- <li class="nav-item  ">
+                        <li class="nav-item  ">
                             <a href="javascript:;" class="nav-link nav-toggle">
                                 <i class="icon-equalizer"></i>
                                 <span class="title">Управление тикетами</span>
@@ -232,7 +232,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li> --}}
+                        </li>
                     </ul>
                 </div>
             </div>

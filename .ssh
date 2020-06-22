@@ -1,0 +1,28 @@
+KKy9#&cnp7JZNyT6 (phpmyadmin password)
+AR5H+-#EY6SWyEjk (root mysql password)
+
+
+Логин: cj43651
+Пароль: bz7MLQosqmte
+Панель: https://vds.timeweb.ru/
+
+
+
+Авторизация пользователя
+https://vds.timeweb.ru
+Операционная система Ubuntu 20.04 успешно установлена на сервере 'Cute pheasant'.
+
+Управлять вашим VDS-сервером вы можете по протоколу SSH, используя следующие параметры подключения:
+
+IP сервера: 89.223.125.50
+Имя пользователя: root
+Пароль: aXQc8v7d
+
+ssh root@89.223.125.50
+riRn1coR
+cd /var/www/goldenmines.online
+chown -R www-data:www-data ./
+
+ftp
+goldenmines
+$S83PgTc
