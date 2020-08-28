@@ -25,7 +25,7 @@ io.on('connection', function (socket) {
 function drop(e)
 {
 	// console.log(e);
-	requestify.get('http://localhost/api/lastOpen/' + e )
+	requestify.get('http://goldenmin.ru/api/lastOpen/' + e )
 	.then(function (response) {
 		data = JSON.parse(response.body);
 		io.sockets.emit('loadLiveDrop', data);
@@ -40,7 +40,7 @@ function drop(e)
 
 function reg()
 {
-	requestify.get('http://localhost/api/users')
+	requestify.get('http://goldenmin.ru/api/users')
 	.then(function(response) {
 		data = JSON.parse(response.body);
 		io.sockets.emit('reg', data);
