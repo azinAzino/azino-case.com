@@ -49,6 +49,8 @@ services:
       MYSQL_ROOT_PASSWORD: Vf6FZp6hEDZAC
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
+      MYSQL_USER: laraveluser
+      MYSQL_PASSWORD: 4fvezC9unPSKM
     volumes:
       - dbdata:/var/lib/mysql/
       - ./mysql/my.cnf:/etc/mysql/my.cnf
