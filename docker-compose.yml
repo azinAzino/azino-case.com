@@ -1,6 +1,5 @@
-version: '3'
+version: "3"
 services:
-
   #PHP Service
   app:
     build:
@@ -56,6 +55,18 @@ services:
       - ./mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network
+
+  #phpmyadmin Service
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links: 
+      - mariadb:db
+    ports:
+      - 8765:80
+    environment:
+      MYSQL_ROOT_PASSWORD: Vf6FZp6hEDZAC
+    depends_on:
+      - mariadb
 
 #Docker Networks
 networks:
