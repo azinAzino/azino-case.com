@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Site;
+use Illuminate\Support\Facades\View;
 
 class Controller extends BaseController
 {
@@ -23,5 +24,6 @@ class Controller extends BaseController
         define('SITE_ID', $site->id);
 		$this->folder = $site->folder;
 		$this->site = $site;
+		View::share('site_settings', $site);
 	}
 }
