@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Хост: localhost:3306
--- Время создания: Июн 17 2020 г., 20:26
--- Версия сервера: 10.1.44-MariaDB-0+deb9u1
--- Версия PHP: 7.4.7
+-- Хост: mysql
+-- Время создания: Авг 28 2020 г., 15:48
+-- Версия сервера: 8.0.21
+-- Версия PHP: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -27,10 +28,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cards` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `cost` decimal(11,2) NOT NULL,
-  `chance` int(11) NOT NULL,
+  `chance` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -56,11 +57,11 @@ INSERT INTO `cards` (`id`, `name`, `cost`, `chance`, `created_at`, `updated_at`)
 --
 
 CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -71,11 +72,11 @@ CREATE TABLE `failed_jobs` (
 --
 
 CREATE TABLE `games` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user` int(11) NOT NULL,
-  `drop_item` int(11) NOT NULL,
-  `card` int(11) NOT NULL,
-  `general_game` int(11) NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user` int NOT NULL,
+  `drop_item` int NOT NULL,
+  `card` int NOT NULL,
+  `general_game` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -87,10 +88,10 @@ CREATE TABLE `games` (
 --
 
 CREATE TABLE `items` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `card` int(11) NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `card` int NOT NULL,
   `cost` float(11,2) NOT NULL,
-  `type` int(11) NOT NULL,
+  `type` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -204,9 +205,9 @@ INSERT INTO `items` (`id`, `card`, `cost`, `type`, `created_at`, `updated_at`) V
 --
 
 CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
+  `id` int UNSIGNED NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -250,15 +251,15 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `operations` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `amount` int(11) NOT NULL,
-  `user` int(11) NOT NULL,
-  `type` int(11) NOT NULL,
-  `status` int(11) NOT NULL,
-  `ref_user` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `amount` int NOT NULL,
+  `user` int NOT NULL,
+  `type` int NOT NULL,
+  `status` int NOT NULL,
+  `ref_user` int DEFAULT NULL,
   `timestamp` timestamp NULL DEFAULT NULL,
-  `koshelek` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nomer` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `koshelek` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nomer` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `swift` tinyint(1) NOT NULL DEFAULT '0',
@@ -266,7 +267,7 @@ CREATE TABLE `operations` (
   `is_swift` tinyint(1) NOT NULL DEFAULT '0',
   `is_tax` tinyint(1) NOT NULL DEFAULT '0',
   `is_fake` tinyint(1) NOT NULL DEFAULT '0',
-  `operation` bigint(20) NOT NULL DEFAULT '0'
+  `operation` bigint NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -276,8 +277,8 @@ CREATE TABLE `operations` (
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -288,13 +289,13 @@ CREATE TABLE `password_resets` (
 --
 
 CREATE TABLE `reviews` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_avatar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `opinion_link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `opinion_link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -306,12 +307,12 @@ CREATE TABLE `reviews` (
 --
 
 CREATE TABLE `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `payload` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_activity` int(11) NOT NULL
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `payload` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_activity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -321,21 +322,21 @@ CREATE TABLE `sessions` (
 --
 
 CREATE TABLE `settings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `min_dep` int(11) NOT NULL,
-  `min_width` int(11) NOT NULL,
-  `ref_percent` int(11) NOT NULL,
-  `vk_group` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `vk_token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payment_type` int(11) NOT NULL,
-  `fk_id` int(11) NOT NULL,
-  `fk_secret1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fk_secret2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pt_shopid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pt_secret` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payeer_shopid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `payeer_secret` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_text` text COLLATE utf8mb4_unicode_ci,
+  `id` bigint UNSIGNED NOT NULL,
+  `min_dep` int NOT NULL,
+  `min_width` int NOT NULL,
+  `ref_percent` int NOT NULL,
+  `vk_group` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vk_token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_type` int NOT NULL,
+  `fk_id` int NOT NULL,
+  `fk_secret1` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fk_secret2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pt_shopid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pt_secret` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payeer_shopid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payeer_secret` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -355,10 +356,10 @@ INSERT INTO `settings` (`id`, `min_dep`, `min_width`, `ref_percent`, `vk_group`,
 --
 
 CREATE TABLE `sites` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `folder` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int UNSIGNED NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `folder` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -368,7 +369,7 @@ CREATE TABLE `sites` (
 --
 
 INSERT INTO `sites` (`id`, `title`, `url`, `folder`, `created_at`, `updated_at`) VALUES
-(1, 'GoldenMines', 'http://goldenmines.online', 'goldenmines', NULL, NULL);
+(1, 'GoldenMines', 'http://goldenmin.ru', 'goldenmines', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -377,11 +378,11 @@ INSERT INTO `sites` (`id`, `title`, `url`, `folder`, `created_at`, `updated_at`)
 --
 
 CREATE TABLE `site_card_image` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `site_id` bigint(20) NOT NULL,
-  `card_id` bigint(20) NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `item_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `site_id` bigint NOT NULL,
+  `card_id` bigint NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `item_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -415,11 +416,11 @@ INSERT INTO `site_card_image` (`id`, `site_id`, `card_id`, `image`, `item_image`
 --
 
 CREATE TABLE `site_card_names` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `site_id` bigint(20) NOT NULL,
-  `card_id` bigint(20) NOT NULL,
-  `language_id` char(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `site_id` bigint NOT NULL,
+  `card_id` bigint NOT NULL,
+  `language_id` char(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -469,10 +470,10 @@ INSERT INTO `site_card_names` (`id`, `site_id`, `card_id`, `language_id`, `name`
 --
 
 CREATE TABLE `site_item_image` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `site_id` bigint(20) NOT NULL,
-  `item_id` bigint(20) NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `site_id` bigint NOT NULL,
+  `item_id` bigint NOT NULL,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -684,13 +685,13 @@ INSERT INTO `site_item_image` (`id`, `site_id`, `item_id`, `image`, `created_at`
 --
 
 CREATE TABLE `tickets` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  `manager_id` bigint(20) NOT NULL,
-  `IP` char(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `direction` enum('question','answer') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'question',
-  `status` enum('new','read') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'new',
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint NOT NULL,
+  `manager_id` bigint NOT NULL,
+  `IP` char(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `direction` enum('question','answer') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'question',
+  `status` enum('new','read') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'new',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -702,10 +703,10 @@ CREATE TABLE `tickets` (
 --
 
 CREATE TABLE `ticket_attachments` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `ticket_id` bigint(20) NOT NULL,
-  `file` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `filename` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `ticket_id` bigint NOT NULL,
+  `file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `filename` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -717,8 +718,8 @@ CREATE TABLE `ticket_attachments` (
 --
 
 CREATE TABLE `ticket_categories` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -730,10 +731,10 @@ CREATE TABLE `ticket_categories` (
 --
 
 CREATE TABLE `ticket_templates` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `ticket_category_id` bigint(20) NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `ticket_category_id` bigint NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -745,30 +746,30 @@ CREATE TABLE `ticket_templates` (
 --
 
 CREATE TABLE `users` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` smallint(5) UNSIGNED NOT NULL,
-  `manager_id` bigint(20) NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` smallint UNSIGNED NOT NULL,
+  `manager_id` bigint NOT NULL DEFAULT '1',
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `ticketit_admin` tinyint(1) NOT NULL DEFAULT '0',
   `ticketit_agent` tinyint(1) NOT NULL DEFAULT '0',
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `money` bigint(20) NOT NULL,
-  `login` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `login2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `is_yt` int(11) DEFAULT NULL,
-  `ref_user` int(11) DEFAULT NULL,
-  `profit` int(11) NOT NULL,
-  `opened` int(11) NOT NULL,
-  `ref_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'none',
-  `deposit` int(11) NOT NULL,
-  `bonus_money` int(11) NOT NULL DEFAULT '0'
+  `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `money` bigint NOT NULL,
+  `login` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `login2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_yt` int DEFAULT NULL,
+  `ref_user` int DEFAULT NULL,
+  `profit` int NOT NULL,
+  `opened` int NOT NULL,
+  `ref_link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'none',
+  `deposit` int NOT NULL,
+  `bonus_money` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -900,87 +901,105 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `cards`
 --
 ALTER TABLE `cards`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
 --
 -- AUTO_INCREMENT для таблицы `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `games`
 --
 ALTER TABLE `games`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+
 --
 -- AUTO_INCREMENT для таблицы `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
 --
 -- AUTO_INCREMENT для таблицы `operations`
 --
 ALTER TABLE `operations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT для таблицы `sites`
 --
 ALTER TABLE `sites`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT для таблицы `site_card_image`
 --
 ALTER TABLE `site_card_image`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
 --
 -- AUTO_INCREMENT для таблицы `site_card_names`
 --
 ALTER TABLE `site_card_names`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
 --
 -- AUTO_INCREMENT для таблицы `site_item_image`
 --
 ALTER TABLE `site_item_image`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=257;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=257;
+
 --
 -- AUTO_INCREMENT для таблицы `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `ticket_attachments`
 --
 ALTER TABLE `ticket_attachments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `ticket_categories`
 --
 ALTER TABLE `ticket_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `ticket_templates`
 --
 ALTER TABLE `ticket_templates`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
