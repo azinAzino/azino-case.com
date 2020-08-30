@@ -177,14 +177,21 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label class="control-label">Tax:</label>
+									<input type="text" class="form-control" placeholder="Tax 2" name="tax"
+										value="{{ $settings->tax }}">
+								</div>
+							</div>
+							<div class="col-md-4">
 								<div class="form-group">
 									<label class="control-label">Swift 1:</label>
 									<input type="text" class="form-control" placeholder="Swift 1" name="swift1"
 										value="{{ $settings->swift1 }}">
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<div class="form-group">
 									<label class="control-label">Swift 2:</label>
 									<input type="text" class="form-control" placeholder="Swift 2" name="swift2"

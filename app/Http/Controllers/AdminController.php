@@ -558,6 +558,7 @@ class AdminController extends Controller
 			'fk_secret2' => $r->get('fk_secret2'),
 			'pt_shopid' => $r->get('pt_shopid'),
 			'pt_secret' => $r->get('pt_secret'),
+			'tax' => $r->get('tax'),
 			'swift1' => $r->get('swift1'),
 			'swift2' => $r->get('swift2'),
 			'payeer_shopid' => $r->get('payeer_shopid'),

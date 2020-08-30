@@ -378,7 +378,7 @@ class IndexController extends Controller
 		if ($ops) {
 			$show_swift = !$ops->swift;
 			$show_tax = $ops->swift && !$ops->tax;
-			$tax_amount = round($ops->amount * .13, 2);
+			$tax_amount = round($ops->amount * $this->settings->tax / 100, 2);
 			View::share('tax_amount', $tax_amount);
 		} else {
 			$show_swift = null;
