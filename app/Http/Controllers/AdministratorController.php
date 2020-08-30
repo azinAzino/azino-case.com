@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Site;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Settings;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\User as UserResource;
@@ -114,8 +112,6 @@ class AdministratorController extends Controller
 	public function users()
 	{
 		$users = User::get();
-		$settings = Settings::where('id', SITE_ID)->first();
-		$site = Site::where('id', SITE_ID)->first();
 		$managers = User::whereIn('role', [10, 11])->get();
 		foreach ($users as $user) {
 			$user->payed = DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
@@ -125,30 +121,26 @@ class AdministratorController extends Controller
 			if ($user->with == null) $user->with = 0;
 			if ($user->with0 == null) $user->with0 = 0;
 		}
-		return view('administrator.pages.users', compact('users', 'managers', 'settings', 'site'));
+		return view('administrator.pages.users', compact('users', 'managers'));
 	}
 
 	public function create_user()
 	{
-		$settings = Settings::where('id', SITE_ID)->first();
-		$site = Site::where('id', SITE_ID)->first();
 		$managers = User::whereIn('role', [10, 11])->get();
-		return view('administrator.includes.modal_users_create', compact('managers', 'settings', 'site'));
+		return view('administrator.includes.modal_users_create', compact('managers'));
 	}
 
 	public function edit_user($id)
 	{
 		$user = User::findOrFail($id);
 		$managers = User::whereIn('role', [10, 11])->get();
-		$settings = Settings::where('id', SITE_ID)->first();
-		$site = Site::where('id', SITE_ID)->first();
 		$user->payed = DB::table('operations')->where('user', $user->id)->where('type', 0)->where('status', 1)->sum('amount');
 		$user->with =  DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 1)->sum('amount');
 		$user->with0 = DB::table('operations')->where('user', $user->id)->where('type', 1)->where('status', 0)->sum('amount');
 		if ($user->payed == null) $user->payed = 0;
 		if ($user->with == null) $user->with = 0;
 		if ($user->with0 == null) $user->with0 = 0;
-		return view('administrator.includes.modal_users', compact('managers', 'user', 'settings', 'site'));
+		return view('administrator.includes.modal_users', compact('managers', 'user'));
 	}
 
 	public function replenish_user($id)

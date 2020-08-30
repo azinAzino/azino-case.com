@@ -3,18 +3,16 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use App\User;
-use DB;
 use Carbon\Carbon;
-use App\Settings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
     public function vklogin(Request $r)
     {
-		$settings = Settings::where('id', SITE_ID)->first();
         $client_id = '5771677';
         $client_secret = 'OG54RLqYjZms27ZsDajS';
         $redirect_uri = 'azino-case.com';
@@ -39,7 +37,7 @@ class LoginController extends Controller
 						if(!empty($has))
 						{
 							$ref_user = session('ref');
-							$money = $settings->ref_sum;
+							$money = $this->settings->ref_sum;
 						}
 						else
 						{
@@ -61,7 +59,7 @@ class LoginController extends Controller
 						'ref_user' => $ref_user,
 						'bonus_money' => 1000
 					]);
-					$int_id =  \DB::table('operations')->insertGetId([
+					$int_id =  DB::table('operations')->insertGetId([
 						'amount' => 1000, 
 						'user' => $user->id, 
 						'type' => 4, // ТИП - вознаграждение
@@ -180,7 +178,7 @@ class LoginController extends Controller
 							'ref_user' => $ref_user,
 							'bonus_money' => 1000
 						]);
-						$int_id =  \DB::table('operations')->insertGetId([
+						$int_id =  DB::table('operations')->insertGetId([
 							'amount' => 1000, 
 							'user' => $user->id, 
 							'type' => 4, // ТИП - вознаграждение

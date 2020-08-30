@@ -3,19 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Cards;
-use App\Items;
-use App\Withdraw;
-use App\Promo;
-use App\Support;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Settings;
 use App\Operation;
-use App\Reviews;
 use App\Site;
-use App\Games;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\User as UserResource;
@@ -125,8 +117,6 @@ class ManagerController extends Controller
 	//manager
 	public function users()
 	{
-		$settings = Settings::where('id', SITE_ID)->first();
-		$site = Site::where('id', SITE_ID)->first();
 		$users = User::where('manager_id', Auth::user()->id)->get();
 		foreach ($users as $user) {
 			$user->payed = DB::table('operations')->where('operations.user', $user->id)->where('operations.type', 0)->where('status', 1)->sum('operations.amount');
@@ -136,15 +126,13 @@ class ManagerController extends Controller
 			if ($user->with == null) $user->with = 0;
 			if ($user->with0 == null) $user->with0 = 0;
 		}
-		return view('manager.pages.users', compact('users', 'settings', 'site'));
+		return view('manager.pages.users', compact('users'));
 	}
 
 	//manager
 	public function create_user()
 	{
-		$settings = Settings::where('id', SITE_ID)->first();
-		$site = Site::where('id', SITE_ID)->first();
-		return view('manager.includes.modal_users_create', compact('settings', 'site'));
+		return view('manager.includes.modal_users_create');
 	}
 
 	//manager

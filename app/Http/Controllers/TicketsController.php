@@ -4,28 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\File;
-
-
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
-
-use App\Cards;
-use App\Items;
-use Illuminate\Support\Facades\Storage;
-use App\Games;
 use App\User;
-use App\Settings;
-use App\Reviews;
 use App\Ticket;
 use App\TicketAttachment;
-use Illuminate\Support\Facades\View;
 
 class TicketsController extends Controller
 {

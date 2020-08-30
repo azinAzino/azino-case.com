@@ -6,9 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -16,7 +14,6 @@ use App\Cards;
 use App\Items;
 use App\Games;
 use App\User;
-use App\Settings;
 use App\Reviews;
 use App\Site;
 use Illuminate\Support\Facades\View;
@@ -111,7 +108,7 @@ class IndexController extends Controller
 			$next_cost = $card->cost * 1.2;
 			$price = $card->cost;
 		}
-		$user = Auth::user();
+		$user = User::find(Auth::id());
 
 		if (Auth::user()->deposit == 0 && Auth::user()->money == 0) {
 			$user->bonus_money = $user->bonus_money - $price;
@@ -145,7 +142,7 @@ class IndexController extends Controller
 			$general_game = $game->general_game;
 		}
 		$game_id = DB::table('games')->insertGetId(['user' => Auth::user()->id, 'drop_item' => $item->id, 'general_game' => (int) $general_game, 'card' => $item->card]);
-		$user = Auth::user();
+		$user = User::find(Auth::id());
 
 		if (Auth::user()->deposit == 0 && Auth::user()->money == 0) {
 			$user->bonus_money = $user->bonus_money + $item->cost;
@@ -242,10 +239,9 @@ class IndexController extends Controller
 			if (!!Auth::user()->ref_link) {
 				return redirect()->back();
 			}
-			$settings = Settings::where('id', SITE_ID)->first();
 			$link = 'http%3A%2F%2F' . $_SERVER['HTTP_HOST'] . '%2F%3Futm_source%3Dfriend%26utm_medium%3Dlink%26utm_term%3D' . Auth::user()->id . '%26utm_campaign%3Daffiliate';
-			$homepage = json_decode(file_get_contents('https://api.vk.com/method/utils.getShortLink?url=' . $link . '&access_token=' . $settings->vk_token));
-			$user = Auth::user();
+			$homepage = json_decode(file_get_contents('https://api.vk.com/method/utils.getShortLink?url=' . $link . '&access_token=' . $this->settings->vk_token));
+			$user = User::find(Auth::id());
 			$user->ref_link = $homepage->response->short_url;
 			$user->save();
 			return redirect()->back();
@@ -254,7 +250,6 @@ class IndexController extends Controller
 
 	private function getPaymentMoney($payment)
 	{
-		$settings = Settings::where('id', SITE_ID)->first();
 		$opration = DB::table('operations')->where('id', $payment->id)->first();
 		if ($opration->operation) {
 			$opration1 = DB::table('operations')->where('id', $opration->operation)->first();
@@ -269,7 +264,7 @@ class IndexController extends Controller
 			$user->save();
 			$te = User::where('id', $user->ref_user)->first();
 			if (!empty($te)) {
-				$bon = ($settings->ref_percent / 100) * $payment->amount;
+				$bon = ($this->settings->ref_percent / 100) * $payment->amount;
 				$te->money =   $te->money + $bon;
 				$te->save();
 				$int_id =  DB::table('operations')->insertGetId([
@@ -300,9 +295,6 @@ class IndexController extends Controller
 	public function advStatus(Request $r)
 	{
 		file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/1.txt', print_r($r->all(), true));
-
-		$settings = Settings::where('id', SITE_ID)->first();
-
 		//if (!in_array($r->ip(), array('185.71.65.92', '185.71.65.189', '149.202.17.210'))) return;
 
 		$payment =  DB::table('operations')->where('id', $r->post('ac_order_id'))->first();
@@ -335,9 +327,6 @@ class IndexController extends Controller
 
 	public function pmStatus(Request $r)
 	{
-
-		$settings = Settings::where('id', SITE_ID)->first();
-
 		//if (!in_array($r->ip(), array('185.71.65.92', '185.71.65.189', '149.202.17.210'))) return;
 
 		$payment =  DB::table('operations')->where('id', $r->post('PAYMENT_ID'))->first();
@@ -414,9 +403,6 @@ class IndexController extends Controller
 				Field is required')]]
 			], 422);
 		} else {
-			$settings = Settings::where('id', SITE_ID)->first();
-
-
 			$amount = $r->amount;
 			$type = $r->currency;
 
@@ -489,13 +475,13 @@ class IndexController extends Controller
 			} else {
 
 				if ((float) $amount < 1) {
-					$amount = $settings->min_dep;
+					$amount = $this->settings->min_dep;
 				}
 
-				if ($r->amount < $settings->min_dep) {
+				if ($r->amount < $this->settings->min_dep) {
 					return Response::json([
 						'message' => 'The given data was invalid.',
-						'errors' => ['amount' => [trans('Minimum replenishment amount') . ': ' . $settings->min_dep . ' $']]
+						'errors' => ['amount' => [trans('Minimum replenishment amount') . ': ' . $this->settings->min_dep . ' $']]
 					], 422);
 				}
 
@@ -512,15 +498,14 @@ class IndexController extends Controller
 			}
 
 			$orderID = $int_id;
-			$settings = Settings::where('id', SITE_ID)->first();
 			$amount = number_format(($amount * 1.08), 2, '.', '');
 
 			if ($type == 10) { // Payeer = 10
-				$m_shop = $settings->payeer_shopid;
+				$m_shop = $this->settings->payeer_shopid;
 				$m_orderid = $orderID;
 				$m_amount = number_format($amount, 2, '.', '');
 				$m_curr = 'USD';
-				$m_key = $settings->payeer_secret;
+				$m_key = $this->settings->payeer_secret;
 
 				$arHash = array(
 					$m_shop,
@@ -588,8 +573,8 @@ class IndexController extends Controller
 						"PAYMENT_METHOD" => "Pay Now!",
 					]
 				]);
-			} elseif ($settings->payment_type == 0) {
-				$sign = md5($settings->fk_id . ':' . $amount . ':' . $settings->fk_secret1 . ':' . $orderID);
+			} elseif ($this->settings->payment_type == 0) {
+				$sign = md5($this->settings->fk_id . ':' . $amount . ':' . $this->settings->fk_secret1 . ':' . $orderID);
 				if ($type == 1) {
 					$type = 160;
 				} // VISA
@@ -615,12 +600,12 @@ class IndexController extends Controller
 					$type = 132;
 				} // TELE2
 
-				$url = 'https://www.free-kassa.ru/merchant/cash.php?m=' . $settings->fk_id . '&oa=' . $amount . '&o=' . $orderID . '&s=' . $sign . '&lang=ru&i=' . $type;
+				$url = 'https://www.free-kassa.ru/merchant/cash.php?m=' . $this->settings->fk_id . '&oa=' . $amount . '&o=' . $orderID . '&s=' . $sign . '&lang=ru&i=' . $type;
 				return json_encode(['url' => $url, "method" => 'get']);
-			} elseif ($settings->payment_type == 1) {
+			} elseif ($this->settings->payment_type == 1) {
 				$currency = self::currency;
-				$shop_id = $settings->pt_shopid;
-				$secret = $settings->pt_secret;
+				$shop_id = $this->settings->pt_shopid;
+				$secret = $this->settings->pt_secret;
 
 				$request = array("amount" => $amount, "currency" => $currency, "shop_id" => $shop_id, "shop_invoice_id" => $orderID);
 				ksort($request);
@@ -667,11 +652,8 @@ class IndexController extends Controller
 
 	public function getpayment(Request $r)
 	{
-
-		$settings = Settings::where('id', SITE_ID)->first();
-
 		if (isset($r->MERCHANT_ORDER_ID)) {
-			$sign = md5($settings->fk_id . ':' . $r->AMOUNT . ':' . $settings->fk_secret2 . ':' . $r->MERCHANT_ORDER_ID);
+			$sign = md5($this->settings->fk_id . ':' . $r->AMOUNT . ':' . $this->settings->fk_secret2 . ':' . $r->MERCHANT_ORDER_ID);
 			$payment = DB::table('operations')->where('id', $r->MERCHANT_ORDER_ID)->first();
 			if (empty($payment)) {
 				return "err[#1]";
@@ -721,8 +703,6 @@ class IndexController extends Controller
 
 	public function payeerStatus(Request $r)
 	{
-		$settings = Settings::where('id', SITE_ID)->first();
-
 		//if (!in_array($r->ip(), array('185.71.65.92', '185.71.65.189', '149.202.17.210'))) return;
 
 		$payment =  DB::table('operations')->where('id', $r->m_orderid)->first();
@@ -733,7 +713,7 @@ class IndexController extends Controller
 		}
 
 		if (isset($r->m_operation_id) && isset($r->m_sign)) {
-			$m_key = $settings->payeer_secret;
+			$m_key = $this->settings->payeer_secret;
 
 			$arHash = array(
 				$r->m_operation_id,
@@ -782,7 +762,7 @@ class IndexController extends Controller
 
 					$te = User::where('id', $user->ref_user)->first();
 					if (!empty($te)) {
-						$bon = ($settings->ref_percent / 100) * $payment->amount;
+						$bon = ($this->settings->ref_percent / 100) * $payment->amount;
 						$te->money =   $te->money + $bon;
 						$te->save();
 						$int_id =  DB::table('operations')->insertGetId([
@@ -841,13 +821,10 @@ class IndexController extends Controller
 					'errors' => ['purse' => [trans('Choose a system to withdraw') . '!']]
 				], 422);
 			}
-
-			$settings = Settings::where('id', SITE_ID)->first();
-
-			if ((float) $r->amount < (float) $settings->min_width) {
+			if ((float) $r->amount < (float) $this->settings->min_width) {
 				return Response::json([
 					'message' => 'The given data was invalid.',
-					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $settings->min_width . '!']]
+					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $this->settings->min_width . '!']]
 				], 422);
 			}
 
@@ -867,7 +844,7 @@ class IndexController extends Controller
 				], 422);
 			}
 
-			$user = Auth::user();
+			$user = User::find(Auth::id());
 			$user->money = $user->money - $r->amount;
 			$user->save();
 			$int_id =  DB::table('operations')->insertGetId([
@@ -899,13 +876,10 @@ class IndexController extends Controller
 					'errors' => ['purse' => [trans('Choose a system to withdraw') . '!']]
 				], 422);
 			}
-
-			$settings = Settings::where('id', SITE_ID)->first();
-
-			if ((float) $r->amount < (float) $settings->min_width) {
+			if ((float) $r->amount < (float) $this->settings->min_width) {
 				return Response::json([
 					'message' => 'The given data was invalid.',
-					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $settings->min_width . '!']]
+					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $this->settings->min_width . '!']]
 				], 422);
 			}
 
@@ -925,7 +899,7 @@ class IndexController extends Controller
 				], 422);
 			}
 
-			$user = Auth::user();
+			$user = User::find(Auth::id());
 			$user->money = $user->money - $r->amount;
 			$user->save();
 			$int_id =  DB::table('operations')->insertGetId([
@@ -957,13 +931,10 @@ class IndexController extends Controller
 					'errors' => ['purse' => [trans('Choose a system to withdraw') . '!']]
 				], 422);
 			}
-
-			$settings = Settings::where('id', SITE_ID)->first();
-
-			if ((float) $r->amount < (float) $settings->min_width) {
+			if ((float) $r->amount < (float) $this->settings->min_width) {
 				return Response::json([
 					'message' => 'The given data was invalid.',
-					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $settings->min_width . '!']]
+					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $this->settings->min_width . '!']]
 				], 422);
 			}
 
@@ -983,7 +954,7 @@ class IndexController extends Controller
 				], 422);
 			}
 
-			$user = Auth::user();
+			$user = User::find(Auth::id());
 			$user->money = $user->money - $r->amount;
 			$user->save();
 			$int_id =  DB::table('operations')->insertGetId([
@@ -1014,13 +985,10 @@ class IndexController extends Controller
 					'errors' => ['purse' => [trans('Choose a system to withdraw') . '!']]
 				], 422);
 			}
-
-			$settings = Settings::where('id', SITE_ID)->first();
-
-			if ((float) $r->amount < (float) $settings->min_width) {
+			if ((float) $r->amount < (float) $this->settings->min_width) {
 				return Response::json([
 					'message' => 'The given data was invalid.',
-					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $settings->min_width . '!']]
+					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $this->settings->min_width . '!']]
 				], 422);
 			}
 
@@ -1040,7 +1008,7 @@ class IndexController extends Controller
 				], 422);
 			}
 
-			$user = Auth::user();
+			$user = User::find(Auth::id());
 			$user->money = $user->money - $r->amount;
 			$user->save();
 			$int_id =  DB::table('operations')->insertGetId([
@@ -1071,13 +1039,10 @@ class IndexController extends Controller
 					'errors' => ['purse' => [trans('Choose a system to withdraw') . '!']]
 				], 422);
 			}
-
-			$settings = Settings::where('id', SITE_ID)->first();
-
-			if ((float) $r->amount < (float) $settings->min_width) {
+			if ((float) $r->amount < (float) $this->settings->min_width) {
 				return Response::json([
 					'message' => 'The given data was invalid.',
-					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $settings->min_width . '!']]
+					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $this->settings->min_width . '!']]
 				], 422);
 			}
 
@@ -1097,7 +1062,7 @@ class IndexController extends Controller
 				], 422);
 			}
 
-			$user = Auth::user();
+			$user = User::find(Auth::id());
 			$user->money = $user->money - $r->amount;
 			$user->save();
 			$int_id =  DB::table('operations')->insertGetId([
@@ -1128,13 +1093,10 @@ class IndexController extends Controller
 					'errors' => ['purse' => [trans('Choose a system to withdraw') . '!']]
 				], 422);
 			}
-
-			$settings = Settings::where('id', SITE_ID)->first();
-
-			if ((float) $r->amount < (float) $settings->min_width) {
+			if ((float) $r->amount < (float) $this->settings->min_width) {
 				return Response::json([
 					'message' => 'The given data was invalid.',
-					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $settings->min_width . '!']]
+					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $this->settings->min_width . '!']]
 				], 422);
 			}
 
@@ -1154,7 +1116,7 @@ class IndexController extends Controller
 				], 422);
 			}
 
-			$user = Auth::user();
+			$user = User::find(Auth::id());
 			$user->money = $user->money - $r->amount;
 			$user->save();
 			$int_id =  DB::table('operations')->insertGetId([
@@ -1185,13 +1147,10 @@ class IndexController extends Controller
 					'errors' => ['purse' => [trans('Choose a system to withdraw') . '!']]
 				], 422);
 			}
-
-			$settings = Settings::where('id', SITE_ID)->first();
-
-			if ((float) $r->amount < (float) $settings->min_width) {
+			if ((float) $r->amount < (float) $this->settings->min_width) {
 				return Response::json([
 					'message' => 'The given data was invalid.',
-					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $settings->min_width . '!']]
+					'errors' => ['amount' => [trans('Minimum withdraw amount') . ': ' . $this->settings->min_width . '!']]
 				], 422);
 			}
 
@@ -1211,7 +1170,7 @@ class IndexController extends Controller
 				], 422);
 			}
 
-			$user = Auth::user();
+			$user = User::find(Auth::id());
 			$user->money = $user->money - $r->amount;
 			$user->save();
 			$int_id =  DB::table('operations')->insertGetId([
