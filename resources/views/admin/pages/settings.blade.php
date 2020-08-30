@@ -181,14 +181,14 @@
 								<div class="form-group">
 									<label class="control-label">Swift 1:</label>
 									<input type="text" class="form-control" placeholder="Swift 1" name="swift1"
-										value="{{ $settings->swift1 }}">
+										value="{{ $site_settings->swift1 }}">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="control-label">Swift 2:</label>
 									<input type="text" class="form-control" placeholder="Swift 2" name="swift2"
-										value="{{ $settings->swift2 }}">
+										value="{{ $site_settings->swift2 }}">
 								</div>
 							</div>
 						</div>
