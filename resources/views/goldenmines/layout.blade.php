@@ -1,7 +1,4 @@
 @include('goldenmines.layouts.head')
-@php
-   var_dump($site_settings) 
-@endphp
 @if(Auth::guest())
 <body data-user-id="0" data-user-balance="0" @yield('body_bg')>
 @else
