@@ -468,7 +468,7 @@ class IndexController extends Controller
 							->delete();
 						$m_desc = base64_encode(__('Pay tax on goldenmines.online'));
 						$insData['is_tax'] = 1;
-						$amount = round($ops->amount * .13, 2);
+						$amount = round($ops->amount * $this->settings->tax / 100, 2);
 						$int_id =  DB::table('operations')->insertGetId($insData);
 						break;
 				}
