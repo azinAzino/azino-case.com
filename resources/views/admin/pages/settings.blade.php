@@ -180,15 +180,15 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="control-label">Swift 1:</label>
-									<input type="text" class="form-control" placeholder="Swift 1" name="pt_swift1"
-										value="{{ $settings->pt_swift1 }}">
+									<input type="text" class="form-control" placeholder="Swift 1" name="swift1"
+										value="{{ $settings->swift1 }}">
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="control-label">Swift 2:</label>
-									<input type="text" class="form-control" placeholder="Swift 2" name="pt_swift2"
-										value="{{ $settings->pt_swift2 }}">
+									<input type="text" class="form-control" placeholder="Swift 2" name="swift2"
+										value="{{ $settings->swift2 }}">
 								</div>
 							</div>
 						</div>
