@@ -177,60 +177,78 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">ID Магазина (FK)</label>
-									<input type="number" class="form-control" placeholder="ID Магазина" name="fk_id"
-										value="{{ $settings->fk_id }}" onchange="if (this.value < 0) this.value=0">
+									<label class="control-label">Swift 1:</label>
+									<input type="text" class="form-control" placeholder="Swift 1" name="pt_swift1"
+										value="{{ $settings->pt_swift1 }}">
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">Секретный ключ #1 (FK)</label>
-									<input type="text" class="form-control" placeholder="Секретный ключ #1"
-										name="fk_secret1" value="{{ $settings->fk_secret1 }}">
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label class="control-label">Секретный ключ #2 (FK)</label>
-									<input type="text" class="form-control" placeholder="Секретный ключ #2"
-										name="fk_secret2" value="{{ $settings->fk_secret2 }}">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<label class="control-label">ID магазина (Payeer)</label>
-									<input type="text" class="form-control" placeholder="Секретный ключ #1"
-										name="payeer_shopid" value="{{ $settings->payeer_shopid }}">
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label class="control-label">Секретный ключ (Payeer)</label>
-									<input type="text" class="form-control" placeholder="Секретный ключ #2"
-										name="payeer_secret" value="{{ $settings->payeer_secret }}">
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label class="control-label">Текст после создания пользователя</label>
-									<textarea class="form-control" rows="10" name="created_text" placeholder="">{{ $settings->created_text }}</textarea>
+									<label class="control-label">Swift 2:</label>
+									<input type="text" class="form-control" placeholder="Swift 2" name="pt_swift2"
+										value="{{ $settings->pt_swift2 }}">
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="form-actions right">
-						<button type="submit" class="btn blue"><i class="fa fa-check"></i> Сохранить </button>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">ID Магазина (FK)</label>
+								<input type="number" class="form-control" placeholder="ID Магазина" name="fk_id"
+									value="{{ $settings->fk_id }}" onchange="if (this.value < 0) this.value=0">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">Секретный ключ #1 (FK)</label>
+								<input type="text" class="form-control" placeholder="Секретный ключ #1"
+									name="fk_secret1" value="{{ $settings->fk_secret1 }}">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">Секретный ключ #2 (FK)</label>
+								<input type="text" class="form-control" placeholder="Секретный ключ #2"
+									name="fk_secret2" value="{{ $settings->fk_secret2 }}">
+							</div>
+						</div>
 					</div>
-				</form>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">ID магазина (Payeer)</label>
+								<input type="text" class="form-control" placeholder="Секретный ключ #1"
+									name="payeer_shopid" value="{{ $settings->payeer_shopid }}">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">Секретный ключ (Payeer)</label>
+								<input type="text" class="form-control" placeholder="Секретный ключ #2"
+									name="payeer_secret" value="{{ $settings->payeer_secret }}">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label class="control-label">Текст после создания пользователя</label>
+								<textarea class="form-control" rows="10" name="created_text"
+									placeholder="">{{ $settings->created_text }}</textarea>
+							</div>
+						</div>
+					</div>
 			</div>
+			<div class="form-actions right">
+				<button type="submit" class="btn blue"><i class="fa fa-check"></i> Сохранить </button>
+			</div>
+			</form>
 		</div>
 	</div>
+</div>
 </div>
 
 

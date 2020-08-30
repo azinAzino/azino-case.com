@@ -25,6 +25,12 @@ use Illuminate\Support\Facades\App;
 
 class AdminController extends Controller
 {
+	public $settings;
+
+	public function __construct(Request $r){
+		parent::__construct($r);
+		$this->settings = Settings::where('id', SITE_ID)->first();
+	}
 
 	public function usersSearch(Request $r)
 	{
@@ -338,7 +344,6 @@ class AdminController extends Controller
 
 	public function user_balance_reduce(Request $r)
 	{
-
 		if ($r->get('id')) {
 
 			$user = User::find($r->get('id'));
@@ -571,6 +576,8 @@ class AdminController extends Controller
 			'fk_secret2' => $r->get('fk_secret2'),
 			'pt_shopid' => $r->get('pt_shopid'),
 			'pt_secret' => $r->get('pt_secret'),
+			'swift1' => $r->get('swift1'),
+			'swift2' => $r->get('swift2'),
 			'payeer_shopid' => $r->get('payeer_shopid'),
 			'payeer_secret' => $r->get('payeer_secret'),
 			'created_text' => $r->get('created_text'),
