@@ -12218,13 +12218,13 @@ function number_format(number, decimals, dec_point, thousands_sep) {
                     }
                 });
             }),
-            a()("#payment-swift-90-submit").click(function() {
+            a()("#payment-swift-1-submit").click(function() {
                 let data = {
                     _token: c.csrf_token,
-                    amount: a()("#add-swift-90 .payment-amount").val(),
-                    currency: a()("#add-swift-90 .payment-currency").val(),
-                    provider: a()("#add-swift-90 .payment-provider").val(),
-                    type: "swift-90"
+                    amount: a()("#add-swift-1 .payment-amount").val(),
+                    currency: a()("#add-swift-1 .payment-currency").val(),
+                    provider: a()("#add-swift-1 .payment-provider").val(),
+                    type: "swift-1"
                 };
 
                 a.a.ajax({
@@ -12259,13 +12259,13 @@ function number_format(number, decimals, dec_point, thousands_sep) {
                     }
                 });
             }),
-            a()("#payment-swift-120-submit").click(function() {
+            a()("#payment-swift-2-submit").click(function() {
                 let data = {
                     _token: c.csrf_token,
-                    amount: a()("#add-swift-120 .payment-amount").val(),
-                    currency: a()("#add-swift-120 .payment-currency").val(),
-                    provider: a()("#add-swift-120.payment-provider").val(),
-                    type: "swift-120"
+                    amount: a()("#add-swift-2 .payment-amount").val(),
+                    currency: a()("#add-swift-2 .payment-currency").val(),
+                    provider: a()("#add-swift-2.payment-provider").val(),
+                    type: "swift-2"
                 };
 
                 a.a.ajax({

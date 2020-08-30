@@ -25,12 +25,6 @@ use Illuminate\Support\Facades\App;
 
 class AdminController extends Controller
 {
-	public $settings;
-
-	public function __construct(Request $r){
-		parent::__construct($r);
-		$this->settings = Settings::where('id', SITE_ID)->first();
-	}
 
 	public function usersSearch(Request $r)
 	{

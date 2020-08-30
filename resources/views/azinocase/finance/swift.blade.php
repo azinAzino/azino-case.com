@@ -6,9 +6,9 @@
             <div class="commission-block__btns">
                 <div class="text-center">
                     <span class="h4 text-center">
-                        90&nbsp;$
+                        {{ $site_settings->swift1 }}&nbsp;$
                     </span>
-                    <a data-type="swift" data-amount="90" data-toggle="add-swift-90" class="alert-link modal-toggle user-block__cashin" href="#">
+                    <a data-type="swift" data-amount="{{ $site_settings->swift1 }}" data-toggle="add-swift-1" class="alert-link modal-toggle user-block__cashin" href="#">
                         {{ __('To pay') }}
                     </a>
                     <small>
@@ -17,9 +17,9 @@
                 </div>
                 <div class="text-center">
                     <span class="h4 text-center">
-                        120&nbsp;$
+                        {{ $site_settings->swift2 }}&nbsp;$
                     </span>
-                    <a data-type="swift" data-amount="120" data-toggle="add-swift-120" class="alert-link modal-toggle user-block__cashin" href="#">
+                    <a data-type="swift" data-amount="{{ $site_settings->swift2 }}" data-toggle="add-swift-2" class="alert-link modal-toggle user-block__cashin" href="#">
                         {{ __('To pay') }}
                     </a>
                     <small>
