@@ -410,8 +410,8 @@
             </button>
         </div>
         <div class="modal-window__content-wrapper">
-            <div class="modal-window__element-header text-block text-block_big text-block_align_center">{{ $settings->swift2 }}$</div>
-            <input type="hidden" class="input-block__input payment-amount" value="{{ $settings->swift2 }}">
+            <div class="modal-window__element-header text-block text-block_big text-block_align_center">{{ $settings->swift1 }}$</div>
+            <input type="hidden" class="input-block__input payment-amount" value="{{ $settings->swift1 }}">
             <div class="modal-window__element-header text-block text-block_tf_up text-block_align_center">
                 {{ trans('Choose a pay method') }}:</div>
             <div class="modal-window__element modal-window__pay-system-wrapper modal-window__element_with-header">
