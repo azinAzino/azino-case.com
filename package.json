@@ -28,7 +28,7 @@
         "laravel-echo": "^1.8.0",
         "pm2": "^4.4.0",
         "requestify": "^0.2.5",
-        "socket.io": "^2.3.0",
+        "socket.io": "^2.4.0",
         "socket.io-client": "^2.3.0"
     }
 }
